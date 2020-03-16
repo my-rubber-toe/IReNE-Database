@@ -69,6 +69,7 @@ class DocumentCase(Document):
     actor = ListField(EmbeddedDocumentField(Actor))
     section = ListField(EmbeddedDocumentField(Section))
     tagDocList = ListField(EmbeddedDocumentField(TagDoc))
+    
 
 
 # collab = Collaborator( collabID = 1, documentsID = [1,2,3], first_name = "Jainel", 
