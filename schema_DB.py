@@ -2,7 +2,8 @@ from mongoengine import *
 
 #Connection to the Database
 
-connect('IReNEdb', host='mongodb://172.17.0.2:20170/IReNEdb')
+connect('IReNEdb', host='mongodb://localhost:27017/IReNEdb')
+
 
 class Collaborator(Document):
     documentsID =  ListField(IntField(required=True))
@@ -27,12 +28,10 @@ class TagList(Document):
     tagItem = ListField(StringField(max_length=50,required=True))
 
 class Infrastructure(Document):
-    infrastructureType = StringField(max_length=50, required=True)
-    documentsID = ListField(StringField(max_length=50, required=True))
-
+    infrastructureType = ListField(StringField(max_length=50, required=True))
+    
 class Damage(Document):
-    damageType = StringField(max_length=50, required=True)
-    documentsID = ListField(StringField(max_length=50, required=True))
+    damageType = ListField(StringField(max_length=50, required=True))
 
 class Location(EmbeddedDocument):
     city = StringField(max_length=50, required=True)
@@ -56,20 +55,19 @@ class Section(EmbeddedDocument):
     secTitle = StringField(max_length=50, required=True)
     content = StringField(required=True)
 
-class TagDoc(EmbeddedDocument):
-    tagsDoc = ListField(StringField(max_length=50,required=True))
-
 class DocumentCase(Document):
     title = StringField(max_length=100, required=True)
     description = StringField(max_length=2000, required=True)
     published = BooleanField(default=False,required=True)
     incidentDate = DateTimeField(required=True)
     creationDate = DateTimeField(required=True)
+    tagsDoc = ListField(StringField(max_length=50,required=True))
+    infrasDocList =  ListField(StringField(max_length=50,required=True))
+    damageDocList =  ListField(StringField(max_length=50,required=True))
     location = ListField(EmbeddedDocumentField(Location))
     author = ListField(EmbeddedDocumentField(Author))
     actor = ListField(EmbeddedDocumentField(Actor))
     section = ListField(EmbeddedDocumentField(Section))
-    tagDocList = ListField(EmbeddedDocumentField(TagDoc))
     timeline = ListField(EmbeddedDocumentField(Timeline))
 
 

@@ -2,10 +2,10 @@
 docker pull mongo:4.2.3
 
 #runs container with IReNEdb
-docker run -d -p 20170:20170 --name IReNEdb mongo:4.2.3
+docker run -d -p 27017:27017 -v /Users/jaits/data:/data/db --name IReNE mongo
 
 #setting an enviornment to work inside the container
-docker exec -it IReNEdb bash
+docker exec -it IReNE bash
 
 #runs mongoshell
 mongo
