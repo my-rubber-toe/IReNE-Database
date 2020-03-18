@@ -1,7 +1,8 @@
 from mongoengine import *
 
 #Connection to the Database
-connect('IReNE')
+
+connect('IReNEdb', host='mongodb://172.17.0.2:20170/IReNEdb')
 
 class Collaborator(Document):
     documentsID =  ListField(IntField(required=True))
@@ -14,7 +15,7 @@ class Collaborator(Document):
 
 class Session(Document):
     sessionToken = StringField(max_length=100, required=True)
-    startDate = DateTimeField(default=datetime.datetime.utcnow,required=True)
+    startDate = DateTimeField(required=True)
     endDate = DateTimeField(required=True)
 
 
@@ -63,22 +64,26 @@ class DocumentCase(Document):
     description = StringField(max_length=2000, required=True)
     published = BooleanField(default=False,required=True)
     incidentDate = DateTimeField(required=True)
-    creationDate = DateTimeField(default=datetime.datetime.utcnow,required=True)
+    creationDate = DateTimeField(required=True)
     location = ListField(EmbeddedDocumentField(Location))
     author = ListField(EmbeddedDocumentField(Author))
     actor = ListField(EmbeddedDocumentField(Actor))
     section = ListField(EmbeddedDocumentField(Section))
     tagDocList = ListField(EmbeddedDocumentField(TagDoc))
-    
+    timeline = ListField(EmbeddedDocumentField(Timeline))
+
 
 
 # collab = Collaborator( collabID = 1, documentsID = [1,2,3], first_name = "Jainel", 
 # last_name = "Torres", email = "jainel.torres@upr.edu", faculty = "ICOM")
 # collab.save()
-
+admin1 = Admin(username = "jait", password = "loco")
+admin1.save()
 # for user in Collaborator.objects:
 #     print (user.id)
 
 # page = Page(comments=[comment1, comment2])
 # date_modified = DateTimeField(default=datetime.datetime.utcnow)
+
+# doc1 = DocumentCase( )
 

@@ -1,7 +1,7 @@
-import pymongo
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-irene = myclient["IReNE"]
+
+myclient = pymongo.MongoClient("mongodb://host.docker.internal:20717/IReNEdb")
+irene = myclient["IReNEdb"]
 
 collab = irene["Collaborators"]
 admin = irene["Admin"]
