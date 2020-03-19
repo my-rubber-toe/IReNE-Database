@@ -1,4 +1,4 @@
-
+from pymongo import *
 
 myclient = pymongo.MongoClient("mongodb://host.docker.internal:20717/IReNEdb")
 irene = myclient["IReNEdb"]

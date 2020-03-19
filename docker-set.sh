@@ -1,14 +1,18 @@
-#pulls specific image with specified mongodb version
-docker pull mongo:4.2.3
+# Pull the latest image for mongo db
+docker pull mongo
 
-#runs container with IReNEdb
-docker run -d -p 27017:27017 -v /Users/jaits/data:/data/db --name IReNE mongo
+# Create docker volume to persist data
+docker volume create IReNEdb_volume
 
-#setting an enviornment to work inside the container
-docker exec -it IReNE bash
+# Create internal network for container communication
+docker network create IReNEdb_network
 
-#runs mongoshell
-mongo
+# Create mongo container connected to the persistent volume and internal network
+docker run -d --network IReNEdb_network -v IReNEdb_volume:/data/db --name IReNEdb mongo
 
-#exit -> getting out of the env
-#docker stop IReNEdb -> close and save container
+# Create mongo-express container for UI management
+docker run -d --network IReNEdb_network -e ME_CONFIG_MONGODB_SERVER=IReNEdb -p 8081:8081 --name mongo-express mongo-express
+
+
+# IReNedb ip address for the schema_DB.py
+docker inspect IReNEdb | grep IPAddress
