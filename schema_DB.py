@@ -1,12 +1,13 @@
 from mongoengine import *
+import datetime
 
 #Connection to the Database
-# connect('IReNEdb')
+connect('IReNEdb')
 #connec the db for testing purposes
-connect('IReNEdb', host='mongomock://localhost:27017')
+# connect('IReNEdb', host='mongomock://localhost:27017')
 
 class Collaborator(Document):
-    documentsID =  ListField(IntField(required=False))
+    documentsID =  ListField(StringField(required=False))
     first_name = StringField(min_length=1, required=True)
     last_name = StringField(min_length=1, required=True)
     email = EmailField(required=True)
@@ -19,12 +20,11 @@ class Session(Document):
     startDate = DateTimeField(required=True)
     endDate = DateTimeField(required=True)
 
-
 class Admin(Document):
     username = StringField(min_length=1, required=True)
     password = StringField(min_length=1, required=True)
 
-class TagList(Document):
+class Tag(Document):
     tagItem = StringField(min_length=1,required=True)
 
 class Infrastructure(Document):
@@ -32,9 +32,6 @@ class Infrastructure(Document):
     
 class Damage(Document):
     damageType = StringField(min_length=1, required=True)
-
-class Location(EmbeddedDocument):
-    city = StringField(min_length=1, required=True)
 
 class Author(EmbeddedDocument):
     author_FN = StringField(min_length=1, required=True)
@@ -56,7 +53,9 @@ class Section(EmbeddedDocument):
     content = StringField(required=True)
 
 class DocumentCase(Document):
+    idCollab = StringField(min_length=1, required=True)
     title = StringField(min_length=1, required=True)
+    location = ListField(StringField(min_length=1,required=True))
     description = StringField(min_length=1, required=True)
     published = BooleanField(default=False,required=True)
     incidentDate = DateTimeField(required=True)
@@ -64,7 +63,6 @@ class DocumentCase(Document):
     tagsDoc = ListField(StringField(min_length=1,required=True))
     infrasDocList =  ListField(StringField(min_length=1,required=True))
     damageDocList =  ListField(StringField(min_length=1,required=True))
-    location = ListField(EmbeddedDocumentField(Location))
     author = ListField(EmbeddedDocumentField(Author))
     actor = ListField(EmbeddedDocumentField(Actor))
     section = ListField(EmbeddedDocumentField(Section))
