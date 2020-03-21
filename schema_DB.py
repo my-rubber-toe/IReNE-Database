@@ -2,41 +2,41 @@ from mongoengine import *
 import datetime
 
 #Connection to the Database
-connect('IReNEdb')
+# connect('IReNEdb')
 #connec the db for testing purposes
-# connect('IReNEdb', host='mongomock://localhost:27017')
+connect('IReNEdb', host='mongomock://localhost:27017')
 
 class Collaborator(Document):
     documentsID =  ListField(StringField(required=False))
     first_name = StringField(min_length=1, required=True)
     last_name = StringField(min_length=1, required=True)
-    email = EmailField(required=True)
+    email = EmailField(required=True, unique=True)
     banned = BooleanField(default=False,required=True)
     faculty = StringField(min_length=1, required=True)
     status = BooleanField(default=False,required=True)
 
 class Session(Document):
-    sessionToken = StringField(min_length=1, required=True)
+    sessionToken = StringField(min_length=1, required=True, unique=True)
     startDate = DateTimeField(required=True)
     endDate = DateTimeField(required=True)
 
 class Admin(Document):
-    username = StringField(min_length=1, required=True)
+    username = StringField(min_length=1, required=True, unique=True)
     password = StringField(min_length=1, required=True)
 
 class Tag(Document):
-    tagItem = StringField(min_length=1,required=True)
+    tagItem = StringField(min_length=1,required=True, unique=True)
 
 class Infrastructure(Document):
-    infrastructureType = StringField(min_length=1, required=True)
+    infrastructureType = StringField(min_length=1, required=True, unique=True)
     
 class Damage(Document):
-    damageType = StringField(min_length=1, required=True)
+    damageType = StringField(min_length=1, required=True, unique=True)
 
 class Author(EmbeddedDocument):
     author_FN = StringField(min_length=1, required=True)
     author_LN = StringField(min_length=1, required=True)
-    author_email = EmailField(required=True)
+    author_email = EmailField(min_length=1, required=True)
     author_faculty = StringField(min_length=1, required=True)
 
 class Actor(EmbeddedDocument):
@@ -45,16 +45,16 @@ class Actor(EmbeddedDocument):
     role = StringField(min_length=1, required=False)
 
 class Timeline(EmbeddedDocument):
-    event = StringField(min_length=1, required=True)
-    eventDate = DateTimeField(required=True)
+    event = StringField(min_length=1, required=False, unique=True)
+    eventDate = DateTimeField(required=False)
 
 class Section(EmbeddedDocument):
-    secTitle = StringField(min_length=1, required=True)
+    secTitle = StringField(min_length=1, required=True, unique=True)
     content = StringField(required=True)
 
 class DocumentCase(Document):
-    idCollab = StringField(min_length=1, required=True)
-    title = StringField(min_length=1, required=True)
+    creatoriD = StringField(min_length=1, required=True)
+    title = StringField(min_length=1, required=True, unique=True)
     location = ListField(StringField(min_length=1,required=True))
     description = StringField(min_length=1, required=True)
     published = BooleanField(default=False,required=True)
