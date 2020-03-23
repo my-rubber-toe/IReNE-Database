@@ -2,9 +2,9 @@ from mongoengine import *
 import datetime
 
 #Connection to the Database
-# connect('IReNEdb')
+connect('IReNEdb')
 #connec the db for testing purposes
-connect('IReNEdb', host='mongomock://localhost:27017')
+# connect('IReNEdb', host='mongomock://localhost:27017')
 
 class Collaborator(Document):
     documentsID =  ListField(StringField(required=False))
@@ -13,7 +13,7 @@ class Collaborator(Document):
     email = EmailField(required=True, unique=True)
     banned = BooleanField(default=False,required=True)
     faculty = StringField(min_length=1, required=True)
-    status = BooleanField(default=False,required=True)
+    approved = BooleanField(default=False,required=True)
 
 class Session(Document):
     sessionToken = StringField(min_length=1, required=True, unique=True)
@@ -40,9 +40,9 @@ class Author(EmbeddedDocument):
     author_faculty = StringField(min_length=1, required=True)
 
 class Actor(EmbeddedDocument):
-    actor_FN = StringField(min_length=1, required=False)
-    actor_LN = StringField(min_length=1, required=False)
-    role = StringField(min_length=1, required=False)
+    actor_FN = StringField(min_length=1, required=True)
+    actor_LN = StringField(min_length=1, required=True)
+    role = StringField(min_length=1, required=True)
 
 class Timeline(EmbeddedDocument):
     event = StringField(min_length=1, required=False, unique=True)

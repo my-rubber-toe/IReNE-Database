@@ -5,17 +5,15 @@ import datetime
 # connect('IReNEdb', host='mongomock://localhost:27017')
 
 def test_insert_Collab():
-    collab = Collaborator( first_name = "Jinel", 
-    last_name = "Torres", email = "jainel.torres@upr.edu", faculty = "ICOM")
+    collab = Collaborator( first_name = "Aurora", 
+    last_name = "Black", email = "aurora.black@upr.edu", faculty = "ICOM")
     collab.save()
-    collab1 = Collaborator( first_name = "Jainel", 
-    last_name = "Torres", email = "jainel.torres@upr.edu", faculty = "ICOM")
     collab1.save()
 
     collab_test = Collaborator.objects.first()
-    assert collab_test.first_name ==  "Jinel"
-    assert collab_test.last_name ==  "Torres"
-    assert collab_test.email ==  "jainel.torres@upr.edu"
+    assert collab_test.first_name ==  "Aurora"
+    assert collab_test.last_name ==  "Black"
+    assert collab_test.email ==  "aurora.black@upr.edu"
     assert collab_test.faculty ==  "ICOM"
 
 def test_insert_Admin():
@@ -29,7 +27,7 @@ def test_insert_Admin():
 def test_insert_Tag():
     tag = Tag(tagItem = "Flood")
     tag.save()
-
+    
     tag_test = Tag.objects.first()
     assert tag_test.tagItem == "Flood"
 
@@ -82,7 +80,7 @@ def test_insert_doc():
     assert doc_test.timeline[0].eventDate == datetime.datetime(2017, 9, 16)
     assert doc_test.section[0].secTitle == "Introduction"
     assert doc_test.section[0].content == "It was bad..."
-   
+
 #-------------------------Tests for Updating------------------------------------
 def test_update_Collab():
     collab = Collaborator(first_name = "Jainel", last_name = "Torres",
@@ -198,9 +196,6 @@ def test_read_tag():
     print("timeline: " , doc_test.section[0].secTitle, doc_test.section[0].content )
    
    
-
-
-test_read_tag()
 #example of get 
 # print(Colaborator.objects.get(faculty = "ICOM")
 
