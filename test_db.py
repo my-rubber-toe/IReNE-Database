@@ -1,14 +1,11 @@
 from mongoengine import *
 from schema_DB import *
 import datetime
-#By running these functions
-# connect('IReNEdb', host='mongomock://localhost:27017')
 
 def test_insert_Collab():
     collab = Collaborator( first_name = "Aurora", 
     last_name = "Black", email = "aurora.black@upr.edu", faculty = "ICOM")
     collab.save()
-    collab1.save()
 
     collab_test = Collaborator.objects.first()
     assert collab_test.first_name ==  "Aurora"
@@ -50,10 +47,10 @@ def test_insert_doc():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     author_faculty = "ICOM")
     actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = datetime.datetime(2017, 9, 16))
+    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD= "s" , title = "The great Flooding", description = "It was horrible",
-    incidentDate = datetime.datetime(2017, 9, 16), creationDate = datetime.datetime(2019, 2, 17),
+    incidentDate = "2018-09-09", creationDate = "2018-09-09",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     timeline = [timelineDoc])
@@ -63,8 +60,8 @@ def test_insert_doc():
     # doc_embedded_test = DocumentCase.
     assert doc_test.title == "The great Flooding"
     assert doc_test.description == "It was horrible"
-    assert doc_test.incidentDate == datetime.datetime(2017, 9, 16)
-    assert doc_test.creationDate == datetime.datetime(2019, 2, 17)
+    assert doc_test.incidentDate == "2018-09-09"
+    assert doc_test.creationDate == "2018-09-09"
     assert doc_test.tagsDoc == ["Flood", "Hurricane"]
     assert doc_test.infrasDocList == ["Building"]
     assert doc_test.damageDocList == ["Flooding"]
@@ -77,7 +74,7 @@ def test_insert_doc():
     assert doc_test.actor[0].actor_LN == "LOL"
     assert doc_test.actor[0].role == "mayor"
     assert doc_test.timeline[0].event == "Maria Passed PR"
-    assert doc_test.timeline[0].eventDate == datetime.datetime(2017, 9, 16)
+    assert doc_test.timeline[0].eventDate == "2018-09-09"
     assert doc_test.section[0].secTitle == "Introduction"
     assert doc_test.section[0].content == "It was bad..."
 
@@ -105,29 +102,30 @@ def test_update_Admin():
 
 def test_update_doc():
     #process of inserting a document
-    authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
-    author_faculty = "ICOM")
-    actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = datetime.datetime(2017, 9, 16))
-    sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
-    doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = datetime.datetime(2017, 9, 16), creationDate = datetime.datetime(2019, 2, 17),
-    tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
-    location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc])
-    doc1.save()
+    # authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
+    # author_faculty = "ICOM")
+    # actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
+    # timelineDoc = Timeline(event = "Maria Passed PR", eventDate = datetime.datetime(2017, 9, 16))
+    # sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
+    # doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
+    # incidentDate = datetime.datetime(2017, 9, 16), creationDate = datetime.datetime(2019, 2, 17),
+    # tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
+    # location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
+    # timeline = [timelineDoc])
+    # doc1.save()
     #process of testing update
     doc_test = DocumentCase.objects.first()
     DocumentCase.objects(title = "The great Flooding").update_one(set__description = "whoa")
     DocumentCase.objects(title = "The great Flooding").update_one(set__tagsDoc = ["Flood", "Hurricane","severe"])
     DocumentCase.objects(title = "The great Flooding", author__author_LN = "TS").update_one(set__author__S__author_FN = "joy")
-    DocumentCase.objects(title = "The great Flooding").update_one(set__creationDate = datetime.datetime(2018, 3, 10))
+    DocumentCase.objects(title = "The great Flooding").update_one(set__creationDate = "2018-09-09")
     doc_test.reload()
+    print(doc_test.creationDate)
     assert doc_test.description == "whoa"
-    assert doc_test.creationDate == datetime.datetime(2018, 3, 10)
+    assert doc_test.creationDate == "2018-09-09"
     assert doc_test.tagsDoc == ["Flood", "Hurricane","severe"]
     assert doc_test.author[0].author_FN == "joy"
-    
+   
 #-----------------------------------Methods for deletion--------------------------
 
 def test_delete_tag():
@@ -142,10 +140,10 @@ def test_delete_doc():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     author_faculty = "ICOM")
     actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = datetime.datetime(2017, 9, 16))
+    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = datetime.datetime(2017, 9, 16), creationDate = datetime.datetime(2019, 2, 17),
+    incidentDate = "2018-09-09", creationDate = "2018-09-09",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     timeline = [timelineDoc])
@@ -169,10 +167,10 @@ def test_read_tag():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     author_faculty = "ICOM")
     actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = datetime.datetime(2017, 9, 16))
+    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = datetime.datetime(2017, 9, 16), creationDate = datetime.datetime(2019, 2, 17),
+    incidentDate = "2018-09-09", creationDate = "2018-09-09",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     timeline = [timelineDoc])
@@ -182,8 +180,8 @@ def test_read_tag():
     print("creatoriD: " + doc_test.creatoriD)
     print("title: " + doc_test.title)
     print("description: " + doc_test.description)
-    print("incidentDate: " + str(doc_test.incidentDate))
-    print("creationDate: " + str(doc_test.creationDate))
+    print("incidentDate: " + doc_test.incidentDate)
+    print("creationDate: " + doc_test.creationDate)
     print("tagsDoc: ", doc_test.tagsDoc)
     print("infrasDocList: ", doc_test.infrasDocList)
     print("damageDocList: " , doc_test.damageDocList)
@@ -195,11 +193,3 @@ def test_read_tag():
     print("section: " , doc_test.timeline[0].event,doc_test.timeline[0].eventDate )
     print("timeline: " , doc_test.section[0].secTitle, doc_test.section[0].content )
    
-   
-#example of get 
-# print(Colaborator.objects.get(faculty = "ICOM")
-
-#example for append to a list
-# blog_post = BlogPost.objects.get(id=post.id)
-# blog_post.tags.insert(0,'nosql')
-# blog_post.save()

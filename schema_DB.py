@@ -17,8 +17,8 @@ class Collaborator(Document):
 
 class Session(Document):
     sessionToken = StringField(min_length=1, required=True, unique=True)
-    startDate = DateTimeField(required=True)
-    endDate = DateTimeField(required=True)
+    startDate = StringField(min_length=1, required=True)
+    endDate = StringField(min_length=1, required=True)
 
 class Admin(Document):
     username = StringField(min_length=1, required=True, unique=True)
@@ -46,7 +46,7 @@ class Actor(EmbeddedDocument):
 
 class Timeline(EmbeddedDocument):
     event = StringField(min_length=1, required=False, unique=True)
-    eventDate = DateTimeField(required=False)
+    eventDate = StringField(min_length=1, required=True)
 
 class Section(EmbeddedDocument):
     secTitle = StringField(min_length=1, required=True, unique=True)
@@ -58,8 +58,8 @@ class DocumentCase(Document):
     location = ListField(StringField(min_length=1,required=True))
     description = StringField(min_length=1, required=True)
     published = BooleanField(default=False,required=True)
-    incidentDate = DateTimeField(required=True)
-    creationDate = DateTimeField(required=True)
+    incidentDate = StringField(min_length=1, required=True)
+    creationDate = StringField(min_length=1, required=True)
     tagsDoc = ListField(StringField(min_length=1,required=True))
     infrasDocList =  ListField(StringField(min_length=1,required=True))
     damageDocList =  ListField(StringField(min_length=1,required=True))
