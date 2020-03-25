@@ -1,16 +1,17 @@
 from pymongo import *
 
-myclient = pymongo.MongoClient("mongodb://host.docker.internal:20717/IReNEdb")
+myclient = pymongo.MongoClient("mongodb://localhost:20717")
 irene = myclient["IReNEdb"]
 
 collab = irene["Collaborators"]
 admin = irene["Admin"]
 session = irene["Session"]
-doc = irene["Document"]
-taglist = irene["TagList"]
+doc = irene["DocumentCase"]
+taglist = irene["Tag"]
 infra = irene["Infrastructure"]
 damage = irene["Damage"]
 
+#test if you are connected
 #print ("server_info():", myclient.server_info())
 
 # db = myclient["IReNE"]
