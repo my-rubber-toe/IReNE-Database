@@ -60,6 +60,7 @@ class DocumentCase(Document):
     published = BooleanField(default=False,required=True)
     incidentDate = StringField(min_length=1, required=True)
     creationDate = StringField(min_length=1, required=True)
+    lastModificationDate = StringField(min_length=1, required=True)
     tagsDoc = ListField(StringField(min_length=1,required=True))
     infrasDocList =  ListField(StringField(min_length=1,required=True))
     damageDocList =  ListField(StringField(min_length=1,required=True))

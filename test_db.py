@@ -50,7 +50,7 @@ def test_insert_doc():
     timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD= "s" , title = "The great Flooding", description = "It was horrible",
-    incidentDate = "2018-09-09", creationDate = "2018-09-09",
+    incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     timeline = [timelineDoc])
@@ -62,6 +62,7 @@ def test_insert_doc():
     assert doc_test.description == "It was horrible"
     assert doc_test.incidentDate == "2018-09-09"
     assert doc_test.creationDate == "2018-09-09"
+    assert doc_test.lastModificationDate = "2020-01-01"
     assert doc_test.tagsDoc == ["Flood", "Hurricane"]
     assert doc_test.infrasDocList == ["Building"]
     assert doc_test.damageDocList == ["Flooding"]
@@ -96,19 +97,19 @@ def test_update_Admin():
     admin1.save()
 
     test_admin = Admin.objects.first()
-    Admin.objects(username = "jaits").update_one(set__password = "mario")
+    Admin.objects(username = "jaits").update_one(set__password = "link")
     test_admin.reload()
-    assert test_admin.password == "mario"
+    assert test_admin.password == "link"
 
 def test_update_doc():
     #process of inserting a document
     # authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     # author_faculty = "ICOM")
     # actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    # timelineDoc = Timeline(event = "Maria Passed PR", eventDate = datetime.datetime(2017, 9, 16))
+    # timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2017-09-09")
     # sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     # doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    # incidentDate = datetime.datetime(2017, 9, 16), creationDate = datetime.datetime(2019, 2, 17),
+    # incidentDate = "2017-09-06", creationDate = "2017-09-07", lastModificationDate = "2020-01-01",
     # tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     # location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     # timeline = [timelineDoc])
@@ -143,7 +144,7 @@ def test_delete_doc():
     timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = "2018-09-09", creationDate = "2018-09-09",
+    incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     timeline = [timelineDoc])
@@ -170,7 +171,7 @@ def test_read_tag():
     timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = "2018-09-09", creationDate = "2018-09-09",
+    incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
     timeline = [timelineDoc])
@@ -182,6 +183,7 @@ def test_read_tag():
     print("description: " + doc_test.description)
     print("incidentDate: " + doc_test.incidentDate)
     print("creationDate: " + doc_test.creationDate)
+    print("lastModificationDate: " + doc_test.lastModificationDate)
     print("tagsDoc: ", doc_test.tagsDoc)
     print("infrasDocList: ", doc_test.infrasDocList)
     print("damageDocList: " , doc_test.damageDocList)
