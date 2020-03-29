@@ -45,7 +45,7 @@ class Actor(EmbeddedDocument):
     role = StringField(min_length=1, required=True)
 
 class Timeline(EmbeddedDocument):
-    event = StringField(min_length=1, required=False)
+    event = StringField(min_length=1, required=True)
     eventDate = StringField(min_length=1, required=True)
 
 class Section(EmbeddedDocument):
