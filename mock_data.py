@@ -15,7 +15,6 @@ emailc = fn + '.' + ln + "@upr.edu"
 collab1 = Collaborator(first_name = fn, 
 last_name = ln, 
 approved = random.choice([True, False]),
-faculty = random.choice(facultyITEM),
 banned = random.choice([True, False]),
 email = emailc
 )
@@ -67,12 +66,12 @@ actorDoc = Actor(actor_FN = names.get_first_name(), actor_LN = names.get_last_na
 role = random.choice(roles))
 
 timelineDoc = Timeline(event = fake.sentence(ext_word_list=my_word_list), 
-eventDate = random.choice(dates))
+eventStartDate = random.choice(dates), eventEndDate = random.choice(dates))
 
 titles=['Introduction', 'Body', 'Analysis', 'Conclusion']
 sectionDoc = Section(secTitle = random.choice(titles), 
 content = fake.sentence(ext_word_list=my_word_list))
-
+languageDoc = ['English', 'Spanish']
 
 doc = DocumentCase(creatoriD = str(get_collab.id), title = namegenerator.gen(), location=[fake.address()], 
 description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
@@ -82,6 +81,6 @@ lastModificationDate= random.choice(dates),
 tagsDoc=[random.choice(tags),random.choice(tags)], 
 infrasDocList= [random.choice(infrastructure), random.choice(infrastructure)],
 damageDocList= [random.choice(damage), random.choice(damage)],
-author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc])
+author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc], language=random.choice(languageDoc))
 doc.save()
 # incident_date = fields.String(required=True, format="%Y-%m-%d")

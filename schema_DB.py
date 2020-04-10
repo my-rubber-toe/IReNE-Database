@@ -12,7 +12,6 @@ class Collaborator(Document):
     last_name = StringField(min_length=1, required=True)
     email = EmailField(required=True, unique=True)
     banned = BooleanField(default=False,required=True)
-    faculty = StringField(min_length=1, required=True)
     approved = BooleanField(default=False,required=True)
 
 class Session(Document):
@@ -45,16 +44,18 @@ class Actor(EmbeddedDocument):
     role = StringField(min_length=1, required=True)
 
 class Timeline(EmbeddedDocument):
-    event = StringField(min_length=1, required=True)
-    eventDate = StringField(min_length=1, required=True)
+    event = StringField(min_length=1, max_length=200, required=True)
+    eventStartDate = StringField(min_length=1, required=True, format='YYYY-MM-DD')
+    eventEndDate = StringField(min_length=1, required=True, format='YYYY-MM-DD')
 
 class Section(EmbeddedDocument):
-    secTitle = StringField(min_length=1, required=True)
+    secTitle = StringField(min_length=1, max_length=200, required=True)
     content = StringField(required=True)
 
 class DocumentCase(Document):
     creatoriD = StringField(min_length=1, required=True)
-    title = StringField(min_length=1, required=True, unique=True)
+    title = StringField(min_length=1, max_length = 200, required=True, unique=True)
+    language = StringField(min_length=1, required=True)
     location = ListField(StringField(min_length=1,required=True))
     description = StringField(min_length=1, required=True)
     published = BooleanField(default=False,required=True)

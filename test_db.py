@@ -4,14 +4,13 @@ import datetime
 
 def test_insert_Collab():
     collab = Collaborator( first_name = "Aurora", 
-    last_name = "Black", email = "aurora.black@upr.edu", faculty = "ICOM")
+    last_name = "Black", email = "aurora.black@upr.edu")
     collab.save()
 
     collab_test = Collaborator.objects.first()
     assert collab_test.first_name ==  "Aurora"
     assert collab_test.last_name ==  "Black"
     assert collab_test.email ==  "aurora.black@upr.edu"
-    assert collab_test.faculty ==  "ICOM"
 
 def test_insert_Admin():
     admin1 = Admin(username = "jaits", password = "loco")
@@ -47,13 +46,13 @@ def test_insert_doc():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     author_faculty = "ICOM")
     actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
+    timelineDoc = Timeline(event = "Maria Passed PR", eventStartDate = "2018-09-09", eventEndDate= "2018-10-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD= "s" , title = "The great Flooding", description = "It was horrible",
     incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc])
+    timeline = [timelineDoc], language="English")
     doc1.save()
     #process of testing the insert
     doc_test = DocumentCase.objects.first()
@@ -75,21 +74,22 @@ def test_insert_doc():
     assert doc_test.actor[0].actor_LN == "LOL"
     assert doc_test.actor[0].role == "mayor"
     assert doc_test.timeline[0].event == "Maria Passed PR"
-    assert doc_test.timeline[0].eventDate == "2018-09-09"
+    assert doc_test.timeline[0].eventStartDate == "2018-09-09"
+    assert doc_test.timeline[0].eventEndDate == "2018-10-09"
     assert doc_test.section[0].secTitle == "Introduction"
     assert doc_test.section[0].content == "It was bad..."
+    assert doc_test.language == "English"
 
 #-------------------------Tests for Updating------------------------------------
 def test_update_Collab():
     collab = Collaborator(first_name = "Jainel", last_name = "Torres",
-    email = "jainel.torres@upr.edu", faculty = "ICOM")
+    email = "jainel.torres@upr.edu")
     collab.save()
 
     collab_test = Collaborator.objects.first()
-    Collaborator.objects(first_name = "Jainel",last_name = "Torres").update_one(set__faculty = "INEL", set__email = "j@upr.edu")
+    Collaborator.objects(first_name = "Jainel",last_name = "Torres").update_one(set__Last_name = "Santos")
     collab_test.reload()
-    assert collab_test.faculty ==  "INEL"
-    assert collab_test.email == "j@upr.edu"
+    assert collab_test.last_name == "Santos"
 
 
 def test_update_Admin():
@@ -141,13 +141,13 @@ def test_delete_doc():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     author_faculty = "ICOM")
     actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
+    timelineDoc = Timeline(event = "Maria Passed PR", eventStartDate = "2018-09-09", eventEndDate= "2018-10-09" )
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
     incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc])
+    timeline = [timelineDoc], language="English")
     doc1.save()
     iddoc = doc1.id
     #eliminate just one
@@ -164,17 +164,17 @@ def test_read_tag():
     print(tagread.tagItem)
     assert tagread.tagItem == "Flood"
 
-def test_read_tag():
+def test_read_doc():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
     author_faculty = "ICOM")
     actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2018-09-09")
+    timelineDoc = Timeline(event = "Maria Passed PR", eventStartDate = "2018-09-09", eventEndDate="2018-10-09")
     sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
     doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
     incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
     tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
     location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc])
+    timeline = [timelineDoc], language="English")
     doc1.save()
 
     doc_test = DocumentCase.objects.get(title = "The great Flooding")
@@ -192,6 +192,6 @@ def test_read_tag():
     doc_test.author[0].author_email, doc_test.author[0].author_faculty)
     print("actor: " , doc_test.actor[0].actor_FN, doc_test.actor[0].actor_LN, 
     doc_test.actor[0].role)
-    print("section: " , doc_test.timeline[0].event,doc_test.timeline[0].eventDate )
-    print("timeline: " , doc_test.section[0].secTitle, doc_test.section[0].content )
+    print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
+    print("section: " , doc_test.section[0].secTitle, doc_test.section[0].content )
    
