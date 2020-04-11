@@ -61,7 +61,7 @@ def test_insert_doc():
     assert doc_test.description == "It was horrible"
     assert doc_test.incidentDate == "2018-09-09"
     assert doc_test.creationDate == "2018-09-09"
-    assert doc_test.lastModificationDate = "2020-01-01"
+    assert doc_test.lastModificationDate == "2020-01-01"
     assert doc_test.tagsDoc == ["Flood", "Hurricane"]
     assert doc_test.infrasDocList == ["Building"]
     assert doc_test.damageDocList == ["Flooding"]
@@ -156,13 +156,65 @@ def test_delete_doc():
  
 #---------------------------------Methods for Read --------------------------
 
-def test_read_tag():
-    tag = Tag(tagItem = "Flood")
-    tag.save()
-    
-    tagread = Tag.objects.get(tagItem = "Flood")
+def test_read_infras():
+    """
+        Returns the list of Infrastructure Types from the DB
+    """
+    infra_read = Infrastructure.objects()
+    infras = []
+    for x in infra_read:
+        infras.append(x.infrastructureType)
+    print(infras)
+ 
+def test_read_damage():
+    """
+        Returns the list of Damage Types from the DB
+    """
+    damage_read = Damage.objects()
+    damages = []
+    for x in damage_read:
+        damages.append(x.damageType)
+    print(damages)
+
+def test_read_tags():
+    """
+        Returns the list of Tags from the DB
+    """
+    tag_read = Tag.objects()
+    tags = []
+    for x in tag_read:
+        tags.append(x.tagItem)
+    print(tags)
+
+def test_get_tag(tag):
+    """
+        Returns a specific Tag from the DB
+    """
+    tagread = Tag.objects.get(tagItem = tag)
     print(tagread.tagItem)
-    assert tagread.tagItem == "Flood"
+    assert tagread.tagItem == tag
+
+test_get_tag("Flood")
+
+def test_get_infras(infras):
+    """
+        Returns a specific Infrastructure Type from the DB
+    """
+    infraread = Infrastructure.objects.get(infrastructureType = infras)
+    print(infraread.infrastructureType)
+    assert infraread.infrastructureType == infras
+
+test_get_infras("Structure")
+
+def test_get_damage(damage):
+    """
+        Returns a specific Damage Type from the DB
+    """
+    damageread = Damage.objects.get(damageType = damage)
+    print(damageread.damageType)
+    assert damageread.damageType == damage
+
+test_get_damage("Fire")
 
 def test_read_doc():
     authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
