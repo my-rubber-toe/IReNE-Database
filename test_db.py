@@ -181,7 +181,7 @@ def test_update_Admin_Password(usern, new_pass):
     print("new password: ", test_admin.password)
 
 
-def test_update_doc(titleDoc, des, tags):
+def test_update_doc(titleDoc, des):
     """
         updates description of doc
     """
@@ -201,30 +201,39 @@ def test_update_doc(titleDoc, des, tags):
 test_update_doc('The Great Rain', 'There was a lot of Water', ['Flood', 'Hurricane', 'Rain'])
 #-----------------------------------Methods for deletion--------------------------
 
-def test_delete_tag():
-    tag = Tag(tagItem = "Flood")
-    tag.save()
-    print(Tag.objects())
+def test_delete_tag(tag):
+    """
+        Deletes a tag
+    """
+    tag_read = Tag.objects()
+    tags = []
+    for x in tag_read:
+        tags.append(x.tagItem)
+    print(tags)
     #eliminate more than one doc
-    Tag.objects(tagItem = "Flood").delete()
-    print(Tag.objects())
+    Tag.objects(tagItem = tag).delete()
+    tag_read.reload()
+    new_tags =[]
+    for x in tag_read:
+        new_tags.append(x.tagItem)
+    print(new_tags)
 
-def test_delete_doc():
-    authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
-    author_faculty = "ICOM")
-    actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventStartDate = "2018-09-09", eventEndDate= "2018-10-09" )
-    sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
-    doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
-    tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
-    location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc], language="English")
-    doc1.save()
-    iddoc = doc1.id
-    #eliminate just one
-    doc_del = DocumentCase.objects.get(id = iddoc)
+def test_delete_doc(titleDoc):
+    """
+        Delete one doc
+    """
+    old_docs = []
+    docs = DocumentCase.objects()
+    for x in docs:
+        old_docs.append(x.title)
+    print(old_docs)
+    doc_del = DocumentCase.objects.get(title = titleDoc)
     doc_del.delete()
+    docs.reload()
+    new_docs()
+    for x in docs:
+        new_docs.append(x.title)
+    print(new_docs)
  
 #---------------------------------Methods for Read --------------------------
 
