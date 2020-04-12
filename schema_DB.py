@@ -1,22 +1,26 @@
 from mongoengine import *
 import datetime
+import regex
 
 #Connection to the Database
 connect('IReNEdb')
 #connec the db for testing purposes
-# connect('IReNEdb', host='mongomock://localhost:27017')
+# connect('IReNEdb', host='mongomock://localhost')
+
 
 class Collaborator(Document):
+    reg = regex.compile('(.)\.(.)@upr\.edu')
     documentsID =  ListField(StringField(required=False))
     first_name = StringField(min_length=1, max_length=30, required=True)
     last_name = StringField(min_length=1, max_length=30, required=True)
-    email = EmailField(required=True,max_length=100, unique=True, regex="@upr\.edu")
+    format_email = (str(first_name) + str(last_name) + '@upr.edu')
+    email = EmailField(required=True,max_length=100, unique=True, format=format_email)
     banned = BooleanField(default=False,required=True)
     approved = BooleanField(default=False,required=True)
 
 class Admin(Document):
     username = StringField(min_length=1, required=True, unique=True)
-    password = StringField(min_length=1, required=True)
+    password = StringField(min_length=5, required=True)
 
 class Tag(Document):
     tagItem = StringField(min_length=1, max_length=20, required=True, unique=True)

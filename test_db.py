@@ -2,131 +2,203 @@ from mongoengine import *
 from schema_DB import *
 import datetime
 
-def test_insert_Collab():
-    collab = Collaborator( first_name = "Aurora", 
-    last_name = "Black", email = "aurora.black@upr.edu")
-    collab.save()
+#-------------------------Tests for Create------------------------------------
+def test_create_Collab(fn,ln,email):
+    """
+        Creates a new Collaborator
+    """
+    if (email == (fn.lower() + "." + ln.lower() + '@upr.edu')):
+        collab = Collaborator( first_name = fn, 
+        last_name = ln, email = email)
+        collab.save()
 
-    collab_test = Collaborator.objects.first()
-    assert collab_test.first_name ==  "Aurora"
-    assert collab_test.last_name ==  "Black"
-    assert collab_test.email ==  "aurora.black@upr.edu"
+        collab_test = Collaborator.objects.get(email = email)
+        assert collab_test.first_name ==  fn
+        assert collab_test.last_name ==  ln
+        assert collab_test.email ==  email
+        print("New Collab: \n\tFN: ", collab_test.first_name, "\n\tLN: ", collab_test.last_name, "\n\temail: ", collab_test.email)
+    else:
+        print('email must match must be a @upr.edu domain & must match with fn & ln')
 
-def test_insert_Admin():
-    admin1 = Admin(username = "jaits", password = "loco")
-    admin1.save()
+def test_create_Admin(user_username, user_password):
+    """
+        Creates a new Admin
+    """
+    admin = Admin(username = user_username, password = user_password)
+    admin.save()
+    test_admin = Admin.objects.get(username = user_username)
+    assert test_admin.username == user_username
+    assert test_admin.password == user_password
+    print("New Admin: \n\tUsername: ", test_admin.username, "\n\tPassword: ", test_admin.password)
 
-    test_admin = Admin.objects.first()
-    assert test_admin.username == "jaits"
-    assert test_admin.password == "loco"
 
-def test_insert_Tag():
-    tag = Tag(tagItem = "Flood")
+def test_create_Tag(new_tag):
+    """
+        Creates a new Tag
+    """
+    tag = Tag(tagItem = new_tag)
     tag.save()
     
-    tag_test = Tag.objects.first()
-    assert tag_test.tagItem == "Flood"
+    tag_test = Tag.objects.get(tagItem = new_tag)
+    assert tag_test.tagItem == new_tag
+    print(tag_test.tagItem)
 
-def test_insert_Infrastructure():
-    infras = Infrastructure(infrastructureType = "Building")
+def test_create_Infrastructure(new_infras):
+    """
+        Creates a new Infrastructure Type
+    """
+    infras = Infrastructure(infrastructureType = new_infras)
     infras.save()
 
-    infras_test = Infrastructure.objects.first()
-    assert infras_test.infrastructureType == "Building"    
+    infras_test = Infrastructure.objects.get(infrastructureType = new_infras)
+    assert infras_test.infrastructureType == new_infras
+    print(infras_test.infrastructureType)    
 
-def test_insert_Damage():
-    damage = Damage(damageType = "Flooding")
+
+def test_create_Damage(new_damage):
+    """
+        Creates a new Damage Type
+    """
+    damage = Damage(damageType = new_damage)
     damage.save()
 
-    damage_test = Damage.objects.first()
-    assert damage_test.damageType == "Flooding" 
+    damage_test = Damage.objects.get(damageType = new_damage)
+    assert damage_test.damageType == new_damage
+    print(damage_test.damageType)
 
-def test_insert_doc():
-    #process of inserting a document
-    authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
-    author_faculty = "ICOM")
-    actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventStartDate = "2018-09-09", eventEndDate= "2018-10-09")
-    sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
-    doc1 = DocumentCase(creatoriD= "s" , title = "The great Flooding", description = "It was horrible",
-    incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
-    tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
-    location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc], language="English")
+
+def test_create_doc (**docatr):
+    """
+        Creates a new Document
+    """
+    authorDoc = []
+    for author in docatr["author"]:
+        auth = Author(author_FN = author[0], author_LN = author[1], author_email = author[2], 
+        author_faculty = author[3])
+        authorDoc.append(auth)
+    actorDoc = []
+    for actor in docatr["actor"]:
+        act = Actor(actor_FN = actor[0], actor_LN = actor[1], role = actor[2])
+        actorDoc.append(act)
+    timelineDoc = []
+    for tl in docatr["timeline"]:
+        timel = Timeline(event = tl[0], eventStartDate = tl[1], eventEndDate= tl[2])
+        timelineDoc.append(timel)
+    sectionDoc = []
+    for sec in docatr["section"]:
+        secdoc = Section(secTitle = sec[0], content = sec[1])
+        sectionDoc.append(secdoc)
+    doc1 = DocumentCase(creatoriD = docatr["creatoriD"],title = docatr["title"], language=docatr["language"], description = docatr["description"],
+    incidentDate = docatr["incidentDate"], creationDate = docatr["creationDate"], lastModificationDate = docatr["lastModificationDate"],
+    tagsDoc = docatr["tagsDoc"], infrasDocList = docatr["infrasDocList"], damageDocList = docatr["damageDocList"],
+    location = docatr["location"], author = authorDoc, actor = actorDoc, 
+    section = sectionDoc, timeline = timelineDoc)
+    for tag in docatr["tagsDoc"]:
+        if not Tag.objects(tagItem=tag):
+            newTag = Tag(tagItem=tag)
+            newTag.save()
     doc1.save()
     #process of testing the insert
-    doc_test = DocumentCase.objects.first()
-    # doc_embedded_test = DocumentCase.
-    assert doc_test.title == "The great Flooding"
-    assert doc_test.description == "It was horrible"
-    assert doc_test.incidentDate == "2018-09-09"
-    assert doc_test.creationDate == "2018-09-09"
-    assert doc_test.lastModificationDate == "2020-01-01"
-    assert doc_test.tagsDoc == ["Flood", "Hurricane"]
-    assert doc_test.infrasDocList == ["Building"]
-    assert doc_test.damageDocList == ["Flooding"]
-    assert doc_test.location == ["Coamo"]
-    assert doc_test.author[0].author_FN == "Jai"
-    assert doc_test.author[0].author_LN == "TS"
-    assert doc_test.author[0].author_email == "j@upr.edu"
-    assert doc_test.author[0].author_faculty == "ICOM"
-    assert doc_test.actor[0].actor_FN == "vic"
-    assert doc_test.actor[0].actor_LN == "LOL"
-    assert doc_test.actor[0].role == "mayor"
-    assert doc_test.timeline[0].event == "Maria Passed PR"
-    assert doc_test.timeline[0].eventStartDate == "2018-09-09"
-    assert doc_test.timeline[0].eventEndDate == "2018-10-09"
-    assert doc_test.section[0].secTitle == "Introduction"
-    assert doc_test.section[0].content == "It was bad..."
+    doc_test = DocumentCase.objects.get(title = docatr["title"])
+    assert doc_test.creatoriD == docatr["creatoriD"]
+    assert doc_test.title == docatr["title"]
+    assert doc_test.description == docatr["description"]
+    assert doc_test.incidentDate == docatr["incidentDate"]
+    assert doc_test.creationDate == docatr["creationDate"]
+    assert doc_test.lastModificationDate == docatr["lastModificationDate"]
+    assert doc_test.tagsDoc == docatr["tagsDoc"]
+    assert doc_test.infrasDocList == docatr["infrasDocList"]
+    assert doc_test.damageDocList == docatr["damageDocList"]
+    assert doc_test.location == docatr["location"]
+    assert doc_test.author[0].author_FN == authorDoc[0].author_FN
+    assert doc_test.author[0].author_LN == authorDoc[0].author_LN
+    assert doc_test.author[0].author_email == authorDoc[0].author_email
+    assert doc_test.author[0].author_faculty == authorDoc[0].author_faculty 
+    assert doc_test.actor[0].actor_FN == actorDoc[0].actor_FN
+    assert doc_test.actor[0].actor_LN == actorDoc[0].actor_LN 
+    assert doc_test.actor[0].role == actorDoc[0].role
+    assert doc_test.timeline[0].event == timelineDoc[0].event
+    assert doc_test.timeline[0].eventStartDate == timelineDoc[0].eventStartDate 
+    assert doc_test.timeline[0].eventEndDate == timelineDoc[0].eventEndDate
+    assert doc_test.section[0].secTitle == sectionDoc[0].secTitle
+    assert doc_test.section[0].content == sectionDoc[0].content
     assert doc_test.language == "English"
+    print("creatorID: " + doc_test.creatoriD)
+    print("title: " + doc_test.title)
+    print("description: " + doc_test.description)
+    print("incidentDate: " + doc_test.incidentDate)
+    print("creationDate: " + doc_test.creationDate)
+    print("lastModificationDate: " + doc_test.lastModificationDate)
+    print("tagsDoc: ", doc_test.tagsDoc)
+    print("infrasDocList: ", doc_test.infrasDocList)
+    print("damageDocList: " , doc_test.damageDocList)
+    print("location: " , doc_test.location)
+    print("author: \n\tname" , doc_test.author[0].author_FN, doc_test.author[0].author_LN, 
+    "\n\temail",doc_test.author[0].author_email, "\n\tfaculty",doc_test.author[0].author_faculty)
+    print("actor: \n\tname:" , doc_test.actor[0].actor_FN, doc_test.actor[0].actor_LN, 
+    "\n\trole:",doc_test.actor[0].role)
+    print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
+    print("section: \n\tsecTitle:" , doc_test.section[0].secTitle, "\n\tcontent:",  doc_test.section[0].content )
 
+# test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Hurricane', description="It was horrible..", incidentDate='2010-02-03',
+#  creationDate='2012-03-10', lastModificationDate='2014-08-03', 
+#  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
+#   location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
+#   actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
+#  section=[['Introduction', 'It was raining a lot']])
 #-------------------------Tests for Updating------------------------------------
-def test_update_Collab():
-    collab = Collaborator(first_name = "Jainel", last_name = "Torres",
-    email = "jainel.torres@upr.edu")
-    collab.save()
-
-    collab_test = Collaborator.objects.first()
-    Collaborator.objects(first_name = "Jainel",last_name = "Torres").update_one(set__Last_name = "Santos")
+def test_update_Collab_FN(email_test, new_fn):
+    """
+        updates FN of collab
+    """
+    collab_test = Collaborator.objects.get(email= email_test)
+    print("old fn: ", collab_test.first_name)
+    Collaborator.objects(email=email_test).update_one(set__first_name = new_fn)
     collab_test.reload()
-    assert collab_test.last_name == "Santos"
+    assert collab_test.first_name == new_fn
+    print("new fn: ",collab_test.first_name)
 
+def test_update_Collab_LN(email_test, new_ln):
+    """
+        updates LN of collab
+    """
+    collab_test = Collaborator.objects.get(email= email_test)
+    print("old ln: ", collab_test.last_name)
+    Collaborator.objects(email=email_test).update_one(set__last_name = new_ln)
+    collab_test.reload()
+    assert collab_test.last_name == new_ln
+    print("new ln: ",collab_test.last_name)
 
-def test_update_Admin():
-    admin1 = Admin(username = "jaits", password = "LOZ")
-    admin1.save()
-
-    test_admin = Admin.objects.first()
-    Admin.objects(username = "jaits").update_one(set__password = "link")
+def test_update_Admin_Password(usern, new_pass):
+    """
+        updates password of admin
+    """
+    test_admin = Admin.objects.get(username=usern)
+    print("old password: ", test_admin.password)
+    Admin.objects(username = usern).update_one(set__password = new_pass)
     test_admin.reload()
-    assert test_admin.password == "link"
+    assert test_admin.password == new_pass
+    print("new password: ", test_admin.password)
 
-def test_update_doc():
-    #process of inserting a document
-    # authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
-    # author_faculty = "ICOM")
-    # actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    # timelineDoc = Timeline(event = "Maria Passed PR", eventDate = "2017-09-09")
-    # sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
-    # doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    # incidentDate = "2017-09-06", creationDate = "2017-09-07", lastModificationDate = "2020-01-01",
-    # tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
-    # location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    # timeline = [timelineDoc])
-    # doc1.save()
+
+def test_update_doc(titleDoc, des, tags):
+    """
+        updates description of doc
+    """
     #process of testing update
-    doc_test = DocumentCase.objects.first()
-    DocumentCase.objects(title = "The great Flooding").update_one(set__description = "whoa")
-    DocumentCase.objects(title = "The great Flooding").update_one(set__tagsDoc = ["Flood", "Hurricane","severe"])
-    DocumentCase.objects(title = "The great Flooding", author__author_LN = "TS").update_one(set__author__S__author_FN = "joy")
-    DocumentCase.objects(title = "The great Flooding").update_one(set__creationDate = "2018-09-09")
+    doc_test = DocumentCase.objects.get(title= titleDoc)
+    print('old description: ' + doc_test.description + " old tags: " )
+    print(doc_test.tagsDoc)
+    DocumentCase.objects(title = titleDoc).update_one(set__description = des)
+    # DocumentCase.objects(title = titleDoc).update_one(set__tagsDoc = tags)
+    # DocumentCase.objects(title = "The great Flooding", author__author_LN = "TS").update_one(set__author__S__author_FN = "joy")
     doc_test.reload()
-    print(doc_test.creationDate)
-    assert doc_test.description == "whoa"
-    assert doc_test.creationDate == "2018-09-09"
-    assert doc_test.tagsDoc == ["Flood", "Hurricane","severe"]
-    assert doc_test.author[0].author_FN == "joy"
-   
+    print('new description: ' + doc_test.description + " new tags: " )
+    print(doc_test.tagsDoc)
+    assert doc_test.description == des
+    # assert doc_test.tagsDoc == tags
+
+test_update_doc('The Great Rain', 'There was a lot of Water', ['Flood', 'Hurricane', 'Rain'])
 #-----------------------------------Methods for deletion--------------------------
 
 def test_delete_tag():
@@ -194,8 +266,6 @@ def test_get_tag(tag):
     print(tagread.tagItem)
     assert tagread.tagItem == tag
 
-test_get_tag("Flood")
-
 def test_get_infras(infras):
     """
         Returns a specific Infrastructure Type from the DB
@@ -203,8 +273,6 @@ def test_get_infras(infras):
     infraread = Infrastructure.objects.get(infrastructureType = infras)
     print(infraread.infrastructureType)
     assert infraread.infrastructureType == infras
-
-test_get_infras("Structure")
 
 def test_get_damage(damage):
     """
@@ -214,22 +282,12 @@ def test_get_damage(damage):
     print(damageread.damageType)
     assert damageread.damageType == damage
 
-test_get_damage("Fire")
 
-def test_read_doc():
-    authorDoc = Author(author_FN = "Jai", author_LN = "TS", author_email = "j@upr.edu", 
-    author_faculty = "ICOM")
-    actorDoc = Actor(actor_FN = "vic", actor_LN = "LOL", role = "mayor")
-    timelineDoc = Timeline(event = "Maria Passed PR", eventStartDate = "2018-09-09", eventEndDate="2018-10-09")
-    sectionDoc = Section(secTitle = "Introduction", content = "It was bad...")
-    doc1 = DocumentCase(creatoriD = "S", title = "The great Flooding", description = "It was horrible",
-    incidentDate = "2018-09-09", creationDate = "2018-09-09", lastModificationDate = "2020-01-01",
-    tagsDoc = ["Flood", "Hurricane"], infrasDocList = ["Building"], damageDocList = ["Flooding"],
-    location = ["Coamo"], author = [authorDoc], actor = [actorDoc], section = [sectionDoc],
-    timeline = [timelineDoc], language="English")
-    doc1.save()
-
-    doc_test = DocumentCase.objects.get(title = "The great Flooding")
+def test_read_doc(titleDoc):
+    """
+        Returns a specific Document from the DB
+    """
+    doc_test = DocumentCase.objects.get(title = titleDoc)
     print("creatoriD: " + doc_test.creatoriD)
     print("title: " + doc_test.title)
     print("description: " + doc_test.description)
@@ -240,10 +298,55 @@ def test_read_doc():
     print("infrasDocList: ", doc_test.infrasDocList)
     print("damageDocList: " , doc_test.damageDocList)
     print("location: " , doc_test.location)
-    print("author: " , doc_test.author[0].author_FN, doc_test.author[0].author_LN, 
-    doc_test.author[0].author_email, doc_test.author[0].author_faculty)
-    print("actor: " , doc_test.actor[0].actor_FN, doc_test.actor[0].actor_LN, 
-    doc_test.actor[0].role)
+    print("author: \n\tname" , doc_test.author[0].author_FN, doc_test.author[0].author_LN, 
+    "\n\temail",doc_test.author[0].author_email, "\n\tfaculty",doc_test.author[0].author_faculty)
+    print("actor: \n\tname:" , doc_test.actor[0].actor_FN, doc_test.actor[0].actor_LN, 
+    "\n\trole:",doc_test.actor[0].role)
     print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
-    print("section: " , doc_test.section[0].secTitle, doc_test.section[0].content )
-   
+    print("section: \n\tsecTitle:" , doc_test.section[0].secTitle, "\n\tcontent:",  doc_test.section[0].content )
+
+
+def read_get_admin(username):
+    """
+        Returns a specific Admin from the DB
+    """
+    admin = Admin.objects.get(username = username)
+    print("Username: " + admin.username)
+    print("Password: " + admin.password)
+
+def read_get_collabs():
+    """
+        Returns a list of Collaborators from the DB
+    """
+    collab = Collaborator.objects()
+    for x in collab:
+        print("\nFN: " + x.first_name)
+        print("LN: " + x.last_name)
+        print("email: " + x.email)
+        print("banned: " + str(x.banned))
+        print("approved: " + str(x.approved))
+
+def read_get_docs():
+    """
+        Returns a list of Documents from the DB
+    """
+    docs = DocumentCase.objects()
+    for doc_tests in docs:
+        print("creatoriD: " + doc_tests.creatoriD)
+        print("title: " + doc_tests.title)
+        print("description: " + doc_tests.description)
+        print("incidentDate: " + doc_tests.incidentDate)
+        print("creationDate: " + doc_tests.creationDate)
+        print("lastModificationDate: " + doc_tests.lastModificationDate)
+        print("tagsDoc: ", doc_tests.tagsDoc)
+        print("infrasDocList: ", doc_testsinfrasDocList)
+        print("damageDocList: " , doc_tests.damageDocList)
+        print("location: " , doc_tests.location)
+        print("author: \n\tname" , doc_tests.author[0].author_FN, doc_tests.author[0].author_LN, 
+        "\n\temail",doc_tests.author[0].author_email, "\n\tfaculty",doc_tests.author[0].author_faculty)
+        print("actor: \n\tname:" , doc_tests.actor[0].actor_FN, doc_tests.actor[0].actor_LN, 
+        "\n\trole:",doc_tests.actor[0].role)
+        print("timeline: " , doc_tests.timeline[0].event,doc_tests.timeline[0].eventStartDate, doc_tests.timeline[0].eventEndDate )
+        print("section: \n\tsecTitle:" , doc_tests.section[0].secTitle, "\n\tcontent:",  doc_tests.section[0].content )
+
+
