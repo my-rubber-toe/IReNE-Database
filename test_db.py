@@ -181,24 +181,23 @@ def test_update_Admin_Password(usern, new_pass):
     print("new password: ", test_admin.password)
 
 
-def test_update_doc(titleDoc, des):
+def test_update_doc(titleDoc, des, tags):
     """
         updates description of doc
     """
     #process of testing update
     doc_test = DocumentCase.objects.get(title= titleDoc)
-    print('old description: ' + doc_test.description + " old tags: " )
+    print('old description: ' + doc_test.description + " \nold tags: " )
     print(doc_test.tagsDoc)
     DocumentCase.objects(title = titleDoc).update_one(set__description = des)
-    # DocumentCase.objects(title = titleDoc).update_one(set__tagsDoc = tags)
+    DocumentCase.objects(title = titleDoc).update_one(set__tagsDoc = tags)
     # DocumentCase.objects(title = "The great Flooding", author__author_LN = "TS").update_one(set__author__S__author_FN = "joy")
     doc_test.reload()
-    print('new description: ' + doc_test.description + " new tags: " )
+    print('new description: ' + doc_test.description + " \nnew tags: " )
     print(doc_test.tagsDoc)
     assert doc_test.description == des
-    # assert doc_test.tagsDoc == tags
+    assert doc_test.tagsDoc == tags
 
-test_update_doc('The Great Rain', 'There was a lot of Water', ['Flood', 'Hurricane', 'Rain'])
 #-----------------------------------Methods for deletion--------------------------
 
 def test_delete_tag(tag):
@@ -212,9 +211,9 @@ def test_delete_tag(tag):
     print(tags)
     #eliminate more than one doc
     Tag.objects(tagItem = tag).delete()
-    tag_read.reload()
     new_tags =[]
-    for x in tag_read:
+    new_tag_read = Tag.objects()
+    for x in new_tag_read:
         new_tags.append(x.tagItem)
     print(new_tags)
 
@@ -222,19 +221,19 @@ def test_delete_doc(titleDoc):
     """
         Delete one doc
     """
+    docs_read = DocumentCase.objects()
     old_docs = []
-    docs = DocumentCase.objects()
-    for x in docs:
+    for x in docs_read:
         old_docs.append(x.title)
     print(old_docs)
-    doc_del = DocumentCase.objects.get(title = titleDoc)
-    doc_del.delete()
-    docs.reload()
-    new_docs()
-    for x in docs:
+    
+    DocumentCase.objects(title = titleDoc).delete()
+    new_docs_read = DocumentCase.objects()
+    new_docs = []
+    for x in new_docs_read:
         new_docs.append(x.title)
     print(new_docs)
- 
+test_delete_doc('El gran Terremoto') 
 #---------------------------------Methods for Read --------------------------
 
 def test_read_infras():

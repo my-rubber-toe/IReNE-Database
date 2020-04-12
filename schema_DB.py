@@ -5,7 +5,7 @@ import regex
 #Connection to the Database
 connect('IReNEdb')
 #connec the db for testing purposes
-# connect('IReNEdb', host='mongomock://localhost')
+#connect('IReNEdb', host='mongomock://localhost', alias='IReNEdb')
 
 
 class Collaborator(Document):
