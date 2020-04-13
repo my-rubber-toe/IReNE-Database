@@ -1,6 +1,6 @@
 from mongoengine import *
 from schema_DB import *
-import datetime
+
 
 #-------------------------Tests for Create------------------------------------
 def test_create_Collab(fn,ln,email):
@@ -19,6 +19,7 @@ def test_create_Collab(fn,ln,email):
         print("New Collab: \n\tFN: ", collab_test.first_name, "\n\tLN: ", collab_test.last_name, "\n\temail: ", collab_test.email)
     else:
         print('email must match must be a @upr.edu domain & must match with fn & ln')
+
 
 def test_create_Admin(user_username, user_password):
     """
@@ -140,12 +141,12 @@ def test_create_doc (**docatr):
     print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
     print("section: \n\tsecTitle:" , doc_test.section[0].secTitle, "\n\tcontent:",  doc_test.section[0].content )
 
-# test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Hurricane', description="It was horrible..", incidentDate='2010-02-03',
-#  creationDate='2012-03-10', lastModificationDate='2014-08-03', 
-#  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
-#   location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
-#   actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
-#  section=[['Introduction', 'It was raining a lot']])
+test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
+ creationDate='2012-03-1', lastModificationDate='2014-08-03', 
+ infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
+  location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
+  actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
+ section=[['Introduction', 'It was raining a lot']])
 #-------------------------Tests for Updating------------------------------------
 def test_update_Collab_FN(email_test, new_fn):
     """
@@ -233,7 +234,7 @@ def test_delete_doc(titleDoc):
     for x in new_docs_read:
         new_docs.append(x.title)
     print(new_docs)
-test_delete_doc('El gran Terremoto') 
+
 #---------------------------------Methods for Read --------------------------
 
 def test_read_infras():

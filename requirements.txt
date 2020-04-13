@@ -1,0 +1,7 @@
+mongoengine
+pymongo
+names
+namegenerator
+Faker
+datetime
+mongo-mock

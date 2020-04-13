@@ -4,7 +4,21 @@ from schema_DB import *
 import names
 import random
 import namegenerator
+import datetime
 from faker  import Faker 
+import password
+import username
+
+pass = 'hello'
+pass = password.Password(method='sha1', hash_encoding='base64')
+
+"""
+    The purpose of this file is to auto generate mock data for the database
+    note: If you are going to run this twice, comment the section of filling the database
+    with Tag, Infrastructure & Damage data, Its because these three were built to only accept
+    unique data. If you want to add more data, just change the values in the lists: infrastructure,
+    damage & tags
+"""
 fake = Faker() 
 
 index = 0
@@ -14,8 +28,8 @@ for index in range(0,10):
     ln = names.get_last_name()
     emailc = fn.lower() + '.' + ln.lower() + "@upr.edu"
     print(emailc)
-    collab1 = Collaborator(first_name = fn.lower(), 
-    last_name = ln.lower(), 
+    collab1 = Collaborator(first_name = fn, 
+    last_name = ln, 
     approved = random.choice([True, False]),
     banned = random.choice([True, False]),
     email = emailc)
