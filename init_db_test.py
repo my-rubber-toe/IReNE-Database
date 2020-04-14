@@ -2,23 +2,23 @@ from mongoengine import *
 from schema_DB import *
 
 #Fills the db with Collaborators mock-data
-collab1 = Collaborator(first_name="Jainel", last_name="Torres", email="jainel.torres@upr.edu")
+collab1 = Collaborator(first_name="Jainel", last_name="Torres", email="jainel.torres@upr.edu", approved=True)
 collab1.save()
-collab2 = Collaborator(first_name="Roberto", last_name="Guzman", email="roberto.guzman3@upr.edu")
+collab2 = Collaborator(first_name="Roberto", last_name="Guzman", email="roberto.guzman3@upr.edu", approved=True)
 collab2.save()
 collab3 = Collaborator(first_name="Alberto", last_name="Canela", email="alberto.canela@upr.edu")
 collab3.save()
-collab4 = Collaborator(first_name="Alejandro", last_name="Vasquez", email="alejandro.vasquez@upr.edu")
+collab4 = Collaborator(first_name="Alejandro", last_name="Vasquez", email="alejandro.vasquez@upr.edu",approved=True, banned=True )
 collab4.save()
 collab5 = Collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu")
 collab5.save()
 
 #Fills the db with Admin mock-data
-admin1 = Admin(username="jaits13", password="icom5047@jaits13")
+admin1 = Admin(username="Jaitorress13", password="Icom5047@jaits13")
 admin1.save()
-admin2 = Admin(username="robg3", password= "icom5047@robg3")
+admin2 = Admin(username="Robertog3", password= "Icom5047@robg3")
 admin2.save()
-admin3 = Admin(username="aleva", password="icom5047@aleva")
+admin3 = Admin(username="Alejandrova", password="Icom5047@aleva")
 admin3.save()
 
 #Fills the db with Tag mock-data

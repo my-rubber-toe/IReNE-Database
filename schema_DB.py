@@ -1,7 +1,6 @@
 from mongoengine import *
 import datetime
 import regex
-
 #Connection to the Database
 connect('IReNEdb')
 #connec the db for testing purposes
@@ -17,8 +16,8 @@ class Collaborator(Document):
     approved = BooleanField(default=False,required=True)
 
 class Admin(Document):
-    username = StringField(min_length=8, required=True, unique=True)
-    password = StringField(min_length=8, required=True, regex='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])')
+    username = StringField(min_length=8,max_length=20, required=True, unique=True, regex='[a-zA-Z0-9]')
+    password = StringField(min_length=8, required=True)
 
 class Tag(Document):
     tagItem = StringField(min_length=1, max_length=20, required=True, unique=True)

@@ -32,7 +32,6 @@ def test_create_Admin(user_username, user_password):
     assert test_admin.password == user_password
     print("New Admin: \n\tUsername: ", test_admin.username, "\n\tPassword: ", test_admin.password)
 
-
 def test_create_Tag(new_tag):
     """
         Creates a new Tag
@@ -141,12 +140,12 @@ def test_create_doc (**docatr):
     print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
     print("section: \n\tsecTitle:" , doc_test.section[0].secTitle, "\n\tcontent:",  doc_test.section[0].content )
 
-test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
- creationDate='2012-03-1', lastModificationDate='2014-08-03', 
- infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
-  location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
-  actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
- section=[['Introduction', 'It was raining a lot']])
+# test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
+#  creationDate='2012-03-01', lastModificationDate='2014-08-03', 
+#  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
+#   location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
+#   actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
+#  section=[['Introduction', 'It was raining a lot']])
 #-------------------------Tests for Updating------------------------------------
 def test_update_Collab_FN(email_test, new_fn):
     """
