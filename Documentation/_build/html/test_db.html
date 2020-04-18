@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>test_db module &#8212; IReNE&#39;s Database 2.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="schema_DB module" href="schema_DB.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-test_db">
+<span id="test-db-module"></span><h1>test_db module<a class="headerlink" href="#module-test_db" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="test_db.read_get_admin">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">read_get_admin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.read_get_admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a specific Admin from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.read_get_collabs">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">read_get_collabs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_db.read_get_collabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of Collaborators from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.read_get_docs">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">read_get_docs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_db.read_get_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of Documents from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_create_Admin">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_create_Admin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_username</span></em>, <em class="sig-param"><span class="n">user_password</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_create_Admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Admin</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_create_Collab">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_create_Collab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fn</span></em>, <em class="sig-param"><span class="n">ln</span></em>, <em class="sig-param"><span class="n">email</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_create_Collab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Collaborator</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_create_Damage">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_create_Damage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_damage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_create_Damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Damage Type</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_create_Infrastructure">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_create_Infrastructure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_infras</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_create_Infrastructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Infrastructure Type</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_create_Tag">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_create_Tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_create_Tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Tag</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_create_doc">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_create_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">docatr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_create_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Document</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_delete_doc">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_delete_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">titleDoc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_delete_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete one doc</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_delete_tag">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_delete_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_delete_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a tag</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_get_damage">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_get_damage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">damage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_get_damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a specific Damage Type from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_get_infras">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_get_infras</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">infras</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_get_infras" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a specific Infrastructure Type from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_get_tag">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_get_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_get_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a specific Tag from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_read_damage">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_read_damage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_read_damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of Damage Types from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_read_doc">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_read_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">titleDoc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_read_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a specific Document from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_read_infras">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_read_infras</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_read_infras" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of Infrastructure Types from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_read_tags">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_read_tags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_read_tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of Tags from the DB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_update_Admin_Password">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_update_Admin_Password</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">usern</span></em>, <em class="sig-param"><span class="n">new_pass</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_update_Admin_Password" title="Permalink to this definition">¶</a></dt>
+<dd><p>updates password of admin</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_update_Collab_FN">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_update_Collab_FN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">email_test</span></em>, <em class="sig-param"><span class="n">new_fn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_update_Collab_FN" title="Permalink to this definition">¶</a></dt>
+<dd><p>updates FN of collab</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_update_Collab_LN">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_update_Collab_LN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">email_test</span></em>, <em class="sig-param"><span class="n">new_ln</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_update_Collab_LN" title="Permalink to this definition">¶</a></dt>
+<dd><p>updates LN of collab</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="test_db.test_update_doc">
+<code class="sig-prename descclassname">test_db.</code><code class="sig-name descname">test_update_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">titleDoc</span></em>, <em class="sig-param"><span class="n">des</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#test_db.test_update_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>updates description of doc</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">IReNE's Database</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">IReNE-Database</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="init_db_test.html">init_db_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema_DB.html">schema_DB module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">test_db module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">IReNE-Database</a><ul>
+      <li>Previous: <a href="schema_DB.html" title="previous chapter">schema_DB module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Jainel M. Torres Santos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0+/3fb16cb</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/test_db.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -9,8 +9,6 @@ from faker  import Faker
 import password
 import username
 
-pass = 'hello'
-pass = password.Password(method='sha1', hash_encoding='base64')
 
 """
     The purpose of this file is to auto generate mock data for the database
