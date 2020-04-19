@@ -34,10 +34,12 @@ class Admin(Document):
         These attributes will be the credentials of the Admins for them to enter the Admin Dashboard.
         List of attributes:
             - username: <String>  Admin's username.
-            - password: <String> Admin's  password.    
+                - username attribute follows this regex: '(^(?=[a-zA-Z0-9])(?=.*[a-z])(?=.*[0-9])(?=.*[\.])(?=.*[A-Z])).*[^.]$' 
+            - password: <String> Admin's  password.   
+                - password attribute follows this regex: '([a-zA-Z0-9]+)*'
     """
-    username = StringField(min_length=8,max_length=20, required=True, unique=True, regex='[a-zA-Z0-9]')
-    password = StringField(min_length=8, required=True)
+    username = StringField(min_length=8, max_length=20, required=True, unique=True, regex='(^(?=[a-zA-Z0-9])(?=.*[a-z])(?=.*[0-9])(?=.*[\.])(?=.*[A-Z])).*[^.]$' )
+    password = StringField(min_length=8,max_length=20, required=True, regex='([a-zA-Z0-9]+)*')
 
 class Tag(Document):
     """
