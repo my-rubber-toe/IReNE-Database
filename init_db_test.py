@@ -22,11 +22,11 @@ def Admins():
     """
         Fills the db with 3 Admin mock-data
     """
-    admin1 = Admin(username="Jaitorress13", password="Icom5047@jaits13")
+    admin1 = Admin(username="Jai.torress13", password="Icom5047@jaits13")
     admin1.save()
-    admin2 = Admin(username="Robertog3", password= "Icom5047@robg3")
+    admin2 = Admin(username="Roberto.g3", password= "Icom5047@robg3")
     admin2.save()
-    admin3 = Admin(username="Alejandrova", password="Icom5047@aleva")
+    admin3 = Admin(username="Alejandro.va2", password="Icom5047@aleva")
     admin3.save()
 
 Admins()
@@ -105,3 +105,4 @@ def Documents():
     doc2.save()
 
 Documents()
+
