@@ -1,10 +1,12 @@
 from mongoengine import *
 import datetime
 import regex
+
+# db.drop_database('IReNEdb')
 #Connection to the Database
-connect('IReNEdb')
+#connect('IReNEdb')
 #connec the db for testing purposes
-#connect('IReNEdb', host='mongomock://localhost', alias='IReNEdb')
+connect('IReNEdb', host='mongomock://localhost:27017')
 
 
 class Collaborator(Document):
@@ -36,10 +38,10 @@ class Admin(Document):
             - username: <String>  Admin's username.
                 - username attribute follows this regex: '(^(?=[a-zA-Z0-9])(?=.*[a-z])(?=.*[0-9])(?=.*[\.])(?=.*[A-Z])).*[^.]$' 
             - password: <String> Admin's  password.   
-                - password attribute follows this regex: '([a-zA-Z0-9]+)*'
+                - password attribute follows this regex: '(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]))'
     """
     username = StringField(min_length=8, max_length=20, required=True, unique=True, regex='(^(?=[a-zA-Z0-9])(?=.*[a-z])(?=.*[0-9])(?=.*[\.])(?=.*[A-Z])).*[^.]$' )
-    password = StringField(min_length=8,max_length=20, required=True, regex='([a-zA-Z0-9]+)*')
+    password = StringField(min_length=8,max_length=20, required=True, regex='(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])')
 
 class Tag(Document):
     """

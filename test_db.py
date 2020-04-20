@@ -1,13 +1,16 @@
 from mongoengine import *
 from schema_DB import *
-
+from init_db_test import *
 
 #-------------------------Tests for Create------------------------------------
 def test_create_Collab(fn,ln,email):
     """
         Creates a new Collaborator
     """
-    if (email == (fn.lower() + "." + ln.lower() + '@upr.edu')):
+    strip_fn = fn.replace(" ", "")
+    strip_ln = ln.replace(" ", "")
+    print(strip_ln)
+    if (email == (strip_fn.lower() + "." + strip_ln.lower() + '@upr.edu')):
         collab = Collaborator( first_name = fn, 
         last_name = ln, email = email)
         collab.save()
@@ -18,8 +21,7 @@ def test_create_Collab(fn,ln,email):
         assert collab_test.email ==  email
         print("New Collab: \n\tFN: ", collab_test.first_name, "\n\tLN: ", collab_test.last_name, "\n\temail: ", collab_test.email)
     else:
-        print('email must match must be a @upr.edu domain & must match with fn & ln')
-
+        print('email must be a @upr.edu domain & must match with fn & ln')
 
 def test_create_Admin(user_username, user_password):
     """
@@ -54,7 +56,6 @@ def test_create_Infrastructure(new_infras):
     assert infras_test.infrastructureType == new_infras
     print(infras_test.infrastructureType)    
 
-
 def test_create_Damage(new_damage):
     """
         Creates a new Damage Type
@@ -65,7 +66,6 @@ def test_create_Damage(new_damage):
     damage_test = Damage.objects.get(damageType = new_damage)
     assert damage_test.damageType == new_damage
     print(damage_test.damageType)
-
 
 def test_create_doc (**docatr):
     """
@@ -140,13 +140,8 @@ def test_create_doc (**docatr):
     print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
     print("section: \n\tsecTitle:" , doc_test.section[0].secTitle, "\n\tcontent:",  doc_test.section[0].content )
 
-# test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
-#  creationDate='2012-03-01', lastModificationDate='2014-08-03', 
-#  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
-#   location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
-#   actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
-#  section=[['Introduction', 'It was raining a lot']])
 #-------------------------Tests for Updating------------------------------------
+
 def test_update_Collab_FN(email_test, new_fn):
     """
         updates FN of collab
@@ -179,7 +174,6 @@ def test_update_Admin_Password(usern, new_pass):
     test_admin.reload()
     assert test_admin.password == new_pass
     print("new password: ", test_admin.password)
-
 
 def test_update_doc(titleDoc, des, tags):
     """
@@ -290,7 +284,6 @@ def test_get_damage(damage):
     print(damageread.damageType)
     assert damageread.damageType == damage
 
-
 def test_read_doc(titleDoc):
     """
         Returns a specific Document from the DB
@@ -312,7 +305,6 @@ def test_read_doc(titleDoc):
     "\n\trole:",doc_test.actor[0].role)
     print("timeline: " , doc_test.timeline[0].event,doc_test.timeline[0].eventStartDate, doc_test.timeline[0].eventEndDate )
     print("section: \n\tsecTitle:" , doc_test.section[0].secTitle, "\n\tcontent:",  doc_test.section[0].content )
-
 
 def read_get_admin(username):
     """
@@ -347,7 +339,7 @@ def read_get_docs():
         print("creationDate: " + doc_tests.creationDate)
         print("lastModificationDate: " + doc_tests.lastModificationDate)
         print("tagsDoc: ", doc_tests.tagsDoc)
-        print("infrasDocList: ", doc_testsinfrasDocList)
+        print("infrasDocList: ", doc_tests.infrasDocList)
         print("damageDocList: " , doc_tests.damageDocList)
         print("location: " , doc_tests.location)
         print("author: \n\tname" , doc_tests.author[0].author_FN, doc_tests.author[0].author_LN, 
@@ -357,4 +349,43 @@ def read_get_docs():
         print("timeline: " , doc_tests.timeline[0].event,doc_tests.timeline[0].eventStartDate, doc_tests.timeline[0].eventEndDate )
         print("section: \n\tsecTitle:" , doc_tests.section[0].secTitle, "\n\tcontent:",  doc_tests.section[0].content )
 
-
+if __name__ == '__main__':
+    """
+    Create test functions
+    """
+    # test_create_Collab("Snow","Pink","snow.pink@upr.edu")
+    # test_create_Admin("jai.TSantos13", "ICOMuprm12345")
+    # test_create_Tag(new_tag)
+    # test_create_Infrastructure(new_infras)
+    # test_create_Damage('Tsunamis')
+    # test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
+    #  creationDate='2012-03-01', lastModificationDate='2014-08-03', 
+    #  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
+    #  location=['Coamo, PR'],author=[['Jainel', 'Torres', 'jainel.torres@upr.edu', 'ICOM']], 
+    #  actor=[['Ricardo', 'Rosello', 'Governor']], timeline=[['It started to rain', '2010-02-03', '2010-04-01']],
+    #  section=[['Introduction', 'It was raining a lot']])
+    """
+    Update test functions
+    """
+    # test_update_Collab_FN(email_test, new_fn)
+    # test_update_Collab_LN(email_test, new_ln)
+    # test_update_Admin_Password(usern, new_pass)
+    # test_update_doc(titleDoc, des, tags)
+    """
+    Delete test functions
+    """
+    # test_delete_tag(tag)
+    # test_delete_doc(titleDoc)
+    """
+    Read test functions
+    """
+    # test_read_infras()
+    # test_read_damage()
+    # test_read_tags()
+    # test_get_tag('Burning')
+    # test_get_infras('Structure')
+    # test_get_damage("Tsunamis")
+    # test_read_doc('The Great Rain')
+    # read_get_admin('Jai.torress13')
+    # read_get_collabs()
+    # read_get_docs()
