@@ -128,6 +128,11 @@ db.createCollection("DocumentCase", {
                description: "description of the case study, must be a string",
                pattern: "^[a-zA-Z]{0,500}$"
             },
+            language: {
+               bsonType: "string",
+               description: "Language which the case study is written, must be a string, and is required",
+               pattern: "^[a-zA-Z]$"
+            },
             published: {
                bsonType: "boolean",
                description: "Must be a boolean with true as default, and is required"
@@ -147,11 +152,163 @@ db.createCollection("DocumentCase", {
                description: "Date when case study was last modified, must be a string following the pattern, and is required",
                pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
             },
-            // infrasDocList: {
-            //    bsonType: ["string"],
-            //    description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
-            //    pattern: "^[a-zA-Z]{1,30}$"
-            // }
+            location: {
+               bsonType: ["array"],
+               minItems: 1, 
+               uniqueItems: true,
+               additionalProperties: false,
+               items: {
+                   bsonType: ["string"],
+                   additionalProperties: false,
+                   description: "locations where that case study takes place, must be a list of string, must follow the pattern, and is required",
+                   pattern: "^[a-zA-Z]$"
+               }
+            },
+            infrasDocList: {
+               bsonType: ["array"],
+               minItems: 1, 
+               uniqueItems: true,
+               additionalProperties: false,
+               items: {
+                   bsonType: ["string"],
+                   additionalProperties: false,
+                   description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
+                   pattern: "^[a-zA-Z]{1,30}$"
+               }
+            },
+            damageDocList: {
+               bsonType: ["array"],
+               minItems: 1, 
+               uniqueItems: true,
+               additionalProperties: false,
+               items: {
+                   bsonType: ["string"],
+                   additionalProperties: false,
+                   description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
+                   pattern: "^[a-zA-Z]{1,30}$"
+               }
+            },
+            tagsDoc: {
+               bsonType: ["array"],
+               minItems: 0, 
+               uniqueItems: true,
+               additionalProperties: false,
+               items: {
+                   bsonType: ["string"],
+                   description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
+                   pattern: "^[a-zA-Z]{1,30}$"
+               }
+            },
+            author: {
+               bsonType: ["array"],
+               minItems: 1, 
+               uniqueItems: false,
+               items: {
+                   bsonType: ["object"],
+                   required: ["author_FN", "author_LN", "author_faculty", "author_email"],
+                   description: "Authors who wrote the case study, must be a list of Author objects, must follow the pattern, and is required",
+                   properties: {
+                        author_FN: {
+                           bsonType: "string",
+                           description: "Author first name",
+                           pattern: "^[a-zA-Z]{1,30}$"
+                        },
+                        author_LN: {
+                           bsonType: "string",
+                           description: "Author last name",
+                           pattern: "^[a-zA-Z]{1,30}$"
+                        },
+                        author_faculty: {
+                           bsonType: "string",
+                           description: "Author faculty",
+                           pattern: "^[a-zA-Z]{1,30}$"
+                        },
+                        author_email: {
+                              bsonType: "string",
+                              description: "Author email, must be a string of length 0-50",
+                              pattern: "(.*)\.(.*)@upr\.edu"
+                           }  
+                   }
+
+               }
+               
+            },
+            actor: {
+               bsonType: ["array"],
+               minItems: 1, 
+               uniqueItems: false,
+               items: {
+                   bsonType: ["object"],
+                   required: ["actor_FN", "actor_LN", "role"],
+                   description: "Actors who play a role in the case study, must be a list of Actor objects, must follow the pattern, and is required",
+                   properties: {
+                        actor_FN: {
+                           bsonType: "string",
+                           description: "Actor first name",
+                           pattern: "^[a-zA-Z]{1,30}$"
+                        },
+                        actor_LN: {
+                           bsonType: "string",
+                           description: "Actor last name",
+                           pattern: "^[a-zA-Z]{1,30}$"
+                        },
+                        role: {
+                           bsonType: "string",
+                           description: "Actor role",
+                           pattern: "^[a-zA-Z]{1,30}$"
+                        } 
+                   }
+
+               }
+            },
+            timeline: {
+               bsonType: ["array"],
+               minItems: 0, 
+               uniqueItems: false,
+               items: {
+                   bsonType: ["object"],
+                   description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
+                   properties: {
+                        event: {
+                           bsonType: ["string"],
+                           description: "Event what happened within the case study",
+                           pattern: "^[a-zA-Z]{1,250}$"
+                        },
+                        eventStartDate: {
+                           bsonType: ["string"],
+                           description: "Date when event started, must be a string following the pattern",
+                           pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
+                        },
+                        eventEndDate: {
+                           bsonType: ["string"],
+                           description: "Date when event ended, must be a string following the pattern",
+                           pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
+                        } 
+                   }
+
+               }
+            },
+            section: {
+               bsonType: ["array"],
+               minItems: 0, 
+               uniqueItems: false,
+               items: {
+                   bsonType: ["object"],
+                   description: "Sections of a Case study, must be a list of Section objects.",
+                   properties: {
+                        secTitle: {
+                           bsonType: ["string"],
+                           description: "Title of the section",
+                           pattern: "(.){1,250}"
+                        },
+                        content: {
+                           bsonType: ["string"],
+                           description: "Content of the section",
+                        }
+                   }
+
+               }
+            } 
          }
       }
    }
