@@ -1,6 +1,5 @@
 from mongoengine import *
 import datetime
-import regex
 #Connection to the Database
 connect('IReNEdb')
 #connec the db for testing purposes
@@ -140,6 +139,23 @@ class Section(EmbeddedDocument):
     secTitle = StringField(min_length=0, max_length=250, required=False)
     content = StringField(required=False)
 
+class Location(EmbeddedDocument):
+    """
+        EmbeddedDocument Class for Location. 
+        These are going to be the body of the Document Case.
+        An EmbeddedDocument is a Document Class that is defined inside another document.
+        This one is going to be defined, and stored inside the DocumentCase Class. 
+        The reason for this technique is that the Location Class has its own schema.
+        List of attributes:
+            - address: <String>  Location's address. 
+            - latitude: <Number>  Location's latitude.
+            - longitude: <Number> Location's Longitude.  
+    """
+    address = StringField(min_length=0, required=False)
+    latitude = DecimalField(min_value=17.87, max_value= 18.53, required=False)
+    longitude = DecimalField(min_value=-67.28, max_value=-65.23, required=False)
+
+
 class DocumentCase(Document):
     """
         Document Class for DocumentCase. 
@@ -148,7 +164,6 @@ class DocumentCase(Document):
             - creatoriD: <String>  the Collaborator's id which created the Case study.
             - title: <String> The case study's title .
             - language: <String> The language which the case study is written.
-            - location: List<String> of addresses where the case study took place.
             - description: <String> Case study's description.
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
             - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
@@ -160,7 +175,9 @@ class DocumentCase(Document):
             - tagsDoc: List<String> of tags from the case study. 
             - infrasDocList: List<String> of infrastructure categories from the case study. 
             - damageDocList: List<String> of damage categories from the case study. 
+            - location: List<Location> of addresses where the case study took place.
             - author: List<Author> of author objects, the ones who wrote the case study.
+            - actor: List<Actor> of actor objects, the ones who plays a role in the case study.
             - section: List<Section> of section objects, this will consist the body of the case study.
             - timeline: List<Timeline> of timeline objects, this will consist of the events that happened within the case study.
                 
@@ -168,7 +185,6 @@ class DocumentCase(Document):
     creatoriD = StringField(min_length=1, required=True)
     title = StringField(min_length=10, max_length = 250, required=True, unique=True)
     language = StringField(min_length=0, required=False)
-    location = ListField(StringField(min_length=0,required=False))
     description = StringField(min_length=0, max_length=500,required=False)
     published = BooleanField(default=False,required=True)
     incidentDate = StringField(min_length=1, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
@@ -177,6 +193,7 @@ class DocumentCase(Document):
     tagsDoc = ListField(StringField(min_length=0,max_length=30,required=False))
     infrasDocList =  ListField(StringField(min_length=1,max_length=30,required=True))
     damageDocList =  ListField(StringField(min_length=1,max_length=30,required=True))
+    location = ListField(EmbeddedDocumentField(Location))
     author = ListField(EmbeddedDocumentField(Author))
     actor = ListField(EmbeddedDocumentField(Actor))
     section = ListField(EmbeddedDocumentField(Section))
