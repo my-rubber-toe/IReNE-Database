@@ -1,4 +1,19 @@
 
+//Connects to the database
+const mongo = require('mongodb');
+const MongoClient = mongo.MongoClient;
+
+const url = 'mongodb://localhost:27017';
+
+MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
+
+    if (err) throw err;
+
+    console.log(client.topology.clientInfo);
+
+    client.close();
+});
+
 //Collaborator collection with its attributes and restrictions
 db.createCollection("Collaborator", {
    validator: {

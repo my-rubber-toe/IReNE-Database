@@ -32,20 +32,21 @@ for index in range(0,100):
     email = emailc)
     collab1.save()
     
-    infrastructure = ['Transportation', 'Energy', 'Water', 'Security', 'Ports', 'Structure', 'Construction']
-    damage = ['Flooding','Earthquake', 'Fire', 'Tsunamis', 'Hurricane']
-    tags = ['Hurricane', 'Rain', 'Earthquake', 'Fire', 'Burning', 'Flood', 'Power Outage']
-    #after running once, just comment this and run it again for more fake data
-    if(index == 0):
-        for infra in infrastructure:
-            infras = Infrastructure(infrastructureType=infra)
-            infras.save()
-        for damages in damage:
-            dama = Damage(damageType=damages)
-            dama.save()
-        for tagslist in tags:
-            tag = Tag(tagItem=tagslist)
-            tag.save()
+    infrastructure = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
+    "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports"
+    "Public Transportation"]
+    damage = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
+    "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
+    tags = infrastructure + damage
+    for infra in infrastructure:
+        infras = Infrastructure(infrastructureType=infra)
+        infras.save()
+    for damages in damage:
+        dama = Damage(damageType=damages)
+        dama.save()
+    for tagslist in tags:
+        tag = Tag(tagItem=tagslist)
+        tag.save()
 
     #make fake text
     my_word_list = [
