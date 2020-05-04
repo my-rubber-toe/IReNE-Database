@@ -31,39 +31,6 @@ def Admins():
 
 Admins()
 
-def Tags():
-    """
-        Fills the db with Tags mock-data
-    """
-    tags = ['Hurricane', 'Rain', 'Earthquake', 'Fire', 'Burning', 'Flood', 'Power Outage']
-    for tag in tags:
-        x = Tag(tagItem= tag)
-        x.save()
-
-Tags()
-
-def Damages():
-    """
-        Fills the db with Damage type mock-data
-    """
-    damage = ['Flooding', 'Earthquake', 'Fire', 'Tsunamis', 'Hurricane']
-    for dam in damage:
-        x = Damage(damageType= dam)
-        x.save()
-
-Damages()
-
-def Infrastructures():
-    """
-        Fills the db with Infrastructure type mock-data
-    """
-    infrastructure = ['Transportation', 'Energy', 'Water', 'Security', 'Ports', 'Structure', 'Construction']
-    for infras in infrastructure:
-        x = Infrastructure(infrastructureType= infras)
-        x.save()
-
-Infrastructures()
-
 def Documents():
     """
         Fills the db with Documents mock-data
@@ -75,7 +42,9 @@ def Documents():
     timelineDoc1 = Timeline(event = "The rain has started", 
     eventStartDate = "2017-09-17", eventEndDate = "2017-09-19")
     sectionDoc1 = Section(secTitle = "Introduction", content = "It was raining a lot")
-    doc1 = DocumentCase(creatoriD = str(get_collab1.id), title = ("The Great Rain"), location=["Coamo, PR"], 
+    citypr = CityPR.objects.get(city = 'Coamo, PR')
+    loc = Location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
+    doc1 = DocumentCase(creatoriD = str(get_collab1.id), title = ("The Great Rain"), location=[loc], 
     description = "It was a cold and stormy night...", published= True,
     incidentDate = "2017-09-17", 
     creationDate= "2018-03-20",
@@ -85,6 +54,7 @@ def Documents():
     damageDocList= ['Flooding'],
     author = [authorDoc1], actor = [actorDoc1],section = [sectionDoc1],timeline = [timelineDoc1], language="English")
     doc1.save()
+    Collaborator.objects(email= get_collab1.email).update_one(set__documentsID = [str(doc1.id)])
 
     get_collab2 = Collaborator.objects.get(first_name= "Roberto")
     authorDoc2 = Author(author_FN = get_collab2.first_name, author_LN = get_collab2.last_name, 
@@ -93,7 +63,9 @@ def Documents():
     timelineDoc2 = Timeline(event = "El temblor ha comenzado", 
     eventStartDate = "2019-02-09", eventEndDate = "2019-03-10")
     sectionDoc2 = Section(secTitle = "Cuerpo", content = "Estaba temblando mucho el suelo")
-    doc2 = DocumentCase(creatoriD = str(get_collab2.id), title = ("El gran Terremoto"), location=["San Juan, PR"], 
+    citypr2 = CityPR.objects.get(city = 'Aguas Buenas, PR')
+    loc2 = Location(address= citypr2.city, latitude= citypr2.latitude, longitude=citypr2.longitude)
+    doc2 = DocumentCase(creatoriD = str(get_collab2.id), title = ("El gran Terremoto"), location=[loc2], 
     description = "Era un lindo dia soleado...", published= False,
     incidentDate = "2019-02-09", 
     creationDate= "2020-02-20",
@@ -103,6 +75,7 @@ def Documents():
     damageDocList= ['Earthquake'],
     author = [authorDoc2], actor = [actorDoc2],section = [sectionDoc2],timeline = [timelineDoc2], language="Spanish")
     doc2.save()
+    Collaborator.objects(email= get_collab1.email).update_one(set__documentsID = [str(doc2.id)])
 
 Documents()
 

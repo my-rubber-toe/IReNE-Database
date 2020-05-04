@@ -49,7 +49,7 @@ class Tag(Document):
         List of attributes:
             - tagItem: <String>  Tag that can be used in a DocumentCase.   
     """
-    tagItem = StringField(min_length=1, max_length=30, required=True, unique=True)
+    tagItem = StringField(min_length=1, max_length=50, required=True, unique=True)
 
 class Infrastructure(Document):
     """
@@ -60,7 +60,7 @@ class Infrastructure(Document):
         List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.   
     """
-    infrastructureType = StringField(min_length=1,max_length=30, required=True, unique=True)
+    infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True)
     
 class Damage(Document):
     """
@@ -71,7 +71,7 @@ class Damage(Document):
         List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.   
     """
-    damageType = StringField(min_length=1,max_length=30, required=True, unique=True)
+    damageType = StringField(min_length=1,max_length=50, required=True, unique=True)
 
 class CityPR(Document):
     """
@@ -165,8 +165,8 @@ class Location(EmbeddedDocument):
             - longitude: <Number> Location's Longitude.  
     """
     address = StringField(min_length=0, required=True)
-    latitude = DecimalField(min_value=17.87, max_value= 18.53, required=True)
-    longitude = DecimalField(min_value=-67.28, max_value=-65.23, required=True)
+    latitude = DecimalField(min_value=17.86, max_value= 18.54, required=True)
+    longitude = DecimalField(min_value=-67.29, max_value=-65.22, required=True)
 
 
 class DocumentCase(Document):
@@ -196,21 +196,61 @@ class DocumentCase(Document):
                 
     """
     creatoriD = StringField(min_length=1, required=True)
-    title = StringField(min_length=10, max_length = 250, required=True, unique=True)
+    title = StringField(min_length=10, max_length = 100, required=True, unique=True)
     language = StringField(min_length=1, required=True)
     description = StringField(min_length=1, max_length=500,required=True)
-    published = BooleanField(default=False,required=True)
-    incidentDate = StringField(min_length=1, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    creationDate = StringField(min_length=1, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    lastModificationDate = StringField(min_length=1, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    tagsDoc = ListField(StringField(min_length=0,max_length=30, unique=True), required=False, max_length=10)
-    infrasDocList =  ListField(StringField(min_length=1,max_length=30,required=True, unique=True))
-    damageDocList =  ListField(StringField(min_length=1,max_length=30,required=True, unique=True))
-    location = ListField(EmbeddedDocumentField(Location), max_length=78, unique=True, required=False)
-    author = ListField(EmbeddedDocumentField(Author), max_length=10, required=True)
-    actor = ListField(EmbeddedDocumentField(Actor), max_length=5, required=True)
+    published = BooleanField(default=True,required=True)
+    incidentDate = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    creationDate = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    lastModificationDate = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    tagsDoc = ListField(StringField(min_length=0,max_length=50, unique=True), required=False, max_length=10)
+    infrasDocList =  ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
+    damageDocList =  ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
+    location = ListField(EmbeddedDocumentField(Location), max_length=5, required=False)
+    author = ListField(EmbeddedDocumentField(Author), min_length=1, max_length=10, required=True)
+    actor = ListField(EmbeddedDocumentField(Actor),min_length=1, max_length=5, required=True)
     section = ListField(EmbeddedDocumentField(Section), max_length=10, required=False)
     timeline = ListField(EmbeddedDocumentField(Timeline), max_length=5, required=False)
 
+class Revision(EmbeddedDocument):
+    """
+        EmbeddedDocument Class for Revision. 
+        These are going to be the revision log for DocumentCaseRevision.
+        An EmbeddedDocument is a Document Class that is defined inside another document.
+        This one is going to be defined, and stored inside the DocumentCaseRevision Class. 
+        The reason for this technique is that the Section Class has its own schema.
+        List of attributes:
+            - old: dictionary field containing what was before the change. 
+            - new: dictionary field containing the new changes made.
+    """
+    old = ListField(DictField(required=True), required=True)
+    new = ListField(DictField(required=True), required=True)
 
+class DocumentCaseRevision(Document):
+    """
+        EmbeddedDocument Class for Revision. 
+        These are going to be the revision log for DocumentCaseRevision.
+        An EmbeddedDocument is a Document Class that is defined inside another document.
+        This one is going to be defined, and stored inside the DocumentCaseRevision Class. 
+        The reason for this technique is that the Section Class has its own schema.
+        List of attributes:
+            - creatorId: <String> Collaborator ID who made the change.
+            - docId: <String> DocumentCase id where the change was made.
+            - creator_name: <String> Collaborator's name who made the change.
+            - document_title: <String> Collaborator's email who made the change.
+            - revision_date: <String> Date when the changes were made.
+            - revision_number: <Integer> number id of the change made.
+            - revision_type: <String> Type of change.
+            - field_changed: <Revision> embedded document which contains the old & new changes made
+    """
+    creatorId = StringField(min_length=1, required=True)
+    docId = StringField(min_length=1, required=True)
+    creator_name = StringField(min_length=1, max_length=30, required=True)
+    creator_email = EmailField(required=True,max_length=50, unique=True, regex='.*(@upr\.edu)$')
+    document_title = StringField(min_length=10, max_length = 100, required=True, unique=True)
+    revision_date = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    revision_number = IntField(min_length=0, required=True)
+    revision_type = StringField(min_length=1, max_length= 20, required=True)
+    field_changed = EmbeddedDocumentField(Revision)
+    
 
