@@ -11,7 +11,6 @@ class Collaborator(Document):
         Document Class for Collaborators. 
         Collaborators are the users that will Create/Edit Case Studies.
         List of attributes:
-            - documentsID: list<String>  of document ids that the Collaborator created.
             - first_name: <String> Collaborator's first name.
             - last_name: <String> Collaborator's last name.
             - email: <String> Collaborator's email. It must be a @upr.edu email.
@@ -19,10 +18,9 @@ class Collaborator(Document):
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.     
     """
-    documentsID =  ListField(StringField(required=False), max_length=10)
     first_name = StringField(min_length=1, max_length=30, required=True)
     last_name = StringField(min_length=1, max_length=30, required=True)
-    email = EmailField(required=True,max_length=50, unique=True, regex='.*(@upr\.edu)$')
+    email = EmailField(min_length= 9,max_length=50, required=True, unique=True, regex='.*(@upr\.edu)$')
     banned = BooleanField(default=False,required=True)
     approved = BooleanField(default=False,required=True)
 
@@ -56,7 +54,7 @@ class Infrastructure(Document):
         Document Class for Infrastructure. 
         These are going to be the categories available for the description of the
         infrastructure in the DocumentCase.
-        All of them  will be pre-defined by the Team.
+        All of them  will be pre-defined by the Team and/or Admins.
         List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.   
     """
@@ -67,7 +65,7 @@ class Damage(Document):
         Document Class for Damage. 
         These are going to be the categories available for the description of the
         Damage in the DocumentCase.
-        All of them  will be pre-defined by the Team.
+        All of them  will be pre-defined by the Team and/or Admins.
         List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.   
     """
@@ -101,7 +99,7 @@ class Author(EmbeddedDocument):
     """
     author_FN = StringField(min_length=1,max_length=30, required=True)
     author_LN = StringField(min_length=1,max_length=30, required=True)
-    author_email = EmailField(min_length=1,max_length=50, required=True, regex='.*(@upr\.edu)$')
+    author_email = EmailField(min_length=9,max_length=50, required=True, regex='.*(@upr\.edu)$')
     author_faculty = StringField(min_length=1,max_length=30, required=True)
 
 class Actor(EmbeddedDocument):
@@ -135,8 +133,8 @@ class Timeline(EmbeddedDocument):
                 - eventEndDate attribute follows this regex: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
     """
     event = StringField(min_length=10, max_length=100, required=True)
-    eventStartDate = StringField(min_length=0, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    eventEndDate = StringField(min_length=0, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    eventStartDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    eventEndDate = StringField(min_length=9, max_length=11,  required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
 
 class Section(EmbeddedDocument):
     """
@@ -149,8 +147,8 @@ class Section(EmbeddedDocument):
             - secTitle: <String>  Section's title. 
             - content: <String>  Section's body.  
     """
-    secTitle = StringField(min_length=0, max_length=100, required=True)
-    content = StringField(required=True)
+    secTitle = StringField(min_length=1, max_length=100, required=True)
+    content = StringField(min_length=1, required=True)
 
 class Location(EmbeddedDocument):
     """
@@ -164,7 +162,7 @@ class Location(EmbeddedDocument):
             - latitude: <Number>  Location's latitude.
             - longitude: <Number> Location's Longitude.  
     """
-    address = StringField(min_length=0, required=True)
+    address = StringField(min_length=1, required=True)
     latitude = DecimalField(min_value=17.86, max_value= 18.54, required=True)
     longitude = DecimalField(min_value=-67.29, max_value=-65.22, required=True)
 
@@ -200,9 +198,9 @@ class DocumentCase(Document):
     language = StringField(min_length=1, required=True)
     description = StringField(min_length=1, max_length=500,required=True)
     published = BooleanField(default=True,required=True)
-    incidentDate = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    creationDate = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    lastModificationDate = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    incidentDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    creationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
+    lastModificationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     tagsDoc = ListField(StringField(min_length=0,max_length=50, unique=True), required=False, max_length=10)
     infrasDocList =  ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
     damageDocList =  ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
