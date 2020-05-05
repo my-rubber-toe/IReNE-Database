@@ -1,10 +1,9 @@
 from mongoengine import *
-# import datetime
+
 #Connection to the Database
 connect('IReNEdb')
 #connec the db for testing purposes
 #connect('IReNEdb', host='mongomock://localhost:27017')
-
 
 class Collaborator(Document):
     """
@@ -18,8 +17,8 @@ class Collaborator(Document):
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.     
     """
-    first_name = StringField(min_length=1, max_length=30, required=True)
-    last_name = StringField(min_length=1, max_length=30, required=True)
+    first_name = StringField(min_length=1, max_length=30, required=True, regex='^([a-zA-Z]*)$')
+    last_name = StringField(min_length=1, max_length=30, required=True, regex='^([a-zA-Z]*)$')
     email = EmailField(min_length= 9,max_length=50, required=True, unique=True, regex='.*(@upr\.edu)$')
     banned = BooleanField(default=False,required=True)
     approved = BooleanField(default=False,required=True)
@@ -42,12 +41,12 @@ class Tag(Document):
     """
         Document Class for Tag. 
         Tag are the tags available for used as keywords for the DocumentCase.
-        There will be some pre-defined by the Team, and the majority will be created by the
+        There will be some pre-defined by the Team and/or Admin, and the majority will be created by the
         Collaborators.
         List of attributes:
             - tagItem: <String>  Tag that can be used in a DocumentCase.   
     """
-    tagItem = StringField(min_length=1, max_length=50, required=True, unique=True)
+    tagItem = StringField(min_length=1, max_length=50, required=True, unique=True, regex='^([a-zA-Z]*)$')
 
 class Infrastructure(Document):
     """
@@ -58,7 +57,7 @@ class Infrastructure(Document):
         List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.   
     """
-    infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True)
+    infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^([a-zA-Z]*)$')
     
 class Damage(Document):
     """
@@ -69,7 +68,7 @@ class Damage(Document):
         List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.   
     """
-    damageType = StringField(min_length=1,max_length=50, required=True, unique=True)
+    damageType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^([a-zA-Z]*)$')
 
 class CityPR(Document):
     """
@@ -97,8 +96,8 @@ class Author(EmbeddedDocument):
             - author_email: <String>  Author's Email.
             - author_faculty: <String>  Author's Faculty.  
     """
-    author_FN = StringField(min_length=1,max_length=30, required=True)
-    author_LN = StringField(min_length=1,max_length=30, required=True)
+    author_FN = StringField(min_length=1,max_length=30, required=True, regex='^([a-zA-Z]*)$')
+    author_LN = StringField(min_length=1,max_length=30, required=True, regex='^([a-zA-Z]*)$')
     author_email = EmailField(min_length=9,max_length=50, required=True, regex='.*(@upr\.edu)$')
     author_faculty = StringField(min_length=1,max_length=30, required=True)
 
@@ -114,8 +113,8 @@ class Actor(EmbeddedDocument):
             - actor_LN: <String>  Actor's Last Name.
             - role: <String>  Actor's role in the DocumentCase. 
     """
-    actor_FN = StringField(min_length=1, max_length=30, required=True)
-    actor_LN = StringField(min_length=1,max_length=30, required=True)
+    actor_FN = StringField(min_length=1, max_length=30, required=True, regex='^([a-zA-Z]*)$')
+    actor_LN = StringField(min_length=1,max_length=30, required=True, regex='^([a-zA-Z]*)$')
     role = StringField(min_length=1,max_length=30, required=True)
 
 class Timeline(EmbeddedDocument):
@@ -202,8 +201,8 @@ class DocumentCase(Document):
     creationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     lastModificationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     tagsDoc = ListField(StringField(min_length=0,max_length=50, unique=True), required=False, max_length=10)
-    infrasDocList =  ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
-    damageDocList =  ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
+    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
+    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True))
     location = ListField(EmbeddedDocumentField(Location), max_length=5, required=False)
     author = ListField(EmbeddedDocumentField(Author), min_length=1, max_length=10, required=True)
     actor = ListField(EmbeddedDocumentField(Actor),min_length=1, max_length=5, required=True)

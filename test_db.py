@@ -1,6 +1,5 @@
 from mongoengine import *
 from schema_DB import *
-from init_db_test import *
 
 #-------------------------Tests for Create------------------------------------
 def test_create_Collab(fn,ln,email):
@@ -9,19 +8,18 @@ def test_create_Collab(fn,ln,email):
     """
     strip_fn = fn.replace(" ", "")
     strip_ln = ln.replace(" ", "")
-    print(strip_ln)
-    if (email == (strip_fn.lower() + "." + strip_ln.lower() + '@upr.edu')):
-        collab = Collaborator( first_name = fn, 
-        last_name = ln, email = email)
-        collab.save()
+    # if (email == (strip_fn.lower() + "." + strip_ln.lower() + '@upr.edu')):
+    collab = Collaborator( first_name = fn, 
+    last_name = ln, email = email)
+    collab.save()
 
-        collab_test = Collaborator.objects.get(email = email)
-        assert collab_test.first_name ==  fn
-        assert collab_test.last_name ==  ln
-        assert collab_test.email ==  email
-        print("New Collab: \n\tFN: ", collab_test.first_name, "\n\tLN: ", collab_test.last_name, "\n\temail: ", collab_test.email)
-    else:
-        print('email must be a @upr.edu domain & must match with fn & ln')
+    collab_test = Collaborator.objects.get(email = email)
+    assert collab_test.first_name ==  fn
+    assert collab_test.last_name ==  ln
+    assert collab_test.email ==  email
+    print("New Collab: \n\tFN: ", collab_test.first_name, "\n\tLN: ", collab_test.last_name, "\n\temail: ", collab_test.email)
+    # else:
+        # print('email must be a @upr.edu domain & must match with fn & ln')
 
 def test_create_Admin(user_username, user_password):
     """
@@ -353,11 +351,11 @@ if __name__ == '__main__':
     """
     Create test functions
     """
-    # test_create_Collab("Snow","Pink","snow.pink@upr.edu")
+    # test_create_Collab("Pink","Snow","sNow.pimk@upr.edu")
     # test_create_Admin("jai.TSantos13", "ICOMuprm12345")
     # test_create_Tag(new_tag)
     # test_create_Infrastructure(new_infras)
-    # test_create_Damage('Tsunamis')
+    test_create_Damage('Tsun\amis')
     # test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
     #  creationDate='2012-03-01', lastModificationDate='2014-08-03', 
     #  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],
