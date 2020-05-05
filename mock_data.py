@@ -105,4 +105,3 @@ for index in range(0,100):
     author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc], language=random.choice(languageDoc))
     doc.save()
     doc = DocumentCase.objects.get(creatoriD=str(get_collab.id))
-    Collaborator.objects(email= emailc).update_one(set__documentsID = [str(doc.id)])

@@ -13,10 +13,10 @@ Run index.html in a brower
         - List of attributes:
             - first_name: <String> Collaborator's first name.
                 - min_length: 1, max_length: 30, required
-                - attribute follows this regex: '^([a-zA-Z]*)$'
+                - attribute follows this regex: '^([a-z A-Z \-]*)$'
             - last_name: <String> Collaborator's last name.
                 - min_length: 1, max_length: 30, required
-                - attribute follows this regex: '^([a-zA-Z]*)$'
+                - attribute follows this regex: '^([a-z A-Z \-]*)$'
             - email: <String> Collaborator's email. It must be a @upr.edu email.
                 - min_length: 9, max_length: 50, required, unique
                 - attribute follows this regex: '.*(@upr\.edu)$'
@@ -30,7 +30,7 @@ Run index.html in a brower
         - List of attributes:
             - username: <String>  Admin's username.
                 - min_length: 8, max_length: 20, unique, required
-                - username attribute follows this regex: '(^(?=[a-zA-Z0-9])(?=.*[a-z])(?=.*[0-9])(?=.*[\.])(?=.*[A-Z])).*[^.]$' 
+                - username attribute follows this regex: '(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' 
             - password: <String> Admin's  password.
                 - min_length: 8, max_length: 20, unique, required
                 - password attribute follows this regex: '(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]))'
@@ -39,16 +39,19 @@ Run index.html in a brower
         - List of attributes:
             - tagItem: <String>  Tag that can be used in a DocumentCase.
                 - min_length: 1, max_length: 50, unique, required 
+                - attribute has the following regex '^([a-z A-Z / & , \- ]*)$'
 4. Document Class for Infrastructure. 
     - These are going to be the categories available for the description of the infrastructure in the DocumentCase. All of them will be pre-defined by the Team and/or Admins.
         - List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.
-                - min_length: 1, max_length: 50, unique, required 
+                - min_length: 1, max_length: 50, unique, required
+                - attribute has the following regex '^([a-z A-Z / & , \- ]*)$' 
 5. Document Class for Damage. 
     - These are going to be the categories available for the description of the Damage in the DocumentCase. All of them  will be pre-defined by the Team and/or Admins.
         - List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.  
-                - min_length: 1, max_length: 50, unique, required 
+                - min_length: 1, max_length: 50, unique, required
+                - attribute has the following regex '^([a-z A-Z / & , \- ]*)$'
 6. Document Class for CityPR. 
     - These are going to be the list of cities of Puerto Rico for the use of selection location for DocumentCase & as a filter list for a visualization. All of them  will be pre-defined by the Team.
         - List of attributes:
@@ -59,10 +62,10 @@ Run index.html in a brower
         - List of attributes:
             - author_FN: <String>  Author's First Name.
                 - min_length: 1, max_length: 30, required 
-                - attribute follows this regex: '^([a-zA-Z]*)$'
+                - attribute follows this regex: '^([a-z A-Z \-]*)$'
             - author_LN: <String>  Author's Last Name.
                 - min_length: 1, max_length: 30, required
-                - attribute follows this regex: '^([a-zA-Z]*)$'
+                - attribute follows this regex: '^([a-z A-Z \-]*)$'
             - author_email: <String>  Author's Email.
                 - min_length: 9, max_length: 50, required 
                 - email attribute follows this regex: '.*(@upr\.edu)$'
@@ -73,10 +76,10 @@ Run index.html in a brower
         - List of attributes:
             - actor_FN: <String>  Actor's First Name. 
                 - min_length: 1, max_length: 30, required
-                - attribute follows this regex: '^([a-zA-Z]*)$'
+                - attribute follows this regex: '^([a-z A-Z \-]*)$'
             - actor_LN: <String>  Actor's Last Name.
                 - min_length: 1, max_length: 30, required
-                - attribute follows this regex: '^([a-zA-Z]*)$'
+                - attribute follows this regex: '^([a-z A-Z \-]*)$'
             - role: <String>  Actor's role in the DocumentCase.
                 - min_length: 1, max_length: 30, required
 9. EmbeddedDocument Class for Timeline. 
