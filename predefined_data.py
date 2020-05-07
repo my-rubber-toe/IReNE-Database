@@ -89,7 +89,7 @@ def Documents():
     sectionDoc1 = Section(secTitle = "Introduction", content = "It was raining a lot")
     citypr = CityPR.objects.get(city = 'Coamo, PR')
     loc = Location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
-    doc1 = DocumentCase(creatoriD = str(get_collab1.id), title = ("The Great Rain"), location=[loc], 
+    doc1 = DocumentCase(creatoriD = get_collab1, title = ("The Great Rain"), location=[loc], 
     description = "It was a cold and stormy night...", published= True,
     incidentDate = "2017-09-17", 
     creationDate= "2018-03-20",
@@ -109,7 +109,7 @@ def Documents():
     sectionDoc2 = Section(secTitle = "Cuerpo", content = "Estaba temblando mucho el suelo")
     citypr2 = CityPR.objects.get(city = 'Aguas Buenas, PR')
     loc2 = Location(address= citypr2.city, latitude= citypr2.latitude, longitude=citypr2.longitude)
-    doc2 = DocumentCase(creatoriD = str(get_collab2.id), title = ("El gran Terremoto"), location=[loc2], 
+    doc2 = DocumentCase(creatoriD = get_collab2, title = ("El gran Terremoto"), location=[loc2], 
     description = "Era un lindo dia soleado...", published= False,
     incidentDate = "2019-02-09", 
     creationDate= "2020-02-20",
