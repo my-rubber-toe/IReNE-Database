@@ -94,7 +94,7 @@ for index in range(0,100):
     while(created > mod):
         mod = random.choice(dates)
     
-    doc = DocumentCase(creatoriD = str(get_collab.id), title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
+    doc = DocumentCase(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
     description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
     incidentDate = inc, 
     creationDate= created,
@@ -104,4 +104,3 @@ for index in range(0,100):
     damageDocList= [random.choice(damage), random.choice(damage)],
     author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc], language=random.choice(languageDoc))
     doc.save()
-    doc = DocumentCase.objects.get(creatoriD=str(get_collab.id))
