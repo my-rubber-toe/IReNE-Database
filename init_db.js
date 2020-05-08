@@ -144,7 +144,7 @@
          }
       })
 
-      db.createCollection("location", {
+      db.createCollection("city_pr", {
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
@@ -162,8 +162,8 @@
                      },
                      latitude: {
                         bsonType: "decimal",
-                        minimum:17.87,
-                        maximun:18.53,
+                        // minimum:17.87,
+                        // maximum:18.53,
                         description: "Location's latitude"
                      },
                      longitude: {
