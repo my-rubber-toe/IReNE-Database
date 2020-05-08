@@ -5,11 +5,11 @@ const MongoClient = mongo.MongoClient;
 
 const url = 'mongodb://localhost:27017';
 
-MongoClient.connect(url, { useNewUrlParser: true }, (err, datab) => {
+MongoClient.connect(url, { useNewUrlParser: true  }, (err, datab) => {
 
+   
    if (err) throw err;
    var db = datab.db("IReNE")
-   console.log(datab.topology.clientInfo);
    datab.close();
 
 
@@ -200,11 +200,6 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, datab) => {
                creatoriD: {
                   bsonType: "string",
                   description: "Collaborator ID who created the case study, must be a string, and is required"
-               },
-               creatoriD: {
-                  bsonType: "string",
-                  description: "Title of the case study, must be a string, and is required",
-                  pattern: "^[a-zA-Z]{10,250}$"
                },
                title: {
                   bsonType: "string",
@@ -417,22 +412,22 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, datab) => {
       }
    })
 
-   db.createView('DocumentCaseView','DocumentCase', [{ $project : { 
-      "creatoriD": $creatoriD,
-      "title": $title, 
-      "description": $description,
-      "published": $published, 
-      "incidentDate": $incidentDate, 
-      "creationDate": $creationDate, 
-      "lastModificationDate": $lastModificationDate, 
-      "infrasDocList": $infrasDocList, 
-      "damageDocList": $damageDocList,
-      "tagsDoc": $tagsDoc,
-      "actor": $actor,
-      "author": $author,
-      "timeline": $timeline,
-      "section": $section,
-      "location": location
-   }}])
+   // db.createView('DocumentCaseView','DocumentCase', [{ $project : { 
+   //    "creatoriD": $creatoriD,
+   //    "title": $title, 
+   //    "description": $description,
+   //    "published": $published, 
+   //    "incidentDate": $incidentDate, 
+   //    "creationDate": $creationDate, 
+   //    "lastModificationDate": $lastModificationDate, 
+   //    "infrasDocList": $infrasDocList, 
+   //    "damageDocList": $damageDocList,
+   //    "tagsDoc": $tagsDoc,
+   //    "actor": $actor,
+   //    "author": $author,
+   //    "timeline": $timeline,
+   //    "section": $section,
+   //    "location": location
+   // }}])
 
 });
