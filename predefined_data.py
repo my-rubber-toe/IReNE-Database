@@ -10,24 +10,24 @@ def Categories():
     """
         Fills the db with predefined categories & tags
     """  
-    infrastructure = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
+    infrast = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
     "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
     "Public Transportation"]
-    damage = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
+    damag = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
     "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
-    tags = infrastructure + damage
+    tags = infrast + damag
 
-    for infra in infrastructure:
-        infras = Infrastructure(infrastructureType=infra)
+    for infra in infrast:
+        infras = infrastructure(infrastructureType=infra)
         infras.save()
-    for damages in damage:
-        dama = Damage(damageType=damages)
+    for damages in damag:
+        dama = damage(damageType=damages)
         dama.save()
     for tagslist in tags:
-        tag = Tag(tagItem=tagslist)
-        tag.save()
+        tagitem = tag(tagItem=tagslist)
+        tagitem.save()
 
-Categories()
+# Categories()
 
 def Locations():
     """
@@ -36,8 +36,8 @@ def Locations():
     with open('cityPR.json') as f:
         data = json.loads(f.read())
         for cities in data['city_PR']:
-            city = CityPR(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
-            city.save()
+            cityitem = city_pr(city=cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
+            cityitem.save()
 
 Locations()
 
@@ -45,15 +45,15 @@ def Collabs():
     """
         Fills the db with 5 Collaborators mock-data
     """
-    collab1 = Collaborator(first_name="Jainel", last_name="Torres", email="jainel.torres@upr.edu", approved=True)
+    collab1 = collaborator(first_name="Jainel", last_name="Torres", email="jainel.torres@upr.edu", approved=True)
     collab1.save()
-    collab2 = Collaborator(first_name="Roberto", last_name="Guzman", email="roberto.guzman3@upr.edu", approved=True)
+    collab2 = collaborator(first_name="Roberto", last_name="Guzman", email="roberto.guzman3@upr.edu", approved=True)
     collab2.save()
-    collab3 = Collaborator(first_name="Alberto", last_name="Canela", email="alberto.canela@upr.edu",approved=True)
+    collab3 = collaborator(first_name="Alberto", last_name="Canela", email="alberto.canela@upr.edu",approved=True)
     collab3.save()
-    collab4 = Collaborator(first_name="Alejandro", last_name="Vasquez", email="alejandro.vasquez@upr.edu",approved=True)
+    collab4 = collaborator(first_name="Alejandro", last_name="Vasquez", email="alejandro.vasquez@upr.edu",approved=True)
     collab4.save()
-    collab5 = Collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
+    collab5 = collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
     collab5.save()
 
 Collabs()
@@ -62,15 +62,15 @@ def Admins():
     """
         Fills the db with 3 Admin mock-data
     """
-    admin1 = Admin(username="jainel.torres", password="Password1")
+    admin1 = admin(username="jainel.torres", password="Password1")
     admin1.save()
-    admin2 = Admin(username="alberto.canela", password= "Password1")
+    admin2 = admin(username="alberto.canela", password= "Password1")
     admin2.save()
-    admin3 = Admin(username="alejandro.vasquez", password="Password1")
+    admin3 = admin(username="alejandro.vasquez", password="Password1")
     admin3.save()
-    admin4 = Admin(username="yomar.ruiz", password= "Password0")
+    admin4 = admin(username="yomar.ruiz", password= "Password0")
     admin4.save()
-    admin5 = Admin(username="roberto.guzman", password="Password1")
+    admin5 = admin(username="roberto.guzman", password="Password1")
     admin5.save()
     
 
@@ -80,16 +80,16 @@ def Documents():
     """
         Fills the db with Documents mock-data
     """                                                                                                                                                                                                                                             
-    get_collab1 = Collaborator.objects.get(first_name= "Jainel")
-    authorDoc1 = Author(author_FN = get_collab1.first_name, author_LN = get_collab1.last_name, 
+    get_collab1 = collaborator.objects.get(first_name= "Jainel")
+    authorDoc1 = author(author_FN = get_collab1.first_name, author_LN = get_collab1.last_name, 
     author_email = get_collab1.email, author_faculty="ICOM")
-    actorDoc1 = Actor(actor_FN = "Victoria", actor_LN = "Black", role = "Mayor")
-    timelineDoc1 = Timeline(event = "The rain has started", 
+    actorDoc1 = actor(actor_FN = "Victoria", actor_LN = "Black", role = "Mayor")
+    timelineDoc1 = timeline(event = "The rain has started", 
     eventStartDate = "2017-09-17", eventEndDate = "2017-09-19")
-    sectionDoc1 = Section(secTitle = "Introduction", content = "It was raining a lot")
-    citypr = CityPR.objects.get(city = 'Coamo, PR')
-    loc = Location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
-    doc1 = DocumentCase(creatoriD = get_collab1, title = ("The Great Rain"), location=[loc], 
+    sectionDoc1 = section(secTitle = "Introduction", content = "It was raining a lot")
+    citypr = city_pr.objects.get(city = 'Coamo, PR')
+    loc = location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
+    doc1 = document_case(creatoriD = get_collab1, title = ("The Great Rain"), location=[loc], 
     description = "It was a cold and stormy night...", published= True,
     incidentDate = "2017-09-17", 
     creationDate= "2018-03-20",
@@ -100,16 +100,16 @@ def Documents():
     author = [authorDoc1], actor = [actorDoc1],section = [sectionDoc1],timeline = [timelineDoc1], language="English")
     doc1.save()
 
-    get_collab2 = Collaborator.objects.get(first_name= "Roberto")
-    authorDoc2 = Author(author_FN = get_collab2.first_name, author_LN = get_collab2.last_name, 
+    get_collab2 = collaborator.objects.get(first_name= "Roberto")
+    authorDoc2 = author(author_FN = get_collab2.first_name, author_LN = get_collab2.last_name, 
     author_email = get_collab2.email, author_faculty= "ICOM")
-    actorDoc2 = Actor(actor_FN = "Nelson", actor_LN = "Santos", role = "Ingeniero")
-    timelineDoc2 = Timeline(event = "El temblor ha comenzado", 
+    actorDoc2 = actor(actor_FN = "Nelson", actor_LN = "Santos", role = "Ingeniero")
+    timelineDoc2 = timeline(event = "El temblor ha comenzado", 
     eventStartDate = "2019-02-09", eventEndDate = "2019-03-10")
-    sectionDoc2 = Section(secTitle = "Cuerpo", content = "Estaba temblando mucho el suelo")
-    citypr2 = CityPR.objects.get(city = 'Aguas Buenas, PR')
-    loc2 = Location(address= citypr2.city, latitude= citypr2.latitude, longitude=citypr2.longitude)
-    doc2 = DocumentCase(creatoriD = get_collab2, title = ("El gran Terremoto"), location=[loc2], 
+    sectionDoc2 = section(secTitle = "Cuerpo", content = "Estaba temblando mucho el suelo")
+    citypr2 = city_pr.objects.get(city = 'Aguas Buenas, PR')
+    loc2 = location(address= citypr2.city, latitude= citypr2.latitude, longitude=citypr2.longitude)
+    doc2 = document_case(creatoriD = get_collab2, title = ("El gran Terremoto"), location=[loc2], 
     description = "Era un lindo dia soleado...", published= False,
     incidentDate = "2019-02-09", 
     creationDate= "2020-02-20",

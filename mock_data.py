@@ -26,7 +26,7 @@ for index in range(0,100):
     ln = names.get_last_name()
     emailc = fn.lower() + '.' + ln.lower() + "@upr.edu"
     print(emailc)
-    collab1 = Collaborator(first_name = fn, 
+    collab1 = collaborator(first_name = fn, 
     last_name = ln, 
     approved = random.choice([True, False]),
     banned = random.choice([True, False]),
@@ -57,11 +57,11 @@ for index in range(0,100):
     #creates doc
     facultyITEM = ['ICOM', 'CIIC', 'INCI', 'INSO', 'INQU', 'INEL', 'MATE', 'QUIM', 'ADEM', 'PSIC']
     roles = ['Mayor', 'President', 'CEO','Owner','Resident','Engineer','Doctor']
-    get_collab = Collaborator.objects.get(email= emailc)
-    authorDoc = Author(author_FN = get_collab.first_name, author_LN = get_collab.last_name, 
+    get_collab = collaborator.objects.get(email= emailc)
+    authorDoc = author(author_FN = get_collab.first_name, author_LN = get_collab.last_name, 
     author_email = get_collab.email, author_faculty = random.choice(facultyITEM))
 
-    actorDoc = Actor(actor_FN = names.get_first_name(), actor_LN = names.get_last_name(), 
+    actorDoc = actor(actor_FN = names.get_first_name(), actor_LN = names.get_last_name(), 
     role = random.choice(roles))
 
     start = random.choice(dates)
@@ -69,11 +69,11 @@ for index in range(0,100):
     while(start > end):
         end = random.choice(dates)
     
-    timelineDoc = Timeline(event = fake.sentence(ext_word_list=my_word_list), 
+    timelineDoc = timeline(event = fake.sentence(ext_word_list=my_word_list), 
     eventStartDate = start, eventEndDate = end)
 
     titles=['Introduction', 'Body', 'Analysis', 'Conclusion', 'Executive Summary', 'Discussion']
-    sectionDoc = Section(secTitle = random.choice(titles), 
+    sectionDoc = section(secTitle = random.choice(titles), 
     content = fake.sentence(ext_word_list=my_word_list))
     languageDoc = ['English', 'Spanish']
 
@@ -81,10 +81,10 @@ for index in range(0,100):
     j = random.choice(ad)
     l = random.choice(ad)
     print('j: ', j, " l: ", l)
-    citypr = CityPR.objects.get(city = j)
-    citypr1 = CityPR.objects.get(city = l)
-    loc = Location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
-    loc1 = Location(address= citypr1.city, latitude= citypr1.latitude, longitude=citypr1.longitude)
+    citypr = city_pr.objects.get(city = j)
+    citypr1 = city_pr.objects.get(city = l)
+    loc = location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
+    loc1 = location(address= citypr1.city, latitude= citypr1.latitude, longitude=citypr1.longitude)
     inc = random.choice(dates)
     created = random.choice(dates)
     mod = random.choice(dates)
@@ -94,7 +94,7 @@ for index in range(0,100):
     while(created > mod):
         mod = random.choice(dates)
     
-    doc = DocumentCase(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
+    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
     description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
     incidentDate = inc, 
     creationDate= created,
