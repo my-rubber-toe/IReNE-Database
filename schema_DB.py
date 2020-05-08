@@ -11,7 +11,7 @@ connect('IReNEdb')
 # connect('IReNEdb', host=DB_HOST)
 
 
-class Collaborator(Document):
+class collaborator(Document):
     """
         Document Class for Collaborators.
         Collaborators are the users that will Create/Edit Case Studies.
@@ -23,13 +23,13 @@ class Collaborator(Document):
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.
     """
-    first_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
-    last_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
-    email = EmailField(min_length= 9,max_length=70, required=True, unique=True, regex='.*(@upr\.edu)$')
+    first_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*[a-z \\u00E0-\\u00FC]$')
+    last_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*[a-z \\u00E0-\\u00FC]$')
+    email = EmailField(min_length= 9,max_length=70, required=True, unique=True, regex='^[\.a-z0-9]*(@upr\.edu)$')
     banned = BooleanField(default=False,required=True)
     approved = BooleanField(default=False,required=True)
 
-class Admin(Document):
+class admin(Document):
     """
         Document Class for Admin.
         Admin are the users that will have access to the Admin Dashboard.
@@ -43,7 +43,7 @@ class Admin(Document):
     username = StringField(min_length=8, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' )
     password = StringField(min_length=8,max_length=20, required=True, regex='(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])')
 
-class Tag(Document):
+class tag(Document):
     """
         Document Class for Tag.
         Tag are the tags available for used as keywords for the DocumentCase.
@@ -54,7 +54,7 @@ class Tag(Document):
     """
     tagItem = StringField(min_length=1, max_length=50, required=True, unique=True, regex='^([a-z A-Z À-ÿ / & , \- ]*)$')
 
-class Infrastructure(Document):
+class infrastructure(Document):
     """
         Document Class for Infrastructure.
         These are going to be the categories available for the description of the
@@ -65,7 +65,7 @@ class Infrastructure(Document):
     """
     infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^([a-z A-Z À-ÿ / & , \- ]*)$')
     
-class Damage(Document):
+class damage(Document):
     """
         Document Class for Damage.
         These are going to be the categories available for the description of the
@@ -76,7 +76,7 @@ class Damage(Document):
     """
     damageType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^([a-z A-Z À-ÿ / & , \- ]*)$')
 
-class CityPR(Document):
+class city_pr(Document):
     """
         Document Class for CityPR.
         These are going to be the list of cities of Puerto Rico for the use of selection location
@@ -89,7 +89,7 @@ class CityPR(Document):
     latitude = DecimalField(min_value=17.87, max_value= 18.53, required=True)
     longitude = DecimalField(min_value=-67.28, max_value=-65.23, required=True) 
 
-class Author(EmbeddedDocument):
+class author(EmbeddedDocument):
     """
         EmbeddedDocument Class for Author.
         These are going to be the authors of a DocumentCase, the ones who wrote it.
@@ -104,10 +104,10 @@ class Author(EmbeddedDocument):
     """
     author_FN = StringField(min_length=1,max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
     author_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
-    author_email = EmailField(min_length=9,max_length=70, required=True, regex='.*(@upr\.edu)$')
+    author_email = EmailField(min_length=9,max_length=70, required=True, regex='^[\.a-z0-9]*(@upr\.edu)$')
     author_faculty = StringField(min_length=1,max_length=30, required=True)
 
-class Actor(EmbeddedDocument):
+class actor(EmbeddedDocument):
     """
         EmbeddedDocument Class for Actor.
         These are going to be the Actor of a DocumentCase, the ones having a role in the DocumentCase.
@@ -123,7 +123,7 @@ class Actor(EmbeddedDocument):
     actor_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
     role = StringField(min_length=1,max_length=30, required=True)
 
-class Timeline(EmbeddedDocument):
+class timeline(EmbeddedDocument):
     """
         EmbeddedDocument Class for Timeline.
         These will consist of the Timeline of a DocumentCase, describing the events followed.
@@ -141,7 +141,7 @@ class Timeline(EmbeddedDocument):
     eventStartDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     eventEndDate = StringField(min_length=9, max_length=11,  required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
 
-class Section(EmbeddedDocument):
+class section(EmbeddedDocument):
     """
         EmbeddedDocument Class for Section.
         These are going to be the body of the Document Case.
@@ -154,22 +154,6 @@ class Section(EmbeddedDocument):
     """
     secTitle = StringField(min_length=1, max_length=100, required=True)
     content = StringField(min_length=1, required=True)
-
-class Location(EmbeddedDocument):
-    """
-        EmbeddedDocument Class for Location.
-        These are going to be the body of the Document Case.
-        An EmbeddedDocument is a Document Class that is defined inside another document.
-        This one is going to be defined, and stored inside the DocumentCase Class.
-        The reason for this technique is that the Location Class has its own schema.
-        List of attributes:
-            - address: <String>  Location's address.
-            - latitude: <Number>  Location's latitude.
-            - longitude: <Number> Location's Longitude.
-    """
-    address = StringField(min_length=1, required=True)
-    latitude = DecimalField(min_value=17.86, max_value= 18.54, required=True)
-    longitude = DecimalField(min_value=-67.29, max_value=-65.22, required=True)
 
 
 class Location(EmbeddedDocument):
@@ -189,7 +173,7 @@ class Location(EmbeddedDocument):
     longitude = DecimalField(min_value=-67.29, max_value=-65.22, required=True)
 
 
-class DocumentCase(Document):
+class document_case(Document):
     """
         Document Class for DocumentCase.
         DocumentCase will consist of a Case Study created by a Collaborator.
@@ -234,7 +218,7 @@ class DocumentCase(Document):
     timeline = ListField(EmbeddedDocumentField(Timeline), max_length=5, required=False)
 
 
-class CreationEmbedded(EmbeddedDocument):
+class creation_embedded(EmbeddedDocument):
     creatoriD = ReferenceField('Collaborator')
     title = StringField(min_length=10, max_length=250, required=False, unique=True, default=None)
     language = StringField(min_length=0, required=False)
