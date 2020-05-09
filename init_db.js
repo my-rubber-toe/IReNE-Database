@@ -475,7 +475,6 @@
                   infrasDocList: {
                      bsonType: ["array"],
                      minItems: 1,
-                     uniqueItems: true,
                      additionalProperties: false,
                      items: {
                         bsonType: ["string"],
@@ -489,7 +488,6 @@
                   damageDocList: {
                      bsonType: ["array"],
                      minItems: 1,
-                     uniqueItems: true,
                      additionalProperties: false,
                      items: {
                         bsonType: ["string"],
@@ -504,7 +502,6 @@
                      bsonType: ["array"],
                      minItems: 0,
                      maxItems:10,
-                     uniqueItems: true,
                      additionalProperties: false,
                      items: {
                         bsonType: ["string"],
@@ -516,7 +513,6 @@
                      bsonType: ["array"],
                      minItems: 1,
                      maxItems: 10,
-                     uniqueItems: true,
                      additionalProperties: false,
                      items: {
                         bsonType: ["object"],
@@ -672,7 +668,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               uniqueItems: true,
                required: ["title"],
                properties: {
                   title: {
@@ -691,7 +686,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               uniqueItems: true,
                required: ["description"],
                properties: {
                   description: {
@@ -710,7 +704,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 1,
                required: ["infrasDocList"],
                properties: {
@@ -733,7 +726,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 1,
                required: ["damageDocList"],
                properties: {
@@ -757,7 +749,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 1,
                maxItems:10,
                required: ["tagsDoc"],
@@ -781,7 +772,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 0,
                maxItems:5,
                uniqueItems: false,
@@ -820,7 +810,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
@@ -855,7 +844,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 0,
                maxItems:5,
                uniqueItems: false,
@@ -894,7 +882,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
@@ -938,7 +925,6 @@
          validator: {
             $jsonSchema: {
                bsonType: ["array"],
-               uniqueItems: true,
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
