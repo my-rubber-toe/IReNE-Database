@@ -10,24 +10,24 @@ def Categories():
     """
         Fills the db with predefined categories & tags
     """  
-    infrast = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
+    infrastructures = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
     "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
     "Public Transportation"]
-    damag = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
+    damages = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
     "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
-    tags = infrast + damag
+    tags = infrastructures + damages
 
-    for infra in infrast:
+    for infra in infrastructures:
         infras = infrastructure(infrastructureType=infra)
         infras.save()
-    for damages in damag:
-        dama = damage(damageType=damages)
+    for damageDoc in damages:
+        dama = damage(damageType=damageDoc)
         dama.save()
     for tagslist in tags:
-        tagitem = tag(tagItem=tagslist)
-        tagitem.save()
+        tagDoc = tag(tagItem=tagslist)
+        tagDoc.save()
 
-# Categories()
+Categories()
 
 def Locations():
     """
@@ -36,8 +36,8 @@ def Locations():
     with open('cityPR.json') as f:
         data = json.loads(f.read())
         for cities in data['city_PR']:
-            cityitem = city_pr(city=cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
-            cityitem.save()
+            cityDoc = city_pr(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
+            cityDoc.save()
 
 Locations()
 
@@ -62,15 +62,15 @@ def Admins():
     """
         Fills the db with 3 Admin mock-data
     """
-    admin1 = Admin(username="yomar.ruiz", password='$2y$12$F8JpE/vVYHW5CGHerUfy3er15s7ApqT7ziRkc9lTGpnVuw9X8jZ4W') #Password0
+    admin1 = admin(username="yomar.ruiz", password='$2y$12$F8JpE/vVYHW5CGHerUfy3er15s7ApqT7ziRkc9lTGpnVuw9X8jZ4W') #Password0
     admin1.save()
-    admin2 = Admin(username="roberto.guzman", password= '$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
+    admin2 = admin(username="roberto.guzman", password= '$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin2.save()
-    admin3 = Admin(username="alejandro.vasquez", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
+    admin3 = admin(username="alejandro.vasquez", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin3.save()
-    admin4 = Admin(username="jainel.torres", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
+    admin4 = admin(username="jainel.torres", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin4.save()
-    admin5 = Admin(username="alberto.canela", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
+    admin5 = admin(username="alberto.canela", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin5.save()
     
 
