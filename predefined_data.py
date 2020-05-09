@@ -62,15 +62,15 @@ def Admins():
     """
         Fills the db with 3 Admin mock-data
     """
-    admin1 = admin(username="jainel.torres", password="Password1")
+    admin1 = Admin(username="yomar.ruiz", password='$2y$12$F8JpE/vVYHW5CGHerUfy3er15s7ApqT7ziRkc9lTGpnVuw9X8jZ4W') #Password0
     admin1.save()
-    admin2 = admin(username="alberto.canela", password= "Password1")
+    admin2 = Admin(username="roberto.guzman", password= '$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin2.save()
-    admin3 = admin(username="alejandro.vasquez", password="Password1")
+    admin3 = Admin(username="alejandro.vasquez", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin3.save()
-    admin4 = admin(username="yomar.ruiz", password= "Password0")
+    admin4 = Admin(username="jainel.torres", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin4.save()
-    admin5 = admin(username="roberto.guzman", password="Password1")
+    admin5 = Admin(username="alberto.canela", password='$2y$12$XZe.igfbsswNfEIrjcIXvOizWs9Xl4mfgw9Zj04bPajmdrr2Wcj1C') #Password1
     admin5.save()
     
 
