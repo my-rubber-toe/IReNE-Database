@@ -74,10 +74,7 @@
                   },
                   password: {
                      bsonType: "string",
-                     minLength: 8,
-                     maxLength:20,
                      description: "Admin Password, must be a hashed string",
-                     pattern: "(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])"
                   }
                }
             }
