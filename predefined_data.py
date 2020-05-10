@@ -45,7 +45,7 @@ def Collabs():
     """
         Fills the db with 5 Collaborators mock-data
     """
-    collab1 = collaborator(first_name="Jainel", last_name="Torres", email="jainel.torres@upr.edu", approved=True)
+    collab1 = collaborator(first_name="Jainel M", last_name="Torres Santos", email="jainel.torres@upr.edu", approved=True)
     collab1.save()
     collab2 = collaborator(first_name="Roberto", last_name="Guzman", email="roberto.guzman3@upr.edu", approved=True)
     collab2.save()
@@ -80,7 +80,7 @@ def Documents():
     """
         Fills the db with Documents mock-data
     """                                                                                                                                                                                                                                             
-    get_collab1 = collaborator.objects.get(first_name= "Jainel")
+    get_collab1 = collaborator.objects.get(first_name= "Jainel M")
     authorDoc1 = author(author_FN = get_collab1.first_name, author_LN = get_collab1.last_name, 
     author_email = get_collab1.email, author_faculty="ICOM")
     actorDoc1 = actor(actor_FN = "Victoria", actor_LN = "Black", role = "Mayor")

@@ -23,8 +23,8 @@ class collaborator(Document):
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.
     """
-    first_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*[a-z \\u00E0-\\u00FC]$')
-    last_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*[a-z \\u00E0-\\u00FC]$')
+    first_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
+    last_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     email = EmailField(min_length= 9,max_length=70, required=True, unique=True, regex='^[\.a-z0-9]*(@upr\.edu)$')
     banned = BooleanField(default=False,required=True)
     approved = BooleanField(default=False,required=True)
@@ -40,7 +40,7 @@ class admin(Document):
             - password: <String> Admin's  password.
                 - password attribute follows this regex: '(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]))'
     """
-    username = StringField(min_length=8, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' )
+    username = StringField(min_length=6, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' )
     password = StringField(required=True)
 
 class tag(Document):
@@ -52,7 +52,7 @@ class tag(Document):
         List of attributes:
             - tagItem: <String>  Tag that can be used in a DocumentCase.
     """
-    tagItem = StringField(min_length=1, max_length=50, required=True, unique=True, regex='^([a-z A-Z À-ÿ / & , \- ]*)$')
+    tagItem = StringField(min_length=1, max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
 
 class infrastructure(Document):
     """
@@ -63,7 +63,7 @@ class infrastructure(Document):
         List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.
     """
-    infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^([a-z A-Z À-ÿ / & , \- ]*)$')
+    infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
     
 class damage(Document):
     """
@@ -74,7 +74,7 @@ class damage(Document):
         List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.
     """
-    damageType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^([a-z A-Z À-ÿ / & , \- ]*)$')
+    damageType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
 
 class city_pr(Document):
     """
@@ -102,8 +102,8 @@ class author(EmbeddedDocument):
             - author_email: <String>  Author's Email.
             - author_faculty: <String>  Author's Faculty.
     """
-    author_FN = StringField(min_length=1,max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
-    author_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
+    author_FN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
+    author_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     author_email = EmailField(min_length=9,max_length=70, required=True, regex='^[\.a-z0-9]*(@upr\.edu)$')
     author_faculty = StringField(min_length=1,max_length=30, required=True)
 
@@ -119,8 +119,8 @@ class actor(EmbeddedDocument):
             - actor_LN: <String>  Actor's Last Name.
             - role: <String>  Actor's role in the DocumentCase.
     """
-    actor_FN = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
-    actor_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*$')
+    actor_FN = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
+    actor_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     role = StringField(min_length=1,max_length=30, required=True)
 
 class timeline(EmbeddedDocument):
@@ -201,7 +201,7 @@ class document_case(Document):
     """
     creatoriD = ReferenceField('collaborator')
     # creatoriD = StringField(min_length=10, max_length = 100, required=True)
-    title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-Z\\u00C0-\\u00DC]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
+    title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
     language = StringField(min_length=1, max_length=20,required=True, regex="^[A-Z][a-z]{1,20}$")
     description = StringField(min_length=1, max_length=500,required=False)
     published = BooleanField(default=True,required=True)
@@ -220,7 +220,7 @@ class document_case(Document):
 
 class creation_embedded(EmbeddedDocument):
     creatoriD = ReferenceField('collaborator')
-    title = StringField(min_length=10, max_length=250, required=False, default=None, regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
+    title = StringField(min_length=10, max_length=250, required=False, default=None, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
     language = StringField(min_length=0, required=False)
     location = ListField(StringField(min_length=0, required=False))
     description = StringField(min_length=0, max_length=500, required=False)
@@ -435,7 +435,7 @@ class document_case_revision(Document):
     """
     creatorId = ReferenceField('collaborator')
     docId = ReferenceField('document_case')
-    creator_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-Z][a-z A-Z \- À-ÿ]*[a-z \\u00E0-\\u00FC]$')
+    creator_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     creator_email = EmailField(required=True,max_length=50, regex='^[\.a-z0-9]*(@upr\.edu)$')
     document_title = StringField(min_length=10, max_length = 100, required=True)
     revision_date = StringField(min_length=1, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
