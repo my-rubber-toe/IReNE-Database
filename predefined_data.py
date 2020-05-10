@@ -33,7 +33,7 @@ def Locations():
     """
         Fills the db with predefined  addresses with their coordinates
     """  
-    with open('cityPR.json') as f:
+    with open('cityPR.json', encoding='utf-8') as f:
         data = json.loads(f.read())
         for cities in data['city_PR']:
             cityDoc = city_pr(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
@@ -124,8 +124,8 @@ Documents()
 
         
 
-
-#code for generating json file with list of cities with coors
+#DO NOT ERASE
+#code for generating json file with list of cities with coors 
 # import googlemaps 
 # import json
 # gmaps = googlemaps.Client(key='AIzaSyAZEkjgNHbvCFQ4ohopyKSg3-zbfHx4pSk')
