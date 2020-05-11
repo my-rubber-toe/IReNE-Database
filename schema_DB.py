@@ -1,14 +1,12 @@
 from mongoengine import *
-# from config.environment import DB_HOST
 import json
 
 #Connection to the Database
 connect('IReNEdb')
-#connec the db for testing purposes
+#connect the db for testing purposes
 #connect('IReNEdb', host='mongomock://localhost:27017')
 
-# Connection to the Database, make sure you place the correct container name for the database
-# connect('IReNEdb', host=DB_HOST)
+
 
 
 class collaborator(Document):
@@ -19,7 +17,6 @@ class collaborator(Document):
             - first_name: <String> Collaborator's first name.
             - last_name: <String> Collaborator's last name.
             - email: <String> Collaborator's email. It must be a @upr.edu email.
-                - email attribute follows this regex: '.*(@upr\.edu)$'
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.
     """
@@ -36,9 +33,7 @@ class admin(Document):
         These attributes will be the credentials of the Admins for them to enter the Admin Dashboard.
         List of attributes:
             - username: <String>  Admin's username.
-                - username attribute follows this regex: '(^(?=[a-zA-Z0-9])(?=.*[a-z])(?=.*[0-9])(?=.*[\.])(?=.*[A-Z])).*[^.]$'
             - password: <String> Admin's  password.
-                - password attribute follows this regex: '(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z]))'
     """
     username = StringField(min_length=6, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' )
     password = StringField(required=True)
@@ -133,9 +128,7 @@ class timeline(EmbeddedDocument):
         List of attributes:
             - event: <String>  Event happend within the DocumentCase.
             - eventStartDate: <String>  Date when the event started, it has to have the following format: 'YYYY-MM-DD'.
-                 - eventStartDate attribute follows this regex: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
             - eventEndDate: <String>  Date when the event ended, it has to have the following format: 'YYYY-MM-DD'.
-                - eventEndDate attribute follows this regex: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
     """
     event = StringField(min_length=10, max_length=100, required=True)
     eventStartDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
@@ -184,11 +177,8 @@ class document_case(Document):
             - description: <String> Case study's description.
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
             - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
-                 - incidentDate attribute follows this regex: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
             - creationDate: <String>  Date when the case study was created, it has to have the following format: 'YYYY-MM-DD'.
-                - creationDate attribute follows this regex: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
             - lastModificationDate: <String>  Last date when the case study was modified, it has to have the following format: 'YYYY-MM-DD'.
-                - lastModificationDate attribute follows this regex: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
             - tagsDoc: List<String> of tags from the case study.
             - infrasDocList: List<String> of infrastructure categories from the case study.
             - damageDocList: List<String> of damage categories from the case study.
@@ -197,10 +187,8 @@ class document_case(Document):
             - actor: List<Actor> of actor objects, the ones who plays a role in the case study.
             - section: List<Section> of section objects, this will consist the body of the case study.
             - timeline: List<Timeline> of timeline objects, this will consist of the events that happened within the case study.
-
     """
     creatoriD = ReferenceField('collaborator')
-    # creatoriD = StringField(min_length=10, max_length = 100, required=True)
     title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
     language = StringField(min_length=1, max_length=20,required=True, regex="^[A-Z][a-z]*$")
     description = StringField(min_length=1, max_length=500,required=False)
@@ -219,6 +207,27 @@ class document_case(Document):
 
 
 class creation_embedded(EmbeddedDocument):
+    """
+        Document Class for creation_embedded.
+        creation_embedded will consist of a revision for a created case study.
+        List of attributes:
+            - creatoriD: <String>  the Collaborator's id which created the Case study.
+            - title: <String> The case study's title .
+            - language: <String> The language which the case study is written.
+            - description: <String> Case study's description.
+            - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
+            - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
+            - creationDate: <String>  Date when the case study was created, it has to have the following format: 'YYYY-MM-DD'.
+            - lastModificationDate: <String>  Last date when the case study was modified, it has to have the following format: 'YYYY-MM-DD'.
+            - tagsDoc: List<String> of tags from the case study.
+            - infrasDocList: List<String> of infrastructure categories from the case study.
+            - damageDocList: List<String> of damage categories from the case study.
+            - location: List<Location> of addresses where the case study took place.
+            - author: List<Author> of author objects, the ones who wrote the case study.
+            - actor: List<Actor> of actor objects, the ones who plays a role in the case study.
+            - section: List<Section> of section objects, this will consist the body of the case study.
+            - timeline: List<Timeline> of timeline objects, this will consist of the events that happened within the case study.
+    """
     creatoriD = ReferenceField('collaborator')
     title = StringField(min_length=10, max_length=250, required=False, default=None, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
     language = StringField(min_length=0, required=False)
@@ -300,6 +309,12 @@ class creation_embedded(EmbeddedDocument):
 
 
 class title_embedded(EmbeddedDocument):
+    """
+        Document Class for title_embedded.
+        title_embedded will consist of a revision for the title of a case study.
+        List of attributes:
+            - title: <String> the title of the revised case study.
+    """
     title = StringField(min_length=10, max_length=100, required=True, regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)")
 
     def to_json(self):
@@ -307,6 +322,12 @@ class title_embedded(EmbeddedDocument):
 
 
 class description_embedded(EmbeddedDocument):
+    """
+        Document Class for description_embedded.
+        description_embedded will consist of a revision for the description of a case study.
+        List of attributes:
+            - description: <String> the description of the revised case study.
+    """
     description = StringField(min_length=0, max_length=500, required=False)
 
     def to_json(self):
@@ -314,6 +335,12 @@ class description_embedded(EmbeddedDocument):
 
 
 class infrastructure_embedded(EmbeddedDocument):
+    """
+        Document Class for infrastructure_embedded.
+        infrastructure_embedded will consist of a revision for the list of infrastructure types of a case study.
+        List of attributes:
+            - infrasDocList: List<String> the list of categories for infrastructure type for the revised case study.
+    """
     infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
 
@@ -322,6 +349,12 @@ class infrastructure_embedded(EmbeddedDocument):
 
 
 class timeline_embedded(EmbeddedDocument):
+    """
+        Document Class for timeline_embedded.
+        timeline_embedded will consist of a revision for the timeline of a case study.
+        List of attributes:
+            - timeline: List<timeline> the timeline of the revised case study.
+    """
     timeline = ListField(EmbeddedDocumentField(timeline))
 
     def to_json(self):
@@ -336,6 +369,12 @@ class timeline_embedded(EmbeddedDocument):
 
 
 class section_embedded(EmbeddedDocument):
+    """
+        Document Class for section_embedded.
+        section_embedded will consist of a revision for the section of a case study.
+        List of attributes:
+            - section: <section> the section of the revised case study.
+    """
     section = EmbeddedDocumentField(section)
 
     def to_json(self):
@@ -348,7 +387,13 @@ class section_embedded(EmbeddedDocument):
 
 
 class damage_embedded(EmbeddedDocument):
-     damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
+    """
+        Document Class for damage_embedded.
+        damage_embedded will consist of a revision for the list of damage types of a case study.
+        List of attributes:
+            - damageDocList: List<String> the list of categories for damage type for the revised case study.
+    """
+    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
 
     def to_json(self):
@@ -356,6 +401,12 @@ class damage_embedded(EmbeddedDocument):
 
 
 class actor_embedded(EmbeddedDocument):
+    """
+        Document Class for actor_embedded.
+        actor_embedded will consist of a revision for the actors of a case study.
+        List of attributes:
+            - actor: List<actor> the actors of the revised case study.
+    """
     actor = ListField(EmbeddedDocumentField(actor))
 
     def to_json(self):
@@ -369,6 +420,12 @@ class actor_embedded(EmbeddedDocument):
 
 
 class author_embedded(EmbeddedDocument):
+    """
+        Document Class for author_embedded.
+        author_embedded will consist of a revision for the authors of a case study
+        List of attributes:
+            - author: List<author> the authors of the revised case study.
+    """
     author = ListField(EmbeddedDocumentField(author))
 
     def to_json(self):
@@ -383,12 +440,24 @@ class author_embedded(EmbeddedDocument):
 
 
 class incident_embedded(EmbeddedDocument):
+    """
+        Document Class for incident_embedded.
+        incident_embedded will consist of a revision for the incident date of a case study
+        List of attributes:
+            - incidentDate: <string> the incident date of the revised case study.
+    """
     incidentDate = StringField(min_length=1, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     def to_json(self):
         return self.incidentDate
 
 
 class tag_embedded(EmbeddedDocument):
+    """
+        Document Class for tag_embedded.
+        tag_embedded will consist of a revision for the list of tags of a case study.
+        List of attributes:
+            - tagsDoc: List<String> the list of tags for the revised case study.
+    """
     tagsDoc = ListField(StringField(min_length=0,max_length=50,
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
     def to_json(self):
@@ -396,6 +465,12 @@ class tag_embedded(EmbeddedDocument):
 
 
 class location_embedded(EmbeddedDocument):
+    """
+        Document Class for location_embedded.
+        location_embedded will consist of a revision for the locations of a case study.
+        List of attributes:
+            - location: List<location> the list of locations for the revised case study.
+    """
     location = ListField(EmbeddedDocumentField(location), max_length=5, required=False)
 
     def to_json(self):

@@ -2,7 +2,10 @@ mongoengine
 /*Only-used-for-testing*/
 mongo-mock
 /*Libraries-below-are-only-for-mock-data*/
-datetime
 names
 namegenerator
 Faker
+/*Library-for-documentation*/
+sphinx
+/*Library-for-location_PR.py*/
+googlemaps

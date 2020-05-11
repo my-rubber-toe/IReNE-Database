@@ -4,6 +4,6 @@ IReNE-Database
 .. toctree::
    :maxdepth: 4
    
-   init_db_test
+   predefined_data
    schema_DB
    test_db

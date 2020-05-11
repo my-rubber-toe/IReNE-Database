@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
     <title>schema_DB module &#8212; IReNE&#39;s Database 2.0 documentation</title>
@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="test_db module" href="test_db.html" />
-    <link rel="prev" title="init_db_test module" href="init_db_test.html" />
+    <link rel="prev" title="predefined_data module" href="predefined_data.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -34,13 +34,13 @@
             
   <div class="section" id="module-schema_DB">
 <span id="schema-db-module"></span><h1>schema_DB module<a class="headerlink" href="#module-schema_DB" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="schema_DB.Actor">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Actor</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Actor" title="Permalink to this definition">¶</a></dt>
-<dd><p>EmbeddedDocument Class for Actor. 
+<dl class="class">
+<dt id="schema_DB.actor">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">actor</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.actor" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for Actor.
 These are going to be the Actor of a DocumentCase, the ones having a role in the DocumentCase.
 An EmbeddedDocument is a Document Class that is defined inside another document.
-This one is going to be defined, and stored inside the DocumentCase Class. 
+This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Actor Class has its own schema.
 List of attributes:</p>
 <blockquote>
@@ -52,10 +52,36 @@ List of attributes:</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Admin">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Admin</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Admin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for Admin. 
+<dl class="class">
+<dt id="schema_DB.actor_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">actor_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.actor_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for actor_embedded.
+actor_embedded will consist of a revision for the actors of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>actor: List&lt;actor&gt; the actors of the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.actor_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.actor_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.admin">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">admin</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.admin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for Admin.
 Admin are the users that will have access to the Admin Dashboard.
 These attributes will be the credentials of the Admins for them to enter the Admin Dashboard.
 List of attributes:</p>
@@ -65,25 +91,25 @@ List of attributes:</p>
 <li><p>password: &lt;String&gt; Admin’s  password.</p></li>
 </ul>
 </div></blockquote>
-<dl class="py exception">
-<dt id="schema_DB.Admin.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.Admin.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.admin.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.admin.DoesNotExist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py exception">
-<dt id="schema_DB.Admin.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.Admin.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.admin.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.admin.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Author">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Author</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Author" title="Permalink to this definition">¶</a></dt>
-<dd><p>EmbeddedDocument Class for Author. 
+<dl class="class">
+<dt id="schema_DB.author">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">author</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.author" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for Author.
 These are going to be the authors of a DocumentCase, the ones who wrote it.
 An EmbeddedDocument is a Document Class that is defined inside another document.
-This one is going to be defined, and stored inside the DocumentCase Class. 
+This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Author Class has its own schema.
 List of attributes:</p>
 <blockquote>
@@ -96,46 +122,38 @@ List of attributes:</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Collaborator">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Collaborator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Collaborator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for Collaborators. 
-Collaborators are the users that will Create/Edit Case Studies.
+<dl class="class">
+<dt id="schema_DB.author_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">author_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.author_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for author_embedded.
+author_embedded will consist of a revision for the authors of a case study
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>documentsID: list&lt;String&gt;  of document ids that the Collaborator created.</p></li>
-<li><p>first_name: &lt;String&gt; Collaborator’s first name.</p></li>
-<li><p>last_name: &lt;String&gt; Collaborator’s last name.</p></li>
-<li><dl class="simple">
-<dt>email: &lt;String&gt; Collaborator’s email. It must be a &#64;upr.edu email.</dt><dd><ul>
-<li><p>email attribute follows this regex: ‘(.*).(.*)&#64;upr.edu’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p>banned: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the Collaborator looses access to Tellspace service.</p></li>
-<li><p>approved: &lt;Boolean&gt; &lt;Default=False&gt;  When set to true, the Collaborator gains access to Tellspace service.</p></li>
+<li><p>author: List&lt;author&gt; the authors of the revised case study.</p></li>
 </ul>
 </div></blockquote>
-<dl class="py exception">
-<dt id="schema_DB.Collaborator.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.Collaborator.DoesNotExist" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py exception">
-<dt id="schema_DB.Collaborator.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.Collaborator.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dl class="method">
+<dt id="schema_DB.author_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.author_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Damage">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Damage</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Damage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for Damage. 
-These are going to be the categories available for the description of the
-Damage in the DocumentCase.
+<dl class="class">
+<dt id="schema_DB.city_pr">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">city_pr</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.city_pr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for CityPR.
+These are going to be the list of cities of Puerto Rico for the use of selection location
+for DocumentCase &amp; as a filter list for a visualization.
 All of them  will be pre-defined by the Team.
 List of attributes:</p>
 <blockquote>
@@ -143,22 +161,167 @@ List of attributes:</p>
 <li><p>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</p></li>
 </ul>
 </div></blockquote>
-<dl class="py exception">
-<dt id="schema_DB.Damage.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.Damage.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.city_pr.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.city_pr.DoesNotExist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py exception">
-<dt id="schema_DB.Damage.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.Damage.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.city_pr.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.city_pr.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.DocumentCase">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">DocumentCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.DocumentCase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for DocumentCase. 
+<dl class="class">
+<dt id="schema_DB.collaborator">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">collaborator</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.collaborator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for Collaborators.
+Collaborators are the users that will Create/Edit Case Studies.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>first_name: &lt;String&gt; Collaborator’s first name.</p></li>
+<li><p>last_name: &lt;String&gt; Collaborator’s last name.</p></li>
+<li><p>email: &lt;String&gt; Collaborator’s email. It must be a &#64;upr.edu email.</p></li>
+<li><p>banned: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the Collaborator looses access to Tellspace service.</p></li>
+<li><p>approved: &lt;Boolean&gt; &lt;Default=False&gt;  When set to true, the Collaborator gains access to Tellspace service.</p></li>
+</ul>
+</div></blockquote>
+<dl class="exception">
+<dt id="schema_DB.collaborator.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.collaborator.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="schema_DB.collaborator.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.collaborator.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.creation_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">creation_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.creation_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for creation_embedded.
+creation_embedded will consist of a revision for a created case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>creatoriD: &lt;String&gt;  the Collaborator’s id which created the Case study.</p></li>
+<li><p>title: &lt;String&gt; The case study’s title .</p></li>
+<li><p>language: &lt;String&gt; The language which the case study is written.</p></li>
+<li><p>description: &lt;String&gt; Case study’s description.</p></li>
+<li><p>published: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the case study will be visible in SearchSpace service.</p></li>
+<li><p>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><p>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><p>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><p>tagsDoc: List&lt;String&gt; of tags from the case study.</p></li>
+<li><p>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</p></li>
+<li><p>damageDocList: List&lt;String&gt; of damage categories from the case study.</p></li>
+<li><p>location: List&lt;Location&gt; of addresses where the case study took place.</p></li>
+<li><p>author: List&lt;Author&gt; of author objects, the ones who wrote the case study.</p></li>
+<li><p>actor: List&lt;Actor&gt; of actor objects, the ones who plays a role in the case study.</p></li>
+<li><p>section: List&lt;Section&gt; of section objects, this will consist the body of the case study.</p></li>
+<li><p>timeline: List&lt;Timeline&gt; of timeline objects, this will consist of the events that happened within the case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.creation_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.creation_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.damage">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">damage</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.damage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for Damage.
+These are going to be the categories available for the description of the
+Damage in the DocumentCase.
+All of them  will be pre-defined by the Team and/or Admins.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</p></li>
+</ul>
+</div></blockquote>
+<dl class="exception">
+<dt id="schema_DB.damage.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.damage.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="schema_DB.damage.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.damage.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.damage_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">damage_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.damage_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for damage_embedded.
+damage_embedded will consist of a revision for the list of damage types of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>damageDocList: List&lt;String&gt; the list of categories for damage type for the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.damage_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.damage_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.description_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">description_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.description_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for description_embedded.
+description_embedded will consist of a revision for the description of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>description: &lt;String&gt; the description of the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.description_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.description_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.document_case">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">document_case</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.document_case" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for DocumentCase.
 DocumentCase will consist of a Case Study created by a Collaborator.
 List of attributes:</p>
 <blockquote>
@@ -166,82 +329,211 @@ List of attributes:</p>
 <li><p>creatoriD: &lt;String&gt;  the Collaborator’s id which created the Case study.</p></li>
 <li><p>title: &lt;String&gt; The case study’s title .</p></li>
 <li><p>language: &lt;String&gt; The language which the case study is written.</p></li>
-<li><p>location: List&lt;String&gt; of addresses where the case study took place.</p></li>
 <li><p>description: &lt;String&gt; Case study’s description.</p></li>
 <li><p>published: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the case study will be visible in SearchSpace service.</p></li>
-<li><dl class="simple">
-<dt>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
-<li><p>incidentDate attribute follows this regex: ‘[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
-<li><p>creationDate attribute follows this regex: ‘[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
-<li><p>lastModificationDate attribute follows this regex: ‘[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
+<li><p>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><p>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><p>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
 <li><p>tagsDoc: List&lt;String&gt; of tags from the case study.</p></li>
 <li><p>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</p></li>
 <li><p>damageDocList: List&lt;String&gt; of damage categories from the case study.</p></li>
+<li><p>location: List&lt;Location&gt; of addresses where the case study took place.</p></li>
 <li><p>author: List&lt;Author&gt; of author objects, the ones who wrote the case study.</p></li>
+<li><p>actor: List&lt;Actor&gt; of actor objects, the ones who plays a role in the case study.</p></li>
 <li><p>section: List&lt;Section&gt; of section objects, this will consist the body of the case study.</p></li>
 <li><p>timeline: List&lt;Timeline&gt; of timeline objects, this will consist of the events that happened within the case study.</p></li>
 </ul>
 </div></blockquote>
-<dl class="py exception">
-<dt id="schema_DB.DocumentCase.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.DocumentCase.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.document_case.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.document_case.DoesNotExist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py exception">
-<dt id="schema_DB.DocumentCase.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.DocumentCase.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.document_case.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.document_case.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Infrastructure">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Infrastructure</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Infrastructure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for Infrastructure. 
+<dl class="class">
+<dt id="schema_DB.document_case_revision">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">document_case_revision</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.document_case_revision" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for Revision. 
+These are going to be the revision log for DocumentCaseRevision.
+An EmbeddedDocument is a Document Class that is defined inside another document.
+This one is going to be defined, and stored inside the DocumentCaseRevision Class. 
+The reason for this technique is that the Section Class has its own schema.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>creatorId: &lt;String&gt; Collaborator ID who made the change.</p></li>
+<li><p>docId: &lt;String&gt; DocumentCase id where the change was made.</p></li>
+<li><p>creator_name: &lt;String&gt; Collaborator’s name who made the change.</p></li>
+<li><p>document_title: &lt;String&gt; Collaborator’s email who made the change.</p></li>
+<li><p>revision_date: &lt;String&gt; Date when the changes were made.</p></li>
+<li><p>revision_number: &lt;Integer&gt; number id of the change made.</p></li>
+<li><p>revision_type: &lt;String&gt; Type of change.</p></li>
+<li><p>field_changed: &lt;Revision&gt; embedded document which contains the old &amp; new changes made</p></li>
+</ul>
+</div></blockquote>
+<dl class="exception">
+<dt id="schema_DB.document_case_revision.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.document_case_revision.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="schema_DB.document_case_revision.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.document_case_revision.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.fields_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">fields_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.fields_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for FieldsEmbedded. 
+These are going to be the revision log for DocumentCaseRevision.
+An EmbeddedDocument is a Document Class that is defined inside another document.
+This one is going to be defined, and stored inside the DocumentCaseRevision Class. 
+The reason for this technique is that the Section Class has its own schema.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>old: dictionary field containing what was before the change.</p></li>
+<li><p>new: dictionary field containing the new changes made.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.incident_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">incident_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.incident_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for incident_embedded.
+incident_embedded will consist of a revision for the incident date of a case study
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>incidentDate: &lt;string&gt; the incident date of the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.incident_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.incident_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.infrastructure">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">infrastructure</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.infrastructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for Infrastructure.
 These are going to be the categories available for the description of the
 infrastructure in the DocumentCase.
-All of them  will be pre-defined by the Team.
+All of them  will be pre-defined by the Team and/or Admins.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>infrastructureType: &lt;String&gt;  category that can be used in a DocumentCase.</p></li>
 </ul>
 </div></blockquote>
-<dl class="py exception">
-<dt id="schema_DB.Infrastructure.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.Infrastructure.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.infrastructure.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.infrastructure.DoesNotExist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py exception">
-<dt id="schema_DB.Infrastructure.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.Infrastructure.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.infrastructure.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.infrastructure.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Section">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Section</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Section" title="Permalink to this definition">¶</a></dt>
-<dd><p>EmbeddedDocument Class for Section. 
+<dl class="class">
+<dt id="schema_DB.infrastructure_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">infrastructure_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.infrastructure_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for infrastructure_embedded.
+infrastructure_embedded will consist of a revision for the list of infrastructure types of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>infrasDocList: List&lt;String&gt; the list of categories for infrastructure type for the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.infrastructure_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.infrastructure_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.location">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">location</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for Location.
 These are going to be the body of the Document Case.
 An EmbeddedDocument is a Document Class that is defined inside another document.
-This one is going to be defined, and stored inside the DocumentCase Class. 
+This one is going to be defined, and stored inside the DocumentCase Class.
+The reason for this technique is that the Location Class has its own schema.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>address: &lt;String&gt;  Location’s address.</p></li>
+<li><p>latitude: &lt;Number&gt;  Location’s latitude.</p></li>
+<li><p>longitude: &lt;Number&gt; Location’s Longitude.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.location_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">location_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.location_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for location_embedded.
+location_embedded will consist of a revision for the locations of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>location: List&lt;location&gt; the list of locations for the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.location_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.location_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.section">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">section</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.section" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for Section.
+These are going to be the body of the Document Case.
+An EmbeddedDocument is a Document Class that is defined inside another document.
+This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Section Class has its own schema.
 List of attributes:</p>
 <blockquote>
@@ -252,12 +544,38 @@ List of attributes:</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Tag">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Tag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for Tag. 
+<dl class="class">
+<dt id="schema_DB.section_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">section_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.section_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for section_embedded.
+section_embedded will consist of a revision for the section of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>section: &lt;section&gt; the section of the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.section_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.section_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.tag">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">tag</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for Tag.
 Tag are the tags available for used as keywords for the DocumentCase.
-There will be some pre-defined by the Team, and the majority will be created by the
+There will be some pre-defined by the Team and/or Admin, and the majority will be created by the
 Collaborators.
 List of attributes:</p>
 <blockquote>
@@ -265,46 +583,112 @@ List of attributes:</p>
 <li><p>tagItem: &lt;String&gt;  Tag that can be used in a DocumentCase.</p></li>
 </ul>
 </div></blockquote>
-<dl class="py exception">
-<dt id="schema_DB.Tag.DoesNotExist">
-<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.Tag.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.tag.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#schema_DB.tag.DoesNotExist" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py exception">
-<dt id="schema_DB.Tag.MultipleObjectsReturned">
-<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.Tag.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dl class="exception">
+<dt id="schema_DB.tag.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#schema_DB.tag.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="schema_DB.Timeline">
-<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">Timeline</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.Timeline" title="Permalink to this definition">¶</a></dt>
-<dd><p>EmbeddedDocument Class for Timeline. 
+<dl class="class">
+<dt id="schema_DB.tag_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">tag_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.tag_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for tag_embedded.
+tag_embedded will consist of a revision for the list of tags of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>tagsDoc: List&lt;String&gt; the list of tags for the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.tag_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.tag_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.timeline">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">timeline</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>EmbeddedDocument Class for Timeline.
 These will consist of the Timeline of a DocumentCase, describing the events followed.
 An EmbeddedDocument is a Document Class that is defined inside another document.
-This one is going to be defined, and stored inside the DocumentCase Class. 
+This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Timeline Class has its own schema.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>event: &lt;String&gt;  Event happend within the DocumentCase.</p></li>
-<li><dl class="simple">
-<dt>eventStartDate: &lt;String&gt;  Date when the event started, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
-<li><p>eventStartDate attribute follows this regex: ‘[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>eventEndDate: &lt;String&gt;  Date when the event ended, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
-<li><p>eventEndDate attribute follows this regex: ‘[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]’</p></li>
-</ul>
-</dd>
-</dl>
-</li>
+<li><p>eventStartDate: &lt;String&gt;  Date when the event started, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><p>eventEndDate: &lt;String&gt;  Date when the event ended, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
 </ul>
 </div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.timeline_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">timeline_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.timeline_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for timeline_embedded.
+timeline_embedded will consist of a revision for the timeline of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>timeline: List&lt;timeline&gt; the timeline of the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.timeline_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.timeline_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="schema_DB.title_embedded">
+<em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">title_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.title_embedded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Document Class for title_embedded.
+title_embedded will consist of a revision for the title of a case study.
+List of attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>title: &lt;String&gt; the title of the revised case study.</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="schema_DB.title_embedded.to_json">
+<code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.title_embedded.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert this document to JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>use_db_field</strong> – Serialize field names as they appear in
+MongoDB (as opposed to attribute names on this document).
+Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -329,7 +713,7 @@ List of attributes:</p>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">IReNE-Database</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="init_db_test.html">init_db_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predefined_data.html">predefined_data module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">schema_DB module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test_db.html">test_db module</a></li>
 </ul>
@@ -341,7 +725,7 @@ List of attributes:</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
   <li><a href="modules.html">IReNE-Database</a><ul>
-      <li>Previous: <a href="init_db_test.html" title="previous chapter">init_db_test module</a></li>
+      <li>Previous: <a href="predefined_data.html" title="previous chapter">predefined_data module</a></li>
       <li>Next: <a href="test_db.html" title="next chapter">test_db module</a></li>
   </ul></li>
   </ul></li>
@@ -373,7 +757,7 @@ List of attributes:</p>
       &copy;2020, Jainel M. Torres Santos.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0+/3fb16cb</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

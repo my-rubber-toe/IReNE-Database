@@ -9,13 +9,48 @@ import json
 def Categories():
     """
         Fills the db with predefined categories & tags
+        For Infrastructure Types:
+            - Streets or Highway
+            - Bridges
+            - Airports
+            - Water Supply
+            - Waste Water Management
+            - Power Generation & Transmission
+            - Telecommunications
+            - Housing
+            - Building
+            - Ports
+            - Public Transportation
+        For Damage Types:
+            - Earthquake
+            - Hurricane
+            - Tsunami
+            - Flooding
+            - Landslide
+            - Fire/smoke
+            - Extreme Precipitation
+            - Water Damage
+            - Wind Damage
+            - Tornado
+        For Tags:
+            - Earthquake
+            - Hurricane
+            - Flooding
+            - Water
+            - Fire
+            - Buildings
+            - Housing
+            - Telecommunications
+            - Ports
+            - Power Generation
     """  
     infrastructures = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
     "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
     "Public Transportation"]
     damages = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
     "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
-    tags = infrastructures + damages
+    tags = ["Earthquake", "Hurricane", "Flooding", "Water", "Fire", "Buildings", "Housing", "Telecommunications", 
+    "Ports", "Power Generation"]
 
     for infra in infrastructures:
         infras = infrastructure(infrastructureType=infra)
@@ -27,11 +62,11 @@ def Categories():
         tagDoc = tag(tagItem=tagslist)
         tagDoc.save()
 
-Categories()
+# Categories()
 
 def Locations():
     """
-        Fills the db with predefined  addresses with their coordinates
+        Fills the db with predefined Locations of all the municipalities of Puerto Rico with their coordinates
     """  
     with open('cityPR.json', encoding='utf-8') as f:
         data = json.loads(f.read())
@@ -39,7 +74,7 @@ def Locations():
             cityDoc = city_pr(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
             cityDoc.save()
 
-Locations()
+# Locations()
 
 def Collabs():
     """
@@ -56,11 +91,11 @@ def Collabs():
     collab5 = collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
     collab5.save()
 
-Collabs()
+# Collabs()
 
 def Admins():
     """
-        Fills the db with 3 Admin mock-data
+        Fills the db with 5 Admin mock-data
     """
     admin1 = admin(username="yomar.ruiz", password='$2y$12$F8JpE/vVYHW5CGHerUfy3er15s7ApqT7ziRkc9lTGpnVuw9X8jZ4W') #Password0
     admin1.save()
@@ -74,11 +109,11 @@ def Admins():
     admin5.save()
     
 
-Admins()
+# Admins()
 
 def Documents():
     """
-        Fills the db with Documents mock-data
+        Fills the db with 2 Documents mock-data
     """                                                                                                                                                                                                                                             
     get_collab1 = collaborator.objects.get(first_name= "Jainel M")
     authorDoc1 = author(author_FN = get_collab1.first_name, author_LN = get_collab1.last_name, 
@@ -120,40 +155,4 @@ def Documents():
     author = [authorDoc2], actor = [actorDoc2],section = [sectionDoc2],timeline = [timelineDoc2], language="Spanish")
     doc2.save()
 
-Documents()
-
-        
-
-#DO NOT ERASE
-#code for generating json file with list of cities with coors 
-# import googlemaps 
-# import json
-# gmaps = googlemaps.Client(key='AIzaSyAZEkjgNHbvCFQ4ohopyKSg3-zbfHx4pSk')
-
-#         # Geocoding an address
-#         cities = ['Adjuntas, PR', 'Aguada, PR', 'Aguadilla, PR', 'Aguas Buenas, PR', 'Aibonito, PR',
-#         'Añasco, PR', 'Arecibo, PR', 'Arroyo, PR', 'Barceloneta, PR', 'Barranquitas, PR',
-#         'Bayamón, PR', 'Cabo Rojo, PR', 'Caguas, PR', 'Camuy, PR', 'Canóvanas, PR',
-#         'Carolina, PR', 'Cataño, PR', 'Cayey, PR', 'Ceiba, PR', 'Ciales, PR',
-#         'Cidra, PR', 'Coamo, PR', 'Comerio, PR', 'Corozal, PR', 'Culebra, PR', 
-#         'Dorado, PR', 'Fajardo, PR', 'Florida, PR', 'Guánica, PR', 'Guayama, PR',
-#         'Guayanilla, PR', 'Guaynabo, PR', 'Gurabo, PR', 'Hatillo, PR', 'Hormigueros, PR',
-#         'Humacao, PR', 'Isabela, PR', 'Jayuya, PR', 'Juana Díaz, PR', 'Juncos, PR',
-#         'Lajas, PR', 'Lares, PR', 'Las Marías, PR', 'Las Piedras, PR', 'Loíza, PR',
-#         'Luquillo, PR', 'Manatí, PR', 'Maricao, PR', 'Maunabo, PR', 'Mayagüez, PR',
-#         'Moca, PR', 'Morovis, PR', 'Naguabo, PR', 'Naranjito, PR', 'Orocovis, PR',
-#         'Patillas, PR', 'Peñuelas, PR', 'Ponce, PR', 'Quebradillas, PR', 'Rincón, PR',
-#         'Río Grande, PR', 'Sabana Grande, PR', 'Salinas, PR', 'San Germán, PR', 'San Juan, PR',
-#         'San Lorenzo, PR', 'San Sebastián, PR', 'Santa Isabel, PR', 'Toa Alta, PR',
-#         'Toa Baja, PR', 'Trujillo Alto, PR', 'Utuado, PR', 'Vega Alta, PR', 'Vega Baja, PR',
-#         'Vieques, PR', 'Villalba, PR', 'Yabucoa, PR', 'Yauco, PR']
-
-#         json_out = []
-#         for city in cities:
-#             geocode_result = gmaps.geocode(city)
-#             json_city =  { "city": city, "latitude":geocode_result[0]['geometry']['location']['lat'], 
-#             "longitude": geocode_result[0]['geometry']['location']['lng'] }
-#             json_out.append(json_city)
-
-#         with open('cityPR.json', 'w') as outfile:
-#             json.dump({"city_PR" : json_out}, outfile)
+# Documents()

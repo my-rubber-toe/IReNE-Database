@@ -13,7 +13,7 @@ def test_create_Collab(fn,ln,email):
     last_name = ln, email = email)
     collab.save()
 
-    collab_test = Collaborator.objects.get(email = email)
+    collab_test = collaborator.objects.get(email = email)
     assert collab_test.first_name ==  fn
     assert collab_test.last_name ==  ln
     assert collab_test.email ==  email
@@ -25,9 +25,9 @@ def test_create_Admin(user_username, user_password):
     """
         Creates a new Admin
     """
-    admin = Admin(username = user_username, password = user_password)
+    admin = admin(username = user_username, password = user_password)
     admin.save()
-    test_admin = Admin.objects.get(username = user_username)
+    test_admin = admin.objects.get(username = user_username)
     assert test_admin.username == user_username
     assert test_admin.password == user_password
     print("New Admin: \n\tUsername: ", test_admin.username, "\n\tPassword: ", test_admin.password)
@@ -36,10 +36,10 @@ def test_create_Tag(new_tag):
     """
         Creates a new Tag
     """
-    tag = Tag(tagItem = new_tag)
-    tag.save()
+    new_tagdoc = tag(tagItem = new_tag)
+    new_tagdoc.save()
     
-    tag_test = Tag.objects.get(tagItem = new_tag)
+    tag_test = tag.objects.get(tagItem = new_tag)
     assert tag_test.tagItem == new_tag
     print(tag_test.tagItem)
 
@@ -47,10 +47,10 @@ def test_create_Infrastructure(new_infras):
     """
         Creates a new Infrastructure Type
     """
-    infras = Infrastructure(infrastructureType = new_infras)
+    infras = infrastructure(infrastructureType = new_infras)
     infras.save()
 
-    infras_test = Infrastructure.objects.get(infrastructureType = new_infras)
+    infras_test = infrastructure.objects.get(infrastructureType = new_infras)
     assert infras_test.infrastructureType == new_infras
     print(infras_test.infrastructureType)    
 
@@ -58,10 +58,10 @@ def test_create_Damage(new_damage):
     """
         Creates a new Damage Type
     """
-    damage = Damage(damageType = new_damage)
+    damage = damage(damageType = new_damage)
     damage.save()
 
-    damage_test = Damage.objects.get(damageType = new_damage)
+    damage_test = damage.objects.get(damageType = new_damage)
     assert damage_test.damageType == new_damage
     print(damage_test.damageType)
 
@@ -70,34 +70,34 @@ def test_create_doc (**docatr):
         Creates a new Document
     """
     authorDoc = []
-    for author in docatr["author"]:
-        auth = Author(author_FN = author[0], author_LN = author[1], author_email = author[2], 
-        author_faculty = author[3])
+    for author_doc in docatr["author"]:
+        auth = author(author_FN = author_doc[0], author_LN = author_doc[1], author_email = author_doc[2], 
+        author_faculty = author_doc[3])
         authorDoc.append(auth)
     actorDoc = []
-    for actor in docatr["actor"]:
-        act = Actor(actor_FN = actor[0], actor_LN = actor[1], role = actor[2])
+    for actor_doc in docatr["actor"]:
+        act = actor(actor_FN = actor_doc[0], actor_LN = actor_doc[1], role = actor_doc[2])
         actorDoc.append(act)
     timelineDoc = []
     for tl in docatr["timeline"]:
-        timel = Timeline(event = tl[0], eventStartDate = tl[1], eventEndDate= tl[2])
+        timel = timeline(event = tl[0], eventStartDate = tl[1], eventEndDate= tl[2])
         timelineDoc.append(timel)
     sectionDoc = []
     for sec in docatr["section"]:
-        secdoc = Section(secTitle = sec[0], content = sec[1])
+        secdoc = section(secTitle = sec[0], content = sec[1])
         sectionDoc.append(secdoc)
-    doc1 = DocumentCase(creatoriD = docatr["creatoriD"],title = docatr["title"], language=docatr["language"], description = docatr["description"],
+    doc1 = document_case(creatoriD = docatr["creatoriD"],title = docatr["title"], language=docatr["language"], description = docatr["description"],
     incidentDate = docatr["incidentDate"], creationDate = docatr["creationDate"], lastModificationDate = docatr["lastModificationDate"],
     tagsDoc = docatr["tagsDoc"], infrasDocList = docatr["infrasDocList"], damageDocList = docatr["damageDocList"],
     location = docatr["location"], author = authorDoc, actor = actorDoc, 
     section = sectionDoc, timeline = timelineDoc)
-    for tag in docatr["tagsDoc"]:
-        if not Tag.objects(tagItem=tag):
-            newTag = Tag(tagItem=tag)
+    for new_tag in docatr["tagsDoc"]:
+        if not tag.objects(tagItem=new_tag):
+            newTag = tag(tagItem=new_tag)
             newTag.save()
     doc1.save()
     #process of testing the insert
-    doc_test = DocumentCase.objects.get(title = docatr["title"])
+    doc_test = document_case.objects.get(title = docatr["title"])
     assert doc_test.creatoriD == docatr["creatoriD"]
     assert doc_test.title == docatr["title"]
     assert doc_test.description == docatr["description"]
@@ -144,9 +144,9 @@ def test_update_Collab_FN(email_test, new_fn):
     """
         updates FN of collab
     """
-    collab_test = Collaborator.objects.get(email= email_test)
+    collab_test = collaborator.objects.get(email= email_test)
     print("old fn: ", collab_test.first_name)
-    Collaborator.objects(email=email_test).update_one(set__first_name = new_fn)
+    collaborator.objects(email=email_test).update_one(set__first_name = new_fn)
     collab_test.reload()
     assert collab_test.first_name == new_fn
     print("new fn: ",collab_test.first_name)
@@ -155,9 +155,9 @@ def test_update_Collab_LN(email_test, new_ln):
     """
         updates LN of collab
     """
-    collab_test = Collaborator.objects.get(email= email_test)
+    collab_test = collaborator.objects.get(email= email_test)
     print("old ln: ", collab_test.last_name)
-    Collaborator.objects(email=email_test).update_one(set__last_name = new_ln)
+    collaborator.objects(email=email_test).update_one(set__last_name = new_ln)
     collab_test.reload()
     assert collab_test.last_name == new_ln
     print("new ln: ",collab_test.last_name)
@@ -166,9 +166,9 @@ def test_update_Admin_Password(usern, new_pass):
     """
         updates password of admin
     """
-    test_admin = Admin.objects.get(username=usern)
+    test_admin = admin.objects.get(username=usern)
     print("old password: ", test_admin.password)
-    Admin.objects(username = usern).update_one(set__password = new_pass)
+    admin.objects(username = usern).update_one(set__password = new_pass)
     test_admin.reload()
     assert test_admin.password == new_pass
     print("new password: ", test_admin.password)
@@ -178,11 +178,11 @@ def test_update_doc(titleDoc, des, tags):
         updates description of doc
     """
     #process of testing update
-    doc_test = DocumentCase.objects.get(title= titleDoc)
+    doc_test = document_case.objects.get(title= titleDoc)
     print('old description: ' + doc_test.description + " \nold tags: " )
     print(doc_test.tagsDoc)
-    DocumentCase.objects(title = titleDoc).update_one(set__description = des)
-    DocumentCase.objects(title = titleDoc).update_one(set__tagsDoc = tags)
+    document_case.objects(title = titleDoc).update_one(set__description = des)
+    Documendocument_casetCase.objects(title = titleDoc).update_one(set__tagsDoc = tags)
     # DocumentCase.objects(title = "The great Flooding", author__author_LN = "TS").update_one(set__author__S__author_FN = "joy")
     doc_test.reload()
     print('new description: ' + doc_test.description + " \nnew tags: " )
@@ -192,17 +192,17 @@ def test_update_doc(titleDoc, des, tags):
 
 #-----------------------------------Methods for deletion--------------------------
 
-def test_delete_tag(tag):
+def test_delete_tag(deltag):
     """
         Deletes a tag
     """
-    tag_read = Tag.objects()
+    tag_read = tag.objects()
     tags = []
     for x in tag_read:
         tags.append(x.tagItem)
     print(tags)
     #eliminate more than one doc
-    Tag.objects(tagItem = tag).delete()
+    tag.objects(tagItem = deltag).delete()
     new_tags =[]
     new_tag_read = Tag.objects()
     for x in new_tag_read:
@@ -213,14 +213,14 @@ def test_delete_doc(titleDoc):
     """
         Delete one doc
     """
-    docs_read = DocumentCase.objects()
+    docs_read = document_case.objects()
     old_docs = []
     for x in docs_read:
         old_docs.append(x.title)
     print(old_docs)
     
-    DocumentCase.objects(title = titleDoc).delete()
-    new_docs_read = DocumentCase.objects()
+    document_case.objects(title = titleDoc).delete()
+    new_docs_read = document_case.objects()
     new_docs = []
     for x in new_docs_read:
         new_docs.append(x.title)
@@ -232,7 +232,7 @@ def test_read_infras():
     """
         Returns the list of Infrastructure Types from the DB
     """
-    infra_read = Infrastructure.objects()
+    infra_read = infrastructure.objects()
     infras = []
     for x in infra_read:
         infras.append(x.infrastructureType)
@@ -242,7 +242,7 @@ def test_read_damage():
     """
         Returns the list of Damage Types from the DB
     """
-    damage_read = Damage.objects()
+    damage_read = damage.objects()
     damages = []
     for x in damage_read:
         damages.append(x.damageType)
@@ -252,25 +252,25 @@ def test_read_tags():
     """
         Returns the list of Tags from the DB
     """
-    tag_read = Tag.objects()
+    tag_read = tag.objects()
     tags = []
     for x in tag_read:
         tags.append(x.tagItem)
     print(tags)
 
-def test_get_tag(tag):
+def test_get_tag(gettag):
     """
         Returns a specific Tag from the DB
     """
-    tagread = Tag.objects.get(tagItem = tag)
+    tagread = tag.objects.get(tagItem = gettag)
     print(tagread.tagItem)
-    assert tagread.tagItem == tag
+    assert tagread.tagItem == gettag
 
 def test_get_infras(infras):
     """
         Returns a specific Infrastructure Type from the DB
     """
-    infraread = Infrastructure.objects.get(infrastructureType = infras)
+    infraread = infrastructure.objects.get(infrastructureType = infras)
     print(infraread.infrastructureType)
     assert infraread.infrastructureType == infras
 
@@ -278,7 +278,7 @@ def test_get_damage(damage):
     """
         Returns a specific Damage Type from the DB
     """
-    damageread = Damage.objects.get(damageType = damage)
+    damageread = damage.objects.get(damageType = damage)
     print(damageread.damageType)
     assert damageread.damageType == damage
 
@@ -286,7 +286,7 @@ def test_read_doc(titleDoc):
     """
         Returns a specific Document from the DB
     """
-    doc_test = DocumentCase.objects.get(title = titleDoc)
+    doc_test = document_case.objects.get(title = titleDoc)
     print("creatoriD: " + doc_test.creatoriD)
     print("title: " + doc_test.title)
     print("description: " + doc_test.description)
@@ -308,15 +308,15 @@ def read_get_admin(username):
     """
         Returns a specific Admin from the DB
     """
-    admin = Admin.objects.get(username = username)
-    print("Username: " + admin.username)
-    print("Password: " + admin.password)
+    getadmin = admin.objects.get(username = username)
+    print("Username: " + getadmin.username)
+    print("Password: " + getadmin.password)
 
 def read_get_collabs():
     """
         Returns a list of Collaborators from the DB
     """
-    collab = Collaborator.objects()
+    collab = collaborator.objects()
     for x in collab:
         print("\nFN: " + x.first_name)
         print("LN: " + x.last_name)
@@ -328,7 +328,7 @@ def read_get_docs():
     """
         Returns a list of Documents from the DB
     """
-    docs = DocumentCase.objects()
+    docs = document_case.objects()
     for doc_tests in docs:
         print("creatoriD: " + doc_tests.creatoriD)
         print("title: " + doc_tests.title)

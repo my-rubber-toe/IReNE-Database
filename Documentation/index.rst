@@ -11,10 +11,3 @@ Welcome to IReNE's Database's documentation!
    :caption: Contents:
 
    modules
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
