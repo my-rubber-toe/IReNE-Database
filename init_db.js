@@ -34,7 +34,7 @@
                      bsonType: "string",
                      description: "Last Name of Collaborator, must be a string, with a length between 0-30 characters, and is required",
                      minLength: 1,
-                     maxLength:30,
+                     maxLength:60,
                      pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
                   },
                   email: {
@@ -68,7 +68,7 @@
                   username: {
                      bsonType: "string",
                      description: "Admin username, must be a string, with a length between 8-20 characters, following the pattern, and is required",
-                     minLength: 8,
+                     minLength: 6,
                      maxLength:20,
                      pattern: "(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$"
                   },
@@ -187,12 +187,15 @@
                   title: {
                      bsonType: "string",
                      description: "Title of the case study, must be a string, and is required",
-                     pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
+                     minLength: 10,
+                     maxLength: 100,
+                     pattern: "^([A-ZÁÉÍÓÚÑÜ]*)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                   },
                   description: {
                      bsonType: "string",
                      description: "description of the case study, must be a string",
-                     pattern: "^.{1,500}$"
+                     minLength: 1,
+                     maxLength: 500
                   },
                   language: {
                      bsonType: "string",
@@ -208,16 +211,22 @@
                   incidentDate: {
                      bsonType: "string",
                      description: "Date when happened the event that the case study describes, must be a string following the pattern, and is required",
+                     minLength:9,
+                     maxLength: 11,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   creationDate: {
                      bsonType: "string",
                      description: "Date when case study was created, must be a string following the pattern, and is required",
+                     minLength:9,
+                     maxLength: 11,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   lastModificationDate: {
                      bsonType: "string",
                      description: "Date when case study was last modified, must be a string following the pattern, and is required",
+                     minLength:9,
+                     maxLength: 70,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   infrasDocList: {
@@ -226,7 +235,7 @@
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -240,7 +249,7 @@
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -255,15 +264,15 @@
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   },
                   location: {
                      bsonType: ["array"],
-                     minItems: 1,
-                     maxItems: 10,
+                     minItems: 0,
+                     maxItems: 5,
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
@@ -297,6 +306,7 @@
                   author: {
                      bsonType: ["array"],
                      minItems: 1,
+                     maxItems:10,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
@@ -339,6 +349,7 @@
                   actor: {
                      bsonType: ["array"],
                      minItems: 1,
+                     maxItems: 5,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
@@ -373,26 +384,31 @@
                   timeline: {
                      bsonType: ["array"],
                      minItems: 0,
+                     maxItems:5,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
                         description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
                         properties: {
                            event: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Event what happened within the case study",
                               minLength:1,
                               maxLength:100,
                            },
                            eventStartDate: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Date when event started, must be a string following the pattern",
+                              minLength:9,
+                              maxLength: 11,
                               pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                            },
                            eventEndDate: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Date when event ended, must be a string following the pattern",
-                              pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
+                              minLength:9,
+                              maxLength: 11,
+                              pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"   
                            }
                         }
 
@@ -401,20 +417,21 @@
                   section: {
                      bsonType: ["array"],
                      minItems: 0,
+                     maxItems:10,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
                         description: "Sections of a Case study, must be a list of Section objects.",
                         properties: {
                            secTitle: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Title of the section",
                               minLength: 1,
                               maxLength:100,
                               pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                            },
                            content: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Content of the section",
                               minLength: 1
                            }
@@ -458,12 +475,15 @@
                   title: {
                      bsonType: "string",
                      description: "Title of the case study, must be a string, and is required",
-                     pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
+                     minLength: 10,
+                     maxLength: 100,
+                     pattern: "^([A-ZÁÉÍÓÚÑÜ]*)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                   },
                   description: {
                      bsonType: "string",
                      description: "description of the case study, must be a string",
-                     pattern: "^.{1,500}$"
+                     minLength: 1,
+                     maxLength: 500
                   },
                   language: {
                      bsonType: "string",
@@ -479,16 +499,22 @@
                   incidentDate: {
                      bsonType: "string",
                      description: "Date when happened the event that the case study describes, must be a string following the pattern, and is required",
+                     minLength:9,
+                     maxLength: 11,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   creationDate: {
                      bsonType: "string",
                      description: "Date when case study was created, must be a string following the pattern, and is required",
+                     minLength:9,
+                     maxLength: 11,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   lastModificationDate: {
                      bsonType: "string",
                      description: "Date when case study was last modified, must be a string following the pattern, and is required",
+                     minLength:9,
+                     maxLength: 70,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   infrasDocList: {
@@ -497,7 +523,7 @@
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -511,7 +537,7 @@
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -526,14 +552,14 @@
                      uniqueItems: true,
                      additionalProperties: false,
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   },
                   location: {
                      bsonType: ["array"],
-                     minItems: 1,
+                     minItems: 0,
                      maxItems: 10,
                      uniqueItems: true,
                      additionalProperties: false,
@@ -568,6 +594,7 @@
                   author: {
                      bsonType: ["array"],
                      minItems: 1,
+                     maxItems:10,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
@@ -579,7 +606,7 @@
                               description: "Author first name",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
                            },
                            author_LN: {
                               bsonType: "string",
@@ -610,6 +637,7 @@
                   actor: {
                      bsonType: ["array"],
                      minItems: 1,
+                     maxItems: 5,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
@@ -644,26 +672,31 @@
                   timeline: {
                      bsonType: ["array"],
                      minItems: 0,
+                     maxItems:5,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
                         description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
                         properties: {
                            event: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Event what happened within the case study",
                               minLength:1,
                               maxLength:100,
                            },
                            eventStartDate: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Date when event started, must be a string following the pattern",
+                              minLength:9,
+                              maxLength: 11,
                               pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                            },
                            eventEndDate: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Date when event ended, must be a string following the pattern",
-                              pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
+                              minLength:9,
+                              maxLength: 11,
+                              pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"   
                            }
                         }
 
@@ -672,20 +705,21 @@
                   section: {
                      bsonType: ["array"],
                      minItems: 0,
+                     maxItems:10,
                      uniqueItems: false,
                      items: {
                         bsonType: ["object"],
                         description: "Sections of a Case study, must be a list of Section objects.",
                         properties: {
                            secTitle: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Title of the section",
                               minLength: 1,
                               maxLength:100,
                               pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                            },
                            content: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Content of the section",
                               minLength: 1
                            }
@@ -697,6 +731,7 @@
             }
          }
       })
+
 
       db.createCollection("title_embedded", {
          validator: {
@@ -762,9 +797,9 @@
                minItems: 1,
                required: ["damageDocList"],
                properties: {
-                  infrasDocList: {
+                  damageDocList: {
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -786,9 +821,9 @@
                maxItems:10,
                required: ["tagsDoc"],
                properties: {
-                  infrasDocList: {
+                  tagsDoc: {
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -816,18 +851,23 @@
                         description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
                         properties: {
                            event: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Event what happened within the case study",
-                              pattern: "^.{1,100}$"
+                              minLength: 1,
+                              maxLength:100
                            },
                            eventStartDate: {
                               bsonType: ["string"],
                               description: "Date when event started, must be a string following the pattern",
+                              minLength: 9,
+                              maxLength:11,
                               pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                            },
                            eventEndDate: {
                               bsonType: ["string"],
                               description: "Date when event ended, must be a string following the pattern",
+                              minLength: 9,
+                              maxLength:11,
                               pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                            }
                         }
@@ -901,7 +941,7 @@
                            role: {
                               bsonType: "string",
                               description: "Actor role",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*[a-záéíóúñü\.0-9]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$"
                            }
                         }
                      }
@@ -1007,8 +1047,8 @@
                   incidentDate: {
                      bsonType: "string",
                      description: "Tag category, must be a string, must follow the pattern, and is required",
-                     minLength: 1,
-                     maxLength:50,
+                     minLength: 9,
+                     maxLength:11,
                      pattern: '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]'
                   }
                }
@@ -1050,14 +1090,14 @@
                      description: "Document's title",
                      minLength:10,
                      maxLength:100,
-                     pattern: "^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)"
+                     pattern: "^([A-ZÁÉÍÓÚ])([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)"
                   },
                   revision_type:{
                      bsonType: "string",
                      minLength:1,
                      maxLength:20,
                      description: "Which attribute was updated",
-                     pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$'
+                     pattern: '^[a-z A-Z \- À-ÿ]*[a-záéíóúñü]$'
                   },
                   revision_number:{
                      bsonType: "int",
@@ -1067,7 +1107,7 @@
                   revision_date:{
                      bsonType: "string",
                      description: "Revision date",
-                     minLength:1,
+                     minLength:9,
                      maxLength:11,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
