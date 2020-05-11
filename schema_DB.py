@@ -116,7 +116,7 @@ class actor(EmbeddedDocument):
     """
     actor_FN = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : À-ÿ]*$')
     actor_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : À-ÿ]*$')
-    role = StringField(min_length=1,max_length=30, required=True, regex= '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*[a-záéíóúñü\.0-9]$')
+    role = StringField(min_length=1,max_length=30, required=True, regex= '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$')
 
 class timeline(EmbeddedDocument):
     """
