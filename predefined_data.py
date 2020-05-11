@@ -62,7 +62,7 @@ def Categories():
         tagDoc = tag(tagItem=tagslist)
         tagDoc.save()
 
-# Categories()
+Categories()
 
 def Locations():
     """
@@ -74,13 +74,13 @@ def Locations():
             cityDoc = city_pr(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
             cityDoc.save()
 
-# Locations()
+Locations()
 
 def Collabs():
     """
         Fills the db with 5 Collaborators mock-data
     """
-    collab1 = collaborator(first_name="Jainel M", last_name="Torres Santos", email="jainel.torres@upr.edu", approved=True)
+    collab1 = collaborator(first_name="Jainel", last_name="Torres Santos", email="jainel.torres@upr.edu", approved=True)
     collab1.save()
     collab2 = collaborator(first_name="Roberto", last_name="Guzman", email="roberto.guzman3@upr.edu", approved=True)
     collab2.save()
@@ -91,7 +91,7 @@ def Collabs():
     collab5 = collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
     collab5.save()
 
-# Collabs()
+Collabs()
 
 def Admins():
     """
@@ -109,13 +109,13 @@ def Admins():
     admin5.save()
     
 
-# Admins()
+Admins()
 
 def Documents():
     """
         Fills the db with 2 Documents mock-data
     """                                                                                                                                                                                                                                             
-    get_collab1 = collaborator.objects.get(first_name= "Jainel M")
+    get_collab1 = collaborator.objects.get(first_name= "Jainel")
     authorDoc1 = author(author_FN = get_collab1.first_name, author_LN = get_collab1.last_name, 
     author_email = get_collab1.email, author_faculty="ICOM")
     actorDoc1 = actor(actor_FN = "Victoria", actor_LN = "Black", role = "Mayor")
@@ -155,4 +155,5 @@ def Documents():
     author = [authorDoc2], actor = [actorDoc2],section = [sectionDoc2],timeline = [timelineDoc2], language="Spanish")
     doc2.save()
 
-# Documents()
+Documents()
+

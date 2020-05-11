@@ -308,7 +308,7 @@
                               description: "Author first name",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
                            },
                            author_LN: {
                               bsonType: "string",
