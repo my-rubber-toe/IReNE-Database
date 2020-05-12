@@ -232,7 +232,7 @@
                   infrasDocList: {
                      bsonType: ["array"],
                      minItems: 1,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: "string",
@@ -246,7 +246,7 @@
                   damageDocList: {
                      bsonType: ["array"],
                      minItems: 1,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: "string",
@@ -261,7 +261,7 @@
                      bsonType: ["array"],
                      minItems: 0,
                      maxItems:10,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: "string",
@@ -273,7 +273,7 @@
                      bsonType: ["array"],
                      minItems: 0,
                      maxItems: 5,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: ["object"],
@@ -520,7 +520,7 @@
                   infrasDocList: {
                      bsonType: ["array"],
                      minItems: 1,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: "string",
@@ -534,7 +534,7 @@
                   damageDocList: {
                      bsonType: ["array"],
                      minItems: 1,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: "string",
@@ -549,7 +549,7 @@
                      bsonType: ["array"],
                      minItems: 0,
                      maxItems:10,
-                     uniqueItems: true,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: "string",
@@ -560,8 +560,8 @@
                   location: {
                      bsonType: ["array"],
                      minItems: 0,
-                     maxItems: 10,
-                     uniqueItems: true,
+                     maxItems: 5,
+                     uniqueItems: false,
                      additionalProperties: false,
                      items: {
                         bsonType: ["object"],
@@ -731,7 +731,6 @@
             }
          }
       })
-
 
       db.createCollection("title_embedded", {
          validator: {

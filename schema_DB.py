@@ -13,10 +13,16 @@ class collaborator(Document):
     """
         Document Class for Collaborators.
         Collaborators are the users that will Create/Edit Case Studies.
-        List of attributes:
+        List of attributes (All of them are required):
             - first_name: <String> Collaborator's first name.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*$
+                - min_Length : 1, max_length: 30
             - last_name: <String> Collaborator's last name.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
+                - min_Length : 1, max_length: 60
             - email: <String> Collaborator's email. It must be a @upr.edu email.
+                - attribute follows following regex: ^[\.a-z0-9]*(@upr\.edu)$
+                - min_Length : 9, max_length: 70
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.
     """
@@ -31,8 +37,10 @@ class admin(Document):
         Document Class for Admin.
         Admin are the users that will have access to the Admin Dashboard.
         These attributes will be the credentials of the Admins for them to enter the Admin Dashboard.
-        List of attributes:
+        List of attributes(All of them are required):
             - username: <String>  Admin's username.
+                - attribute follows following regex: (^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$
+                - min_Length : 6, max_length: 20
             - password: <String> Admin's  password.
     """
     username = StringField(min_length=6, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' )
@@ -46,6 +54,8 @@ class tag(Document):
         Collaborators.
         List of attributes:
             - tagItem: <String>  Tag that can be used in a DocumentCase.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                - min_Length : 1, max_length: 50, required, unique
     """
     tagItem = StringField(min_length=1, max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
 
@@ -57,6 +67,8 @@ class infrastructure(Document):
         All of them  will be pre-defined by the Team and/or Admins.
         List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                - min_Length : 1, max_length: 50, required, unique
     """
     infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
     
@@ -68,6 +80,8 @@ class damage(Document):
         All of them  will be pre-defined by the Team and/or Admins.
         List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                - min_Length : 1, max_length: 50, required, unique
     """
     damageType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
 
@@ -77,8 +91,14 @@ class city_pr(Document):
         These are going to be the list of cities of Puerto Rico for the use of selection location
         for DocumentCase & as a filter list for a visualization.
         All of them  will be pre-defined by the Team.
-        List of attributes:
-            - damageType: <String>  category that can be used in a DocumentCase.
+        List of attributes(All of them are required):
+            - city: <String>  address of a city of PR.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$
+                - min_Length : 1, max_length: 50, unique
+            - latitude: <Decimal> city's latitude.
+                - min: 17.87, max: 18.53
+            - longitude: <Decimal> city's longitude
+                - min: -67.28, max: -65.23
     """
     city = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
     latitude = DecimalField(min_value=17.87, max_value= 18.53, required=True)
@@ -91,11 +111,19 @@ class author(EmbeddedDocument):
         An EmbeddedDocument is a Document Class that is defined inside another document.
         This one is going to be defined, and stored inside the DocumentCase Class.
         The reason for this technique is that the Author Class has its own schema.
-        List of attributes:
+        List of attributes(All of them are required):
             - author_FN: <String>  Author's First Name.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$
+                - min_Length : 1, max_length: 30
             - author_LN: <String>  Author's Last Name.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
+                - min_Length : 1, max_length: 30
             - author_email: <String>  Author's Email.
+                - attribute follows following regex: ^[\.a-z0-9]*(@upr\.edu)$
+                - min_Length : 9, max_length: 70
             - author_faculty: <String>  Author's Faculty.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$
+                - min_Length : 1, max_length: 30
     """
     author_FN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$')
     author_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')

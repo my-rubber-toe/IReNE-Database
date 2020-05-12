@@ -78,11 +78,14 @@ for index in range(0,100):
     languageDoc = ['English', 'Spanish']
 
     ad = ["Coamo, PR", "Arecibo, PR", "Santa Isabel, PR", "Camuy, PR", "Salinas, PR", "San Juan, PR", "Mayagüez, PR", "Carolina, PR", "Aguas Buenas, PR", "Isabela, PR", "Quebradillas, PR", "Moca, PR", "Añasco, PR", "Yabucoa, PR", "Caguas, PR", "Lares, PR", "Humacao, PR", "Gurabo, PR", "Vieques, PR", "Maricao, PR", "Patillas, PR", "Arroyo, PR", "Las Piedras, PR", "Cidra, PR", "Maunabo, PR", "Fajardo, PR", "Ceiba, PR", "Juncos, PR", "Orocovis, PR", "Utuado, PR", "Jayuya, PR", "Ciales, PR", "Corozal, PR", "Aibonito, PR", "Sabana Grande, PR", "Guánica, PR", "Cayey, PR", "Vega Baja, PR"]
-    j = random.choice(ad)
-    l = random.choice(ad)
-    print('j: ', j, " l: ", l)
-    citypr = city_pr.objects.get(city = j)
-    citypr1 = city_pr.objects.get(city = l)
+    town1 = random.choice(ad)
+    while True:
+            town2 = random.choice(ad)
+            if(town1 != town2):
+                break
+
+    citypr = city_pr.objects.get(city = town1)
+    citypr1 = city_pr.objects.get(city = town2)
     loc = location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
     loc1 = location(address= citypr1.city, latitude= citypr1.latitude, longitude=citypr1.longitude)
     inc = random.choice(dates)
@@ -94,13 +97,14 @@ for index in range(0,100):
     while(created > mod):
         mod = random.choice(dates)
     
-    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
+
+    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen() + namegenerator.gen()), location=[loc,loc1], 
     description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
     incidentDate = inc, 
     creationDate= created,
     lastModificationDate= mod,
-    tagsDoc=[random.choice(tags),random.choice(tags)], 
-    infrasDocList= [random.choice(infrastructure), random.choice(infrastructure)],
-    damageDocList= [random.choice(damage), random.choice(damage)],
+    tagsDoc=[random.sample(tags,3)], 
+    infrasDocList= [random.sample(infrastructure,3)],
+    damageDocList= [random.sample(damage,3)],
     author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc], language=random.choice(languageDoc))
     doc.save()
