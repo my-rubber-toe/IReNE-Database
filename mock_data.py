@@ -12,12 +12,13 @@ from faker  import Faker
 """
 fake = Faker() 
 
-infrastructure = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
+infrastructure = {"Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
     "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
-    "Public Transportation"]
-damage = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
-    "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
-tags = infrastructure + damage
+    "Public Transportation"}
+damage = {"Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
+    "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"}
+tags = {"Earthquake", "Hurricane", "Flooding", "Water", "Fire", "Buildings", "Housing", "Telecommunications", 
+    "Ports", "Power Generation"}
 
 index = 0
 for index in range(0,100):
@@ -25,7 +26,6 @@ for index in range(0,100):
     fn = names.get_first_name()
     ln = names.get_last_name()
     emailc = fn.lower() + '.' + ln.lower() + "@upr.edu"
-    print(emailc)
     collab1 = collaborator(first_name = fn, 
     last_name = ln, 
     approved = random.choice([True, False]),
@@ -69,7 +69,7 @@ for index in range(0,100):
     while(start > end):
         end = random.choice(dates)
     
-    timelineDoc = timeline(event = fake.sentence(ext_word_list=my_word_list), 
+    timelineDoc = timeline(event = "This happended well " + fake.sentence(ext_word_list=my_word_list), 
     eventStartDate = start, eventEndDate = end)
 
     titles=['Introduction', 'Body', 'Analysis', 'Conclusion', 'Executive Summary', 'Discussion']
@@ -103,8 +103,10 @@ for index in range(0,100):
     incidentDate = inc, 
     creationDate= created,
     lastModificationDate= mod,
-    tagsDoc=[random.sample(tags,3)], 
-    infrasDocList= [random.sample(infrastructure,3)],
-    damageDocList= [random.sample(damage,3)],
+    tagsDoc=random.sample(tags,1), 
+    infrasDocList= random.sample(infrastructure,1),
+    damageDocList= random.sample(damage,1),
     author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc], language=random.choice(languageDoc))
+
+    
     doc.save()

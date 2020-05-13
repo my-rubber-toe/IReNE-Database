@@ -137,10 +137,16 @@ class actor(EmbeddedDocument):
         An EmbeddedDocument is a Document Class that is defined inside another document.
         This one is going to be defined, and stored inside the DocumentCase Class.
         The reason for this technique is that the Actor Class has its own schema.
-        List of attributes:
+        List of attributes(All of them are required):
             - actor_FN: <String>  Actor's First Name.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : À-ÿ]*$
+                - min_Length : 1, max_length: 30
             - actor_LN: <String>  Actor's Last Name.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : À-ÿ]*$
+                - min_Length : 1, max_length: 30
             - role: <String>  Actor's role in the DocumentCase.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$
+                - min_Length : 1, max_length: 30
     """
     actor_FN = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : À-ÿ]*$')
     actor_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : À-ÿ]*$')
@@ -153,10 +159,15 @@ class timeline(EmbeddedDocument):
         An EmbeddedDocument is a Document Class that is defined inside another document.
         This one is going to be defined, and stored inside the DocumentCase Class.
         The reason for this technique is that the Timeline Class has its own schema.
-        List of attributes:
+        List of attributes(All of them are required):
             - event: <String>  Event happend within the DocumentCase.
+                - min_Length : 10, max_length: 100
             - eventStartDate: <String>  Date when the event started, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - eventEndDate: <String>  Date when the event ended, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
     """
     event = StringField(min_length=10, max_length=100, required=True)
     eventStartDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
@@ -169,9 +180,12 @@ class section(EmbeddedDocument):
         An EmbeddedDocument is a Document Class that is defined inside another document.
         This one is going to be defined, and stored inside the DocumentCase Class.
         The reason for this technique is that the Section Class has its own schema.
-        List of attributes:
+        List of attributes(All of them are required):
             - secTitle: <String>  Section's title.
+                - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
+                - min_Length : 1, max_length: 100
             - content: <String>  Section's body.
+                - min_Length : 1
     """
     secTitle = StringField(min_length=1, max_length=100, required=True, regex='^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)')
     content = StringField(min_length=1, required=True)
@@ -186,12 +200,16 @@ class location(EmbeddedDocument):
         The reason for this technique is that the Location Class has its own schema.
         List of attributes:
             - address: <String>  Location's address.
-            - latitude: <Number>  Location's latitude.
-            - longitude: <Number> Location's Longitude.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$
+                - min_Length : 1, max_length: 50
+            - latitude: <Decimal> city's latitude.
+                - min: 17.87, max: 18.53
+            - longitude: <Decimal> city's longitude
+                - min: -67.28, max: -65.23
     """
-    address = StringField(min_length=1, required=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
-    latitude = DecimalField(min_value=17.86, max_value=18.54, required=True)
-    longitude = DecimalField(min_value=-67.29, max_value=-65.22, required=True)
+    address = StringField(min_length=1, max_length=50, required=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
+    latitude = FloatField(min_value=17.86, max_value=18.54, required=True)
+    longitude = FloatField(min_value=-67.29, max_value=-65.22, required=True)
 
 
 class document_case(Document):
@@ -199,22 +217,55 @@ class document_case(Document):
         Document Class for DocumentCase.
         DocumentCase will consist of a Case Study created by a Collaborator.
         List of attributes:
+            - Required: creatoriD, title, language, published, incidentDate, creationDate, lastModificationDate,
+                infrasDocList, damageDocList, author, actor
             - creatoriD: <String>  the Collaborator's id which created the Case study.
-            - title: <String> The case study's title .
+            - title: <String> The case study's title.
+                - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
+                - min_Length : 10, max_length: 100
             - language: <String> The language which the case study is written.
+                - attribute follows following regex: ^[A-Z][a-z]*$
+                - min_Length : 1, max_length: 20
             - description: <String> Case study's description.
+                - min_Length : 1, max_length: 500
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
             - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - creationDate: <String>  Date when the case study was created, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - lastModificationDate: <String>  Last date when the case study was modified, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - tagsDoc: List<String> of tags from the case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required, Unique
+                - For List:
+                    - min_Length : 0, max_length: 10
             - infrasDocList: List<String> of infrastructure categories from the case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required, Unique
+                - For List:
+                    - min_Length : 1
             - damageDocList: List<String> of damage categories from the case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required, Unique
+                - For List:
+                    - min_Length : 1
             - location: List<Location> of addresses where the case study took place.
+                - max_length: 5
             - author: List<Author> of author objects, the ones who wrote the case study.
+                - min_Length : 1, max_length: 10
             - actor: List<Actor> of actor objects, the ones who plays a role in the case study.
+                - min_Length : 1, max_length: 5
             - section: List<Section> of section objects, this will consist the body of the case study.
+                - max_length: 10
             - timeline: List<Timeline> of timeline objects, this will consist of the events that happened within the case study.
+                - max_length: 5
     """
     creatoriD = ReferenceField('collaborator')
     title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
@@ -225,8 +276,8 @@ class document_case(Document):
     creationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     lastModificationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     tagsDoc = ListField(StringField(min_length=1,max_length=50, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
-    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
-    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
+    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
+    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
     location = ListField(EmbeddedDocumentField(location), max_length=5, required=False)
     author = ListField(EmbeddedDocumentField(author), min_length=1, max_length=10, required=True)
     actor = ListField(EmbeddedDocumentField(actor),min_length=1, max_length=5, required=True)
@@ -239,22 +290,55 @@ class creation_embedded(EmbeddedDocument):
         Document Class for creation_embedded.
         creation_embedded will consist of a revision for a created case study.
         List of attributes:
+            - Required: creatoriD, title, language, published, incidentDate, creationDate, lastModificationDate,
+                infrasDocList, damageDocList, author, actor
             - creatoriD: <String>  the Collaborator's id which created the Case study.
-            - title: <String> The case study's title .
+            - title: <String> The case study's title.
+                - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
+                - min_Length : 10, max_length: 100
             - language: <String> The language which the case study is written.
+                - attribute follows following regex: ^[A-Z][a-z]*$
+                - min_Length : 1, max_length: 20
             - description: <String> Case study's description.
+                - min_Length : 1, max_length: 500
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
             - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - creationDate: <String>  Date when the case study was created, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - lastModificationDate: <String>  Last date when the case study was modified, it has to have the following format: 'YYYY-MM-DD'.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - tagsDoc: List<String> of tags from the case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required, Unique
+                - For List:
+                    - min_Length : 0, max_length: 10
             - infrasDocList: List<String> of infrastructure categories from the case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required, Unique
+                - For List:
+                    - min_Length : 1
             - damageDocList: List<String> of damage categories from the case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required, Unique
+                - For List:
+                    - min_Length : 1
             - location: List<Location> of addresses where the case study took place.
+                - max_length: 5
             - author: List<Author> of author objects, the ones who wrote the case study.
+                - min_Length : 1, max_length: 10
             - actor: List<Actor> of actor objects, the ones who plays a role in the case study.
+                - min_Length : 1, max_length: 5
             - section: List<Section> of section objects, this will consist the body of the case study.
+                - max_length: 10
             - timeline: List<Timeline> of timeline objects, this will consist of the events that happened within the case study.
+                - max_length: 5
     """
     creatoriD = ReferenceField('collaborator')
     title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
@@ -265,8 +349,8 @@ class creation_embedded(EmbeddedDocument):
     creationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     lastModificationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     tagsDoc = ListField(StringField(min_length=1,max_length=50, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
-    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
-    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
+    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
+    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
     location = ListField(EmbeddedDocumentField(location), max_length=5, required=False)
     author = ListField(EmbeddedDocumentField(author), min_length=1, max_length=10, required=True)
     actor = ListField(EmbeddedDocumentField(actor),min_length=1, max_length=5, required=True)
@@ -342,6 +426,8 @@ class title_embedded(EmbeddedDocument):
         title_embedded will consist of a revision for the title of a case study.
         List of attributes:
             - title: <String> the title of the revised case study.
+                - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
+                - min_Length : 10, max_length: 100, required
     """
     title = StringField(min_length=10, max_length=100, required=True, regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)")
 
@@ -355,6 +441,7 @@ class description_embedded(EmbeddedDocument):
         description_embedded will consist of a revision for the description of a case study.
         List of attributes:
             - description: <String> the description of the revised case study.
+                - min_Length : 1, max_length: 500
     """
     description = StringField(min_length=0, max_length=500, required=False)
 
@@ -368,6 +455,9 @@ class infrastructure_embedded(EmbeddedDocument):
         infrastructure_embedded will consist of a revision for the list of infrastructure types of a case study.
         List of attributes:
             - infrasDocList: List<String> the list of categories for infrastructure type for the revised case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required
     """
     infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
@@ -420,6 +510,9 @@ class damage_embedded(EmbeddedDocument):
         damage_embedded will consist of a revision for the list of damage types of a case study.
         List of attributes:
             - damageDocList: List<String> the list of categories for damage type for the revised case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50, Required
     """
     damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
@@ -485,6 +578,11 @@ class tag_embedded(EmbeddedDocument):
         tag_embedded will consist of a revision for the list of tags of a case study.
         List of attributes:
             - tagsDoc: List<String> the list of tags for the revised case study.
+                - For string:
+                    - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
+                    - min_Length : 1, max_length: 50
+                - For list:
+                    -  max_length: 10
     """
     tagsDoc = ListField(StringField(min_length=0,max_length=50,
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
@@ -498,6 +596,8 @@ class location_embedded(EmbeddedDocument):
         location_embedded will consist of a revision for the locations of a case study.
         List of attributes:
             - location: List<location> the list of locations for the revised case study.
+                - For List:
+                   - max_length: 5
     """
     location = ListField(EmbeddedDocumentField(location), max_length=5, required=False)
 
@@ -533,10 +633,19 @@ class document_case_revision(Document):
             - creatorId: <String> Collaborator ID who made the change.
             - docId: <String> DocumentCase id where the change was made.
             - creator_name: <String> Collaborator's name who made the change.
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
+                - min_Length : 1, max_length: 90
             - document_title: <String> Collaborator's email who made the change.
+                - attribute follows following regex: ^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)
+                - min_Length : 10, max_length: 100
             - revision_date: <String> Date when the changes were made.
+                - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
+                - min_Length : 9, max_length: 11
             - revision_number: <Integer> number id of the change made.
+                - min: 0
             - revision_type: <String> Type of change.
+                - attribute follows following regex: ^[a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
+                - min_Length : 1, max_length: 20
             - field_changed: <Revision> embedded document which contains the old & new changes made
     """
     creatorId = ReferenceField('collaborator')
@@ -546,9 +655,9 @@ class document_case_revision(Document):
     creator_email = EmailField(required=True,min_length=9, max_length=50, regex='^[\.a-z0-9]*(@upr\.edu)$')
     document_title = StringField(min_length=10, max_length = 100, required=True, 
         regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)")
-    revision_date = StringField(min_length=1, max_length=11, required=True, 
+    revision_date = StringField(min_length=9, max_length=11, required=True, 
         regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    revision_number = IntField(min_length=0, required=True)
+    revision_number = IntField(min_value=0, required=True)
     revision_type = StringField(min_length=1, max_length= 20, required=True, 
         regex='^[a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     field_changed = EmbeddedDocumentField(fields_embedded)

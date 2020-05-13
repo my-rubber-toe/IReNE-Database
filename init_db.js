@@ -278,7 +278,6 @@
                      items: {
                         bsonType: ["object"],
                         description: "locations where that case study takes place, must be a list of string, must follow the pattern, and is required",
-                        required: ["address", "latitude", "longitude"],
                         properties: {
                            address: {
                               bsonType: "string",
@@ -375,7 +374,7 @@
                               description: "Actor role",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*[a-záéíóúñü\.0-9]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$"
                            }
                         }
 
@@ -444,23 +443,6 @@
          }
       })
 
-      db.createCollection('document_case_view',{viewOn:'document_case', pipeline: [{ $project : { 
-         "creatoriD": 1,
-         "title": 1, 
-         "description": 1,
-         "published": 1, 
-         "incidentDate": 1, 
-         "creationDate": 1, 
-         "lastModificationDate": 1, 
-         "infrasDocList": 1, 
-         "damageDocList": 1,
-         "tagsDoc":1,
-         "actor": 1,
-         "author": 1,
-         "timeline": 1,
-         "section": 1,
-         "location": 1
-      }}]})
 
       db.createCollection("creation_embedded", {
          validator: {
@@ -566,7 +548,6 @@
                      items: {
                         bsonType: ["object"],
                         description: "locations where that case study takes place, must be a list of string, must follow the pattern, and is required",
-                        required: ["address", "latitude", "longitude"],
                         properties: {
                            address: {
                               bsonType: "string",
@@ -663,7 +644,7 @@
                               description: "Actor role",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*[a-záéíóúñü\.0-9]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$"
                            }
                         }
 

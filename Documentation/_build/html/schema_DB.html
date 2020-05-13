@@ -42,12 +42,33 @@ These are going to be the Actor of a DocumentCase, the ones having a role in the
 An EmbeddedDocument is a Document Class that is defined inside another document.
 This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Actor Class has its own schema.
-List of attributes:</p>
+List of attributes(All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>actor_FN: &lt;String&gt;  Actor’s First Name.</p></li>
-<li><p>actor_LN: &lt;String&gt;  Actor’s Last Name.</p></li>
-<li><p>role: &lt;String&gt;  Actor’s role in the DocumentCase.</p></li>
+<li><dl class="simple">
+<dt>actor_FN: &lt;String&gt;  Actor’s First Name.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : À-ÿ]*$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>actor_LN: &lt;String&gt;  Actor’s Last Name.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : À-ÿ]*$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>role: &lt;String&gt;  Actor’s role in the DocumentCase.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : 0-9 À-ÿ]*$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -84,10 +105,17 @@ Defaults to True.</p>
 <dd><p>Document Class for Admin.
 Admin are the users that will have access to the Admin Dashboard.
 These attributes will be the credentials of the Admins for them to enter the Admin Dashboard.
-List of attributes:</p>
+List of attributes(All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>username: &lt;String&gt;  Admin’s username.</p></li>
+<li><dl class="simple">
+<dt>username: &lt;String&gt;  Admin’s username.</dt><dd><ul>
+<li><p>attribute follows following regex: (^[^.]([a-zA-Z0-9]*)[.]([a-zA-Z0-9]*))[^.]$</p></li>
+<li><p>min_Length : 6, max_length: 20</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>password: &lt;String&gt; Admin’s  password.</p></li>
 </ul>
 </div></blockquote>
@@ -111,13 +139,41 @@ These are going to be the authors of a DocumentCase, the ones who wrote it.
 An EmbeddedDocument is a Document Class that is defined inside another document.
 This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Author Class has its own schema.
-List of attributes:</p>
+List of attributes(All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>author_FN: &lt;String&gt;  Author’s First Name.</p></li>
-<li><p>author_LN: &lt;String&gt;  Author’s Last Name.</p></li>
-<li><p>author_email: &lt;String&gt;  Author’s Email.</p></li>
-<li><p>author_faculty: &lt;String&gt;  Author’s Faculty.</p></li>
+<li><dl class="simple">
+<dt>author_FN: &lt;String&gt;  Author’s First Name.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>author_LN: &lt;String&gt;  Author’s Last Name.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>author_email: &lt;String&gt;  Author’s Email.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[.a-z0-9]*(&#64;upr.edu)$</p></li>
+<li><p>min_Length : 9, max_length: 70</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>author_faculty: &lt;String&gt;  Author’s Faculty.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : 0-9 À-ÿ]*$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -155,10 +211,31 @@ Defaults to True.</p>
 These are going to be the list of cities of Puerto Rico for the use of selection location
 for DocumentCase &amp; as a filter list for a visualization.
 All of them  will be pre-defined by the Team.
-List of attributes:</p>
+List of attributes(All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</p></li>
+<li><dl class="simple">
+<dt>city: &lt;String&gt;  address of a city of PR.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$</p></li>
+<li><p>min_Length : 1, max_length: 50, unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>latitude: &lt;Decimal&gt; city’s latitude.</dt><dd><ul>
+<li><p>min: 17.87, max: 18.53</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>longitude: &lt;Decimal&gt; city’s longitude</dt><dd><ul>
+<li><p>min: -67.28, max: -65.23</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="exception">
@@ -178,12 +255,33 @@ List of attributes:</p>
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">collaborator</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.collaborator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document Class for Collaborators.
 Collaborators are the users that will Create/Edit Case Studies.
-List of attributes:</p>
+List of attributes (All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>first_name: &lt;String&gt; Collaborator’s first name.</p></li>
-<li><p>last_name: &lt;String&gt; Collaborator’s last name.</p></li>
-<li><p>email: &lt;String&gt; Collaborator’s email. It must be a &#64;upr.edu email.</p></li>
+<li><dl class="simple">
+<dt>first_name: &lt;String&gt; Collaborator’s first name.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - À-ÿ]*$</p></li>
+<li><p>min_Length : 1, max_length: 30</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>last_name: &lt;String&gt; Collaborator’s last name.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>min_Length : 1, max_length: 60</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>email: &lt;String&gt; Collaborator’s email. It must be a &#64;upr.edu email.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[.a-z0-9]*(&#64;upr.edu)$</p></li>
+<li><p>min_Length : 9, max_length: 70</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>banned: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the Collaborator looses access to Tellspace service.</p></li>
 <li><p>approved: &lt;Boolean&gt; &lt;Default=False&gt;  When set to true, the Collaborator gains access to Tellspace service.</p></li>
 </ul>
@@ -208,22 +306,158 @@ creation_embedded will consist of a revision for a created case study.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
+<li><dl class="simple">
+<dt>Required: creatoriD, title, language, published, incidentDate, creationDate, lastModificationDate,</dt><dd><p>infrasDocList, damageDocList, author, actor</p>
+</dd>
+</dl>
+</li>
 <li><p>creatoriD: &lt;String&gt;  the Collaborator’s id which created the Case study.</p></li>
-<li><p>title: &lt;String&gt; The case study’s title .</p></li>
-<li><p>language: &lt;String&gt; The language which the case study is written.</p></li>
-<li><p>description: &lt;String&gt; Case study’s description.</p></li>
+<li><dl class="simple">
+<dt>title: &lt;String&gt; The case study’s title.</dt><dd><ul>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>min_Length : 10, max_length: 100</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>language: &lt;String&gt; The language which the case study is written.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-Z][a-z]*$</p></li>
+<li><p>min_Length : 1, max_length: 20</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>description: &lt;String&gt; Case study’s description.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 500</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>published: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the case study will be visible in SearchSpace service.</p></li>
-<li><p>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>tagsDoc: List&lt;String&gt; of tags from the case study.</p></li>
-<li><p>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</p></li>
-<li><p>damageDocList: List&lt;String&gt; of damage categories from the case study.</p></li>
-<li><p>location: List&lt;Location&gt; of addresses where the case study took place.</p></li>
-<li><p>author: List&lt;Author&gt; of author objects, the ones who wrote the case study.</p></li>
-<li><p>actor: List&lt;Actor&gt; of actor objects, the ones who plays a role in the case study.</p></li>
-<li><p>section: List&lt;Section&gt; of section objects, this will consist the body of the case study.</p></li>
-<li><p>timeline: List&lt;Timeline&gt; of timeline objects, this will consist of the events that happened within the case study.</p></li>
+<li><dl class="simple">
+<dt>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>tagsDoc: List&lt;String&gt; of tags from the case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required, Unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>min_Length : 0, max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required, Unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>min_Length : 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>damageDocList: List&lt;String&gt; of damage categories from the case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required, Unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>min_Length : 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>location: List&lt;Location&gt; of addresses where the case study took place.</dt><dd><ul>
+<li><p>max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>author: List&lt;Author&gt; of author objects, the ones who wrote the case study.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>actor: List&lt;Actor&gt; of actor objects, the ones who plays a role in the case study.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>section: List&lt;Section&gt; of section objects, this will consist the body of the case study.</dt><dd><ul>
+<li><p>max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>timeline: List&lt;Timeline&gt; of timeline objects, this will consist of the events that happened within the case study.</dt><dd><ul>
+<li><p>max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -251,7 +485,14 @@ All of them  will be pre-defined by the Team and/or Admins.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</p></li>
+<li><dl class="simple">
+<dt>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, required, unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="exception">
@@ -274,7 +515,20 @@ damage_embedded will consist of a revision for the list of damage types of a cas
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>damageDocList: List&lt;String&gt; the list of categories for damage type for the revised case study.</p></li>
+<li><dl class="simple">
+<dt>damageDocList: List&lt;String&gt; the list of categories for damage type for the revised case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -300,7 +554,13 @@ description_embedded will consist of a revision for the description of a case st
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>description: &lt;String&gt; the description of the revised case study.</p></li>
+<li><dl class="simple">
+<dt>description: &lt;String&gt; the description of the revised case study.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 500</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -326,22 +586,158 @@ DocumentCase will consist of a Case Study created by a Collaborator.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
+<li><dl class="simple">
+<dt>Required: creatoriD, title, language, published, incidentDate, creationDate, lastModificationDate,</dt><dd><p>infrasDocList, damageDocList, author, actor</p>
+</dd>
+</dl>
+</li>
 <li><p>creatoriD: &lt;String&gt;  the Collaborator’s id which created the Case study.</p></li>
-<li><p>title: &lt;String&gt; The case study’s title .</p></li>
-<li><p>language: &lt;String&gt; The language which the case study is written.</p></li>
-<li><p>description: &lt;String&gt; Case study’s description.</p></li>
+<li><dl class="simple">
+<dt>title: &lt;String&gt; The case study’s title.</dt><dd><ul>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>min_Length : 10, max_length: 100</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>language: &lt;String&gt; The language which the case study is written.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-Z][a-z]*$</p></li>
+<li><p>min_Length : 1, max_length: 20</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>description: &lt;String&gt; Case study’s description.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 500</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>published: &lt;Boolean&gt; &lt;Default=False&gt; When set to true, the case study will be visible in SearchSpace service.</p></li>
-<li><p>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>tagsDoc: List&lt;String&gt; of tags from the case study.</p></li>
-<li><p>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</p></li>
-<li><p>damageDocList: List&lt;String&gt; of damage categories from the case study.</p></li>
-<li><p>location: List&lt;Location&gt; of addresses where the case study took place.</p></li>
-<li><p>author: List&lt;Author&gt; of author objects, the ones who wrote the case study.</p></li>
-<li><p>actor: List&lt;Actor&gt; of actor objects, the ones who plays a role in the case study.</p></li>
-<li><p>section: List&lt;Section&gt; of section objects, this will consist the body of the case study.</p></li>
-<li><p>timeline: List&lt;Timeline&gt; of timeline objects, this will consist of the events that happened within the case study.</p></li>
+<li><dl class="simple">
+<dt>incidentDate: &lt;String&gt;  Date when the incident happened, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>creationDate: &lt;String&gt;  Date when the case study was created, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>lastModificationDate: &lt;String&gt;  Last date when the case study was modified, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>tagsDoc: List&lt;String&gt; of tags from the case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required, Unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>min_Length : 0, max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required, Unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>min_Length : 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>damageDocList: List&lt;String&gt; of damage categories from the case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required, Unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>min_Length : 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>location: List&lt;Location&gt; of addresses where the case study took place.</dt><dd><ul>
+<li><p>max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>author: List&lt;Author&gt; of author objects, the ones who wrote the case study.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>actor: List&lt;Actor&gt; of actor objects, the ones who plays a role in the case study.</dt><dd><ul>
+<li><p>min_Length : 1, max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>section: List&lt;Section&gt; of section objects, this will consist the body of the case study.</dt><dd><ul>
+<li><p>max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>timeline: List&lt;Timeline&gt; of timeline objects, this will consist of the events that happened within the case study.</dt><dd><ul>
+<li><p>max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="exception">
@@ -369,11 +765,45 @@ List of attributes:</p>
 <div><ul class="simple">
 <li><p>creatorId: &lt;String&gt; Collaborator ID who made the change.</p></li>
 <li><p>docId: &lt;String&gt; DocumentCase id where the change was made.</p></li>
-<li><p>creator_name: &lt;String&gt; Collaborator’s name who made the change.</p></li>
-<li><p>document_title: &lt;String&gt; Collaborator’s email who made the change.</p></li>
-<li><p>revision_date: &lt;String&gt; Date when the changes were made.</p></li>
-<li><p>revision_number: &lt;Integer&gt; number id of the change made.</p></li>
-<li><p>revision_type: &lt;String&gt; Type of change.</p></li>
+<li><dl class="simple">
+<dt>creator_name: &lt;String&gt; Collaborator’s name who made the change.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>min_Length : 1, max_length: 90</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>document_title: &lt;String&gt; Collaborator’s email who made the change.</dt><dd><ul>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9áéíóú]$)</p></li>
+<li><p>min_Length : 10, max_length: 100</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>revision_date: &lt;String&gt; Date when the changes were made.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>revision_number: &lt;Integer&gt; number id of the change made.</dt><dd><ul>
+<li><p>min: 0</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>revision_type: &lt;String&gt; Type of change.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>min_Length : 1, max_length: 20</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>field_changed: &lt;Revision&gt; embedded document which contains the old &amp; new changes made</p></li>
 </ul>
 </div></blockquote>
@@ -442,7 +872,14 @@ All of them  will be pre-defined by the Team and/or Admins.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>infrastructureType: &lt;String&gt;  category that can be used in a DocumentCase.</p></li>
+<li><dl class="simple">
+<dt>infrastructureType: &lt;String&gt;  category that can be used in a DocumentCase.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, required, unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="exception">
@@ -465,7 +902,20 @@ infrastructure_embedded will consist of a revision for the list of infrastructur
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>infrasDocList: List&lt;String&gt; the list of categories for infrastructure type for the revised case study.</p></li>
+<li><dl class="simple">
+<dt>infrasDocList: List&lt;String&gt; the list of categories for infrastructure type for the revised case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, Required</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -494,9 +944,28 @@ The reason for this technique is that the Location Class has its own schema.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>address: &lt;String&gt;  Location’s address.</p></li>
-<li><p>latitude: &lt;Number&gt;  Location’s latitude.</p></li>
-<li><p>longitude: &lt;Number&gt; Location’s Longitude.</p></li>
+<li><dl class="simple">
+<dt>address: &lt;String&gt;  Location’s address.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$</p></li>
+<li><p>min_Length : 1, max_length: 50</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>latitude: &lt;Decimal&gt; city’s latitude.</dt><dd><ul>
+<li><p>min: 17.87, max: 18.53</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>longitude: &lt;Decimal&gt; city’s longitude</dt><dd><ul>
+<li><p>min: -67.28, max: -65.23</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -509,7 +978,19 @@ location_embedded will consist of a revision for the locations of a case study.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>location: List&lt;location&gt; the list of locations for the revised case study.</p></li>
+<li><dl class="simple">
+<dt>location: List&lt;location&gt; the list of locations for the revised case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For List:</dt><dd><ul>
+<li><p>max_length: 5</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -535,11 +1016,24 @@ These are going to be the body of the Document Case.
 An EmbeddedDocument is a Document Class that is defined inside another document.
 This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Section Class has its own schema.
-List of attributes:</p>
+List of attributes(All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>secTitle: &lt;String&gt;  Section’s title.</p></li>
-<li><p>content: &lt;String&gt;  Section’s body.</p></li>
+<li><dl class="simple">
+<dt>secTitle: &lt;String&gt;  Section’s title.</dt><dd><ul>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>min_Length : 1, max_length: 100</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>content: &lt;String&gt;  Section’s body.</dt><dd><ul>
+<li><p>min_Length : 1</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -580,7 +1074,14 @@ Collaborators.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>tagItem: &lt;String&gt;  Tag that can be used in a DocumentCase.</p></li>
+<li><dl class="simple">
+<dt>tagItem: &lt;String&gt;  Tag that can be used in a DocumentCase.</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50, required, unique</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="exception">
@@ -603,7 +1104,27 @@ tag_embedded will consist of a revision for the list of tags of a case study.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>tagsDoc: List&lt;String&gt; the list of tags for the revised case study.</p></li>
+<li><dl class="simple">
+<dt>tagsDoc: List&lt;String&gt; the list of tags for the revised case study.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For string:</dt><dd><ul>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>min_Length : 1, max_length: 50</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For list:</dt><dd><ul>
+<li><p>max_length: 10</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -629,12 +1150,32 @@ These will consist of the Timeline of a DocumentCase, describing the events foll
 An EmbeddedDocument is a Document Class that is defined inside another document.
 This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Timeline Class has its own schema.
-List of attributes:</p>
+List of attributes(All of them are required):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>event: &lt;String&gt;  Event happend within the DocumentCase.</p></li>
-<li><p>eventStartDate: &lt;String&gt;  Date when the event started, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
-<li><p>eventEndDate: &lt;String&gt;  Date when the event ended, it has to have the following format: ‘YYYY-MM-DD’.</p></li>
+<li><dl class="simple">
+<dt>event: &lt;String&gt;  Event happend within the DocumentCase.</dt><dd><ul>
+<li><p>min_Length : 10, max_length: 100</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>eventStartDate: &lt;String&gt;  Date when the event started, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>eventEndDate: &lt;String&gt;  Date when the event ended, it has to have the following format: ‘YYYY-MM-DD’.</dt><dd><ul>
+<li><p>attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]</p></li>
+<li><p>min_Length : 9, max_length: 11</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -673,7 +1214,14 @@ title_embedded will consist of a revision for the title of a case study.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>title: &lt;String&gt; the title of the revised case study.</p></li>
+<li><dl class="simple">
+<dt>title: &lt;String&gt; the title of the revised case study.</dt><dd><ul>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>min_Length : 10, max_length: 100, required</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
