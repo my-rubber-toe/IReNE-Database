@@ -1,9 +1,7 @@
 mongoengine
 mongomock
-
 names
 namegenerator
 Faker
 sphinx
-
 googlemaps
