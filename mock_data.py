@@ -12,12 +12,13 @@ from faker  import Faker
 """
 fake = Faker() 
 
-infrastructure = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
+infrastructure = {"Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
     "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
-    "Public Transportation"]
-damage = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
-    "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
-tags = infrastructure + damage
+    "Public Transportation"}
+damage = {"Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
+    "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"}
+tags = {"Earthquake", "Hurricane", "Flooding", "Water", "Fire", "Buildings", "Housing", "Telecommunications", 
+    "Ports", "Power Generation"}
 
 index = 0
 for index in range(0,100):
@@ -25,7 +26,6 @@ for index in range(0,100):
     fn = names.get_first_name()
     ln = names.get_last_name()
     emailc = fn.lower() + '.' + ln.lower() + "@upr.edu"
-    print(emailc)
     collab1 = collaborator(first_name = fn, 
     last_name = ln, 
     approved = random.choice([True, False]),
@@ -69,7 +69,7 @@ for index in range(0,100):
     while(start > end):
         end = random.choice(dates)
     
-    timelineDoc = timeline(event = fake.sentence(ext_word_list=my_word_list), 
+    timelineDoc = timeline(event = "This happended well " + fake.sentence(ext_word_list=my_word_list), 
     eventStartDate = start, eventEndDate = end)
 
     titles=['Introduction', 'Body', 'Analysis', 'Conclusion', 'Executive Summary', 'Discussion']
@@ -78,11 +78,14 @@ for index in range(0,100):
     languageDoc = ['English', 'Spanish']
 
     ad = ["Coamo, PR", "Arecibo, PR", "Santa Isabel, PR", "Camuy, PR", "Salinas, PR", "San Juan, PR", "Mayagüez, PR", "Carolina, PR", "Aguas Buenas, PR", "Isabela, PR", "Quebradillas, PR", "Moca, PR", "Añasco, PR", "Yabucoa, PR", "Caguas, PR", "Lares, PR", "Humacao, PR", "Gurabo, PR", "Vieques, PR", "Maricao, PR", "Patillas, PR", "Arroyo, PR", "Las Piedras, PR", "Cidra, PR", "Maunabo, PR", "Fajardo, PR", "Ceiba, PR", "Juncos, PR", "Orocovis, PR", "Utuado, PR", "Jayuya, PR", "Ciales, PR", "Corozal, PR", "Aibonito, PR", "Sabana Grande, PR", "Guánica, PR", "Cayey, PR", "Vega Baja, PR"]
-    j = random.choice(ad)
-    l = random.choice(ad)
-    print('j: ', j, " l: ", l)
-    citypr = city_pr.objects.get(city = j)
-    citypr1 = city_pr.objects.get(city = l)
+    town1 = random.choice(ad)
+    while True:
+            town2 = random.choice(ad)
+            if(town1 != town2):
+                break
+
+    citypr = city_pr.objects.get(city = town1)
+    citypr1 = city_pr.objects.get(city = town2)
     loc = location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
     loc1 = location(address= citypr1.city, latitude= citypr1.latitude, longitude=citypr1.longitude)
     inc = random.choice(dates)
@@ -94,13 +97,16 @@ for index in range(0,100):
     while(created > mod):
         mod = random.choice(dates)
     
-    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
+
+    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen() + namegenerator.gen()), location=[loc,loc1], 
     description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
     incidentDate = inc, 
     creationDate= created,
     lastModificationDate= mod,
-    tagsDoc=[random.choice(tags),random.choice(tags)], 
-    infrasDocList= [random.choice(infrastructure), random.choice(infrastructure)],
-    damageDocList= [random.choice(damage), random.choice(damage)],
+    tagsDoc=random.sample(tags,1), 
+    infrasDocList= random.sample(infrastructure,1),
+    damageDocList= random.sample(damage,1),
     author = [authorDoc], actor = [actorDoc],section = [sectionDoc],timeline = [timelineDoc], language=random.choice(languageDoc))
+
+    
     doc.save()

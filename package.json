@@ -1,23 +1,27 @@
 {
-  "name": "irene-database",
-  "version": "1.0.0",
-  "description": "## Dependencies     ```         1. Python 3.8.0         2. pip3 19.03         3. Mongoengine 0.19.1         4. Mongodb 4.2.5     ``` ## Download libraries - To download the libraries needed, run requirements.txt as     - `pip install -r requirements.txt`",
+  "name": "irene_db",
+  "description": "Initialize Database with collections, limits & restrictions for all tables & its attributes",
+  "version": "3.0.0",
+  "author": "Jainel M. Torres Santos <jainel.torres@upr.edu>",
   "main": "init_db.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rubbertoe-G/IReNE-Database.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "Mongoengine",
+    "Case Studies",
+    "Infrastructure",
+    "Collaborators",
+    "Admins",
+    "PR"
+  ],
   "dependencies": {
     "mongodb": "^3.5.7"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rubbertoe-G/IReNE-Database.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rubbertoe-G/IReNE-Database/issues"
-  },
-  "homepage": "https://github.com/rubbertoe-G/IReNE-Database#readme"
+  "engines": {
+    "node": "v12.6.0",
+    "npm": "6.13.1"
+  }
 }

@@ -22,7 +22,7 @@
     - `npm install mongodb --save`
 2. Run the init_db.js file where it will initialize db with its collections & restrictions.
     - `node init_db.js`
-3. Open another terminal window and go back to the database repository.
+3. End the process by pressing ctrl-C
 4. Run predefined_data.py to fill the database with all the predefined data that it's going to have.
     - `python3 predefined_data.py`
 5. Run mock_data.py to fill the database with mock data of collaborators & documents
