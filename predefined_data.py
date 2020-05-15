@@ -90,6 +90,8 @@ def Collabs():
     collab4.save()
     collab5 = collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
     collab5.save()
+    collab6 = collaborator(first_name="VICTORIA M.", last_name="BLACK-PINK", email="victoria.black@upr.edu",approved=True)
+    collab6.save()
 
 Collabs()
 
@@ -121,6 +123,10 @@ def Documents():
     actorDoc1 = actor(actor_FN = "Victoria", actor_LN = "Black", role = "Mayor")
     timelineDoc1 = timeline(event = "The rain has started", 
     eventStartDate = "2017-09-17", eventEndDate = "2017-09-19")
+    timelineDoc2 = timeline(event = "The case study started", 
+    eventStartDate = "2018-07-17", eventEndDate = "2018-07-19")
+    timelineDoc3 = timeline(event = "The rain has intensified", 
+    eventStartDate = "2019-03-17", eventEndDate = "2019-05-10")
     sectionDoc1 = section(secTitle = "Introduction", content = "It was raining a lot")
     citypr = city_pr.objects.get(city = 'Coamo, PR')
     loc = location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
@@ -132,7 +138,8 @@ def Documents():
     tagsDoc=['Hurricane', 'Rain'], 
     infrasDocList= ["Building", "Water Supply"],
     damageDocList= ['Flooding'],
-    author = [authorDoc1], actor = [actorDoc1],section = [sectionDoc1],timeline = [timelineDoc1], language="English")
+    author = [authorDoc1], actor = [actorDoc1],section = [sectionDoc1],
+    timeline = [timelineDoc1,timelineDoc2,timelineDoc3], language="English")
     doc1.save()
 
     get_collab2 = collaborator.objects.get(first_name= "Roberto")

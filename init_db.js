@@ -42,14 +42,14 @@
                      description: "First Name of Collaborator, must be a string, with a length between 0-30, and is required",
                      minLength: 1,
                      maxLength:30,
-                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*$"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- . À-ÿ]*[a-zA-Z.À-ÿ]$"
                   },
                   last_name: {
                      bsonType: "string",
                      description: "Last Name of Collaborator, must be a string, with a length between 0-30 characters, and is required",
                      minLength: 1,
                      maxLength:60,
-                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- . À-ÿ]*[a-zA-Z.À-ÿ]$"
                   },
                   email: {
                      bsonType: "string",
