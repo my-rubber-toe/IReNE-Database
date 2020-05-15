@@ -1,17 +1,27 @@
 {
-    "name": "irene_db",
-    "description": "Initialize Database with collections, limits & restrictions for all tables & its attributes",
-    "version": "3.0.0",
-    "author": "Jainel M. Torres Santos <jainel.torres@upr.edu>",
-    "main": "init_db.js",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/rubbertoe-G/IReNE-Database.git"
-    },
-    "keywords": ["MongoDB", "Mongoengine", "Case Studies", "Infrastructure", "Collaborators", "Admins", "PR"],
-    "dependencies": {"mongodb": "^3.5.7"},
-      "engines": {
-        "node": "v12.6.0",
-        "npm": "6.13.1"
-      }
+  "name": "irene_db",
+  "description": "Initialize Database with collections, limits & restrictions for all tables & its attributes",
+  "version": "3.0.0",
+  "author": "Jainel M. Torres Santos <jainel.torres@upr.edu>",
+  "main": "init_db.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rubbertoe-G/IReNE-Database.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "Mongoengine",
+    "Case Studies",
+    "Infrastructure",
+    "Collaborators",
+    "Admins",
+    "PR"
+  ],
+  "dependencies": {
+    "mongodb": "^3.5.7"
+  },
+  "engines": {
+    "node": "v12.6.0",
+    "npm": "6.13.1"
   }
+}

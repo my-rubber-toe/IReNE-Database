@@ -3,8 +3,7 @@ import json
 
 #Connection to the Database
 connect('IReNEdb')
-#connect the db for testing purposes
-#connect('IReNEdb', host='mongomock://localhost:27017')
+
 
 
 
