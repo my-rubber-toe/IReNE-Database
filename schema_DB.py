@@ -5,19 +5,14 @@ import json
 connect('IReNEdb')
 
 
-
-
-
 class collaborator(Document):
     """
         Document Class for Collaborators.
         Collaborators are the users that will Create/Edit Case Studies.
         List of attributes (All of them are required):
             - first_name: <String> Collaborator's first name.
-                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- . À-ÿ]*[a-zA-Z.À-ÿ]$
                 - min_Length : 1, max_length: 30
             - last_name: <String> Collaborator's last name.
-                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- . À-ÿ]*[a-zA-Z.À-ÿ]$
                 - min_Length : 1, max_length: 60
             - email: <String> Collaborator's email. It must be a @upr.edu email.
                 - attribute follows following regex: ^[\.a-z0-9]*(@upr\.edu)$
@@ -25,8 +20,8 @@ class collaborator(Document):
             - banned: <Boolean> <Default=False> When set to true, the Collaborator looses access to Tellspace service.
             - approved: <Boolean> <Default=False>  When set to true, the Collaborator gains access to Tellspace service.
     """
-    first_name = StringField(min_length=1, max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- . À-ÿ]*[a-zA-Z.À-ÿ]$')
-    last_name = StringField(min_length=1, max_length=60, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- . À-ÿ]*[a-zA-Z.À-ÿ]$')
+    first_name = StringField(min_length=1, max_length=30, required=True)
+    last_name = StringField(min_length=1, max_length=60, required=True)
     email = EmailField(min_length= 9,max_length=70, required=True, unique=True, regex='^[\.a-z0-9]*(@upr\.edu)$')
     banned = BooleanField(default=False,required=True)
     approved = BooleanField(default=False,required=True)

@@ -90,7 +90,7 @@ def Collabs():
     collab4.save()
     collab5 = collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
     collab5.save()
-    collab6 = collaborator(first_name="VICTORIA M.", last_name="BLACK-PINK", email="victoria.black@upr.edu",approved=True)
+    collab6 = collaborator(first_name="VICTORIA M.", last_name="TORRES.SANTOS", email="victoria.black@upr.edu",approved=True)
     collab6.save()
 
 Collabs()
