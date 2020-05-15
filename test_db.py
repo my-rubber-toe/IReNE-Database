@@ -9,7 +9,7 @@ def test_create_Collab(fn,ln,email):
     strip_fn = fn.replace(" ", "")
     strip_ln = ln.replace(" ", "")
     # if (email == (strip_fn.lower() + "." + strip_ln.lower() + '@upr.edu')):
-    collab = Collaborator( first_name = fn, 
+    collab = collaborator( first_name = fn, 
     last_name = ln, email = email)
     collab.save()
 
@@ -355,7 +355,7 @@ if __name__ == '__main__':
     # test_create_Admin("jai.TSantos13", "ICOMuprm12345")
     # test_create_Tag(new_tag)
     # test_create_Infrastructure(new_infras)
-    test_create_Damage('Tsun\amis')
+    # test_create_Damage('Tsunamis')
     # test_create_doc(creatoriD= 'JBJBijnj283892husdBHB',language='English', title='The Great Moon', description="It was horrible..", incidentDate='2010-02-03',
     #  creationDate='2012-03-01', lastModificationDate='2014-08-03', 
     #  infrasDocList=['Structure', 'Water'],damageDocList=['Flooding'],  tagsDoc=['Flood', 'Rain'],

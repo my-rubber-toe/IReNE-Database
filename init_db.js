@@ -5,10 +5,20 @@
 
    const url = 'mongodb://localhost:27017';
 
-   const client = new MongoClient(url)
+   const client = new MongoClient(url, {useUnifiedTopology: true}) 
 
-   client.connect(function (err, client) {
-      if (err) throw err;
+   client.connect(function (error, client, ) {
+      process.on('unhandledRejection', error => {
+         // Will print "unhandledRejection err is not defined"
+         console.log('unhandledRejection', error.message);
+       });
+       
+      new Promise((_, reject) => reject(new Error())).
+         catch(error => {
+           // Will not execute
+           console.log(error.message);
+      });
+
       var db = client.db("IReNEdb");
 
       setupCollections(db, () => {
@@ -17,6 +27,10 @@
    });
 
    function setupCollections(db, callback) {
+      /*
+       * Collaborator schema definition with its attributes, limits & regex
+       *    These are going to be the users who will create Case Studies
+       */
       db.createCollection("collaborator", {
          validator: {
             $jsonSchema: {
@@ -58,7 +72,10 @@
       })
 
 
-      //Admin Collection with its attribute and restrictions
+      /*
+       * Admin schema definition with its attributes, limits & regex
+       *    These are the users who will use the Admin Dashboard
+       */
       db.createCollection("admin", {
          validator: {
             $jsonSchema: {
@@ -81,7 +98,11 @@
          }
       })
 
-      //Infrastructure Collection with its attribute and restrictions
+      /*
+       * Infrastructure schema definition with its attributes, limits & regex
+       *    These will be the different categories based on Infrastructure types
+       *       All of them will be defined by the team/admins
+       */
       db.createCollection("infrastructure", {
          validator: {
             $jsonSchema: {
@@ -101,7 +122,11 @@
          }
       })
 
-      //Damage Collection with its attribute and restrictions
+      /*
+       * Damage schema definition with its attributes, limits & regex
+       *    These will be the different categories based on Damage types
+       *       All of them will be defined by the team/admins
+       */
       db.createCollection("damage", {
          validator: {
             $jsonSchema: {
@@ -121,7 +146,12 @@
          }
       })
 
-      //Tag Collection with its attribute and restrictions
+      /*
+       * Tag schema definition with its attributes, limits & regex
+       *    These will be the different tags available for the document
+       *       Some will be defined by the team/admins and the majority of them will
+       *       be defined by the Collaborators
+       */
       db.createCollection("tag", {
          validator: {
             $jsonSchema: {
@@ -141,6 +171,10 @@
          }
       })
 
+      /*
+       * City_PR schema definition with its attributes, limits & regex
+       *    These are the addresses, with coordinates, of all the municipalities of Puerto Rico
+       */
       db.createCollection("city_pr", {
          validator: {
             $jsonSchema: {
@@ -173,7 +207,10 @@
          }
       })
 
-      //DocumentCase Collection with its attribute and restrictions
+      /*
+       * Document Case schema definition with its attributes, limits & regex
+       *    These are the Case Studies which are made by the collaborators in TellSpace
+       */
       db.createCollection("document_case", {
          validator: {
             $jsonSchema: {
@@ -258,7 +295,7 @@
                      }
                   },
                   tagsDoc: {
-                     bsonType: ["array"],
+                     bsonType: "array",
                      minItems: 0,
                      maxItems:10,
                      uniqueItems: false,
@@ -274,9 +311,8 @@
                      minItems: 0,
                      maxItems: 5,
                      uniqueItems: false,
-                     additionalProperties: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "locations where that case study takes place, must be a list of string, must follow the pattern, and is required",
                         properties: {
                            address: {
@@ -308,7 +344,7 @@
                      maxItems:10,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         required: ["author_FN", "author_LN", "author_faculty", "author_email"],
                         description: "Authors who wrote the case study, must be a list of Author objects, must follow the pattern, and is required",
                         properties: {
@@ -351,7 +387,7 @@
                      maxItems: 5,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         required: ["actor_FN", "actor_LN", "role"],
                         description: "Actors who play a role in the case study, must be a list of Actor objects, must follow the pattern, and is required",
                         properties: {
@@ -386,7 +422,7 @@
                      maxItems:5,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
                         properties: {
                            event: {
@@ -419,7 +455,7 @@
                      maxItems:10,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "Sections of a Case study, must be a list of Section objects.",
                         properties: {
                            secTitle: {
@@ -443,7 +479,10 @@
          }
       })
 
-
+      /*
+       * Creation_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems for creating a document
+      */
       db.createCollection("creation_embedded", {
          validator: {
             $jsonSchema: {
@@ -544,9 +583,8 @@
                      minItems: 0,
                      maxItems: 5,
                      uniqueItems: false,
-                     additionalProperties: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "locations where that case study takes place, must be a list of string, must follow the pattern, and is required",
                         properties: {
                            address: {
@@ -578,7 +616,7 @@
                      maxItems:10,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         required: ["author_FN", "author_LN", "author_faculty", "author_email"],
                         description: "Authors who wrote the case study, must be a list of Author objects, must follow the pattern, and is required",
                         properties: {
@@ -621,7 +659,7 @@
                      maxItems: 5,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         required: ["actor_FN", "actor_LN", "role"],
                         description: "Actors who play a role in the case study, must be a list of Actor objects, must follow the pattern, and is required",
                         properties: {
@@ -656,7 +694,7 @@
                      maxItems:5,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
                         properties: {
                            event: {
@@ -689,7 +727,7 @@
                      maxItems:10,
                      uniqueItems: false,
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "Sections of a Case study, must be a list of Section objects.",
                         properties: {
                            secTitle: {
@@ -713,6 +751,7 @@
          }
       })
 
+      
       db.createCollection("title_embedded", {
          validator: {
             $jsonSchema: {
@@ -751,13 +790,14 @@
       db.createCollection("infrastructure_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 1,
                required: ["infrasDocList"],
                properties: {
                   infrasDocList: {
+                     bsonType: ["array"],
                      items: {
-                        bsonType: ["string"],
+                        bsonType: "string",
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
@@ -773,11 +813,12 @@
       db.createCollection("damage_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 1,
                required: ["damageDocList"],
                properties: {
                   damageDocList: {
+                     bsonType: ["array"],
                      items: {
                         bsonType: "string",
                         additionalProperties: false,
@@ -792,16 +833,20 @@
          }
       })
 
-
+      /*
+       * Tag_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the tags of the case study
+      */
       db.createCollection("tag_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 1,
                maxItems:10,
                required: ["tagsDoc"],
                properties: {
                   tagsDoc: {
+                     bsonType: ["array"],
                      items: {
                         bsonType: "string",
                         additionalProperties: false,
@@ -816,18 +861,23 @@
          }
       })
 
+      /*
+       * Timeline_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the timeline of the case study
+      */
       db.createCollection("timeline_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 0,
                maxItems:5,
                uniqueItems: false,
                required: ["timeline"],
                properties: {
                   timeline: {
+                     bsonType: ["array"],
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "Timeline of a Case study, must be a list of Actor objects, must follow the pattern",
                         properties: {
                            event: {
@@ -837,14 +887,14 @@
                               maxLength:100
                            },
                            eventStartDate: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Date when event started, must be a string following the pattern",
                               minLength: 9,
                               maxLength:11,
                               pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                            },
                            eventEndDate: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Date when event ended, must be a string following the pattern",
                               minLength: 9,
                               maxLength:11,
@@ -859,29 +909,34 @@
          }
       })
 
+      /*
+       * Section_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the sections of the case study
+      */
       db.createCollection("section_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType:  "object",
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
                required: ["section"],
                properties: {
                   section: {
+                     bsonType: ["array"],
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "Sections of a Case study, must be a list of Section objects.",
                         properties: {
                            secTitle: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Title of the section",
                               minLength: 1,
                               maxLength:100,
                               pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                            },
                            content: {
-                              bsonType: ["string"],
+                              bsonType: "string",
                               description: "Content of the section",
                               minLength: 1,
                            }
@@ -893,18 +948,23 @@
          }
       })
 
+      /*
+       * Actor_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the actors of the case study
+      */
       db.createCollection("actor_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 0,
                maxItems:5,
                uniqueItems: false,
                required: ["actor"],
                properties: {
                   actor: {
+                     bsonType: ["array"],
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         required: ["actor_FN", "actor_LN", "role"],
                         description: "Actors who play a role in the case study, must be a list of Actor objects, must follow the pattern, and is required",
                         properties: {
@@ -931,18 +991,23 @@
          }
       })
 
+      /*
+       * Author_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the authors of the case study
+      */
       db.createCollection("author_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
                required: ["author"],
                properties: {
                   author: {
+                     bsonType: ["array"],
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         required: ["author_FN", "author_LN", "author_faculty", "author_email"],
                         description: "Authors who wrote the case study, must be a list of Author objects, must follow the pattern, and is required",
                         properties: {
@@ -976,18 +1041,23 @@
          }
       })
 
+      /*
+       * Location_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the location of the case study
+      */
       db.createCollection("location_embedded", {
          validator: {
             $jsonSchema: {
-               bsonType: ["array"],
+               bsonType: "object",
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
                required: ["location"],
                properties: {
                   location: {
+                     bsonType: ["array"],
                      items: {
-                        bsonType: ["object"],
+                        bsonType: "object",
                         description: "locations where that case study takes place, must be a list of string, must follow the pattern, and is required",
                         required: ["address", "latitude", "longitude"],
                         properties: {
@@ -1018,6 +1088,10 @@
          }
       })
 
+      /*
+       * Incident_Embedded schema definition with its attributes, limits & regex
+       *    This will be the revision schems regarding with the incident date of the case study
+      */
       db.createCollection("incident_embedded", {
          validator: {
             $jsonSchema: {
@@ -1036,6 +1110,10 @@
          }
       })
 
+      /*
+       *  Document_case_revisionschema definition with its attributes, limits & regex
+       *    This will be the document for whenever a change is made on a document
+      */
       db.createCollection("document_case_revision", {
          validator: {
             $jsonSchema: {
@@ -1092,12 +1170,13 @@
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   field_changed:{
-                     bsonType: ["array"],
+                     bsonType: "object",
                      minItems: 1,
                      uniqueItems: false,
                      items: {
+                        bsonType: ["array"],
                         properties: {
-                           bsonType: ["object"],
+                           bsonType: "object",
                            required: ["new", "old"],
                            new: {
                               bsonType: "object",
@@ -1118,6 +1197,5 @@
          
          
       
-      // client.close()
    }
 })()
