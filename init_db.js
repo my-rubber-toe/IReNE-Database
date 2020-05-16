@@ -8,14 +8,13 @@
    const client = new MongoClient(url, {useUnifiedTopology: true}) 
 
    client.connect(function (error, client, ) {
+      
       process.on('unhandledRejection', error => {
-         // Will print "unhandledRejection err is not defined"
          console.log('unhandledRejection', error.message);
        });
        
       new Promise((_, reject) => reject(new Error())).
          catch(error => {
-           // Will not execute
            console.log(error.message);
       });
 
@@ -183,7 +182,7 @@
                properties: {
                   city: {
                      bsonType: "string",
-                     minLength: 1,
+                     minLength: 7,
                      maxLength:50,
                      description: "Location's address",
                      pattern: "^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$"
@@ -223,7 +222,7 @@
                      bsonType: "string",
                      description: "Title of the case study, must be a string, and is required",
                      minLength: 10,
-                     maxLength: 100,
+                     maxLength: 50,
                      pattern: "^([A-ZÁÉÍÓÚÑÜ]*)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                   },
                   description: {
@@ -301,7 +300,9 @@
                      items: {
                         bsonType: "string",
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$",
+                        minLength: 1,
+                        maxLength:50
                      }
                   },
                   location: {
@@ -315,7 +316,7 @@
                         properties: {
                            address: {
                               bsonType: "string",
-                              minLength: 1,
+                              minLength: 7,
                               maxLength:50,
                               description: "Location's address",
                               pattern: "^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$"
@@ -349,14 +350,14 @@
                            author_FN: {
                               bsonType: "string",
                               description: "Author first name",
-                              minLength:1,
+                              minLength:2,
                               maxLength:30,
                               pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
                            },
                            author_LN: {
                               bsonType: "string",
                               description: "Author last name",
-                              minLength:1,
+                              minLength:2,
                               maxLength:30,
                               pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
                            },
@@ -427,7 +428,7 @@
                               bsonType: "string",
                               description: "Event what happened within the case study",
                               minLength:1,
-                              maxLength:100,
+                              maxLength:50,
                            },
                            eventStartDate: {
                               bsonType: "string",
@@ -460,13 +461,14 @@
                               bsonType: "string",
                               description: "Title of the section",
                               minLength: 1,
-                              maxLength:100,
+                              maxLength:50,
                               pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                            },
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1
+                              minLength: 1,
+                              maxLength:5000
                            }
                         }
 
@@ -495,7 +497,7 @@
                      bsonType: "string",
                      description: "Title of the case study, must be a string, and is required",
                      minLength: 10,
-                     maxLength: 100,
+                     maxLength: 50,
                      pattern: "^([A-ZÁÉÍÓÚÑÜ]*)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                   },
                   description: {
@@ -587,7 +589,7 @@
                         properties: {
                            address: {
                               bsonType: "string",
-                              minLength: 1,
+                              minLength: 7,
                               maxLength:50,
                               description: "Location's address",
                               pattern: "^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$"
@@ -621,14 +623,14 @@
                            author_FN: {
                               bsonType: "string",
                               description: "Author first name",
-                              minLength:1,
+                              minLength:2,
                               maxLength:30,
                               pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
                            },
                            author_LN: {
                               bsonType: "string",
                               description: "Author last name",
-                              minLength:1,
+                              minLength:2,
                               maxLength:30,
                               pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
                            },
@@ -699,7 +701,7 @@
                               bsonType: "string",
                               description: "Event what happened within the case study",
                               minLength:1,
-                              maxLength:100,
+                              maxLength:50,
                            },
                            eventStartDate: {
                               bsonType: "string",
@@ -732,13 +734,14 @@
                               bsonType: "string",
                               description: "Title of the section",
                               minLength: 1,
-                              maxLength:100,
+                              maxLength:50,
                               pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                            },
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1
+                              minLength: 1,
+                              maxLength:5000
                            }
                         }
 
@@ -760,7 +763,7 @@
                      bsonType: "string",
                      description: "Infrastructure category, must be a string, must follow the pattern, and is required",
                      minLength: 1,
-                     maxLength:100,
+                     maxLength:50,
                      pattern: "^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)"
                   }
                }
@@ -882,7 +885,7 @@
                               bsonType: "string",
                               description: "Event what happened within the case study",
                               minLength: 1,
-                              maxLength:100
+                              maxLength:50
                            },
                            eventStartDate: {
                               bsonType: "string",
@@ -930,13 +933,14 @@
                               bsonType: "string",
                               description: "Title of the section",
                               minLength: 1,
-                              maxLength:100,
+                              maxLength:50,
                               pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
                            },
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
                               minLength: 1,
+                              maxLength:5000
                            }
                         }
                      }
@@ -1012,17 +1016,23 @@
                            author_FN: {
                               bsonType: "string",
                               description: "Author first name",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$",
+                              minLength:2,
+                              maxLength:30
                            },
                            author_LN: {
                               bsonType: "string",
                               description: "Author last name",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$",
+                              minLength:2,
+                              maxLength:30
                            },
                            author_faculty: {
                               bsonType: "string",
                               description: "Author faculty",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$",
+                              minLength:1,
+                              maxLength:30
                            },
                            author_email: {
                               bsonType: "string",
@@ -1061,7 +1071,7 @@
                         properties: {
                            address: {
                               bsonType: "string",
-                              minLength: 1,
+                              minLength: 7,
                               maxLength:50,
                               description: "Location's address",
                               pattern: "^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$"
@@ -1129,8 +1139,8 @@
                   creator_name: {
                      bsonType: "string",
                      description: "Collaborator who made the changes",
-                     minLength:1,
-                     maxLength:60,
+                     minLength:2,
+                     maxLength:90,
                      pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$"
                   },
                   creator_email:{
@@ -1145,12 +1155,12 @@
                      bsonType: "string",
                      description: "Document's title",
                      minLength:10,
-                     maxLength:100,
+                     maxLength:50,
                      pattern: "^([A-ZÁÉÍÓÚ])([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)"
                   },
                   revision_type:{
                      bsonType: "string",
-                     minLength:1,
+                     minLength:2,
                      maxLength:20,
                      description: "Which attribute was updated",
                      pattern: '^[a-z A-Z \- À-ÿ]*[a-záéíóúñü]$'

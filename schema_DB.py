@@ -94,7 +94,7 @@ class city_pr(Document):
             - longitude: <Decimal> city's longitude
                 - min: -67.28, max: -65.23
     """
-    city = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
+    city = StringField(min_length=7,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
     latitude = DecimalField(min_value=17.87, max_value= 18.53, required=True)
     longitude = DecimalField(min_value=-67.28, max_value=-65.23, required=True) 
 
@@ -108,10 +108,10 @@ class author(EmbeddedDocument):
         List of attributes(All of them are required):
             - author_FN: <String>  Author's First Name.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$
-                - min_Length : 1, max_length: 30
+                - min_Length : 2, max_length: 30
             - author_LN: <String>  Author's Last Name.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
-                - min_Length : 1, max_length: 30
+                - min_Length : 2, max_length: 30
             - author_email: <String>  Author's Email.
                 - attribute follows following regex: ^[\.a-z0-9]*(@upr\.edu)$
                 - min_Length : 9, max_length: 70
@@ -119,8 +119,8 @@ class author(EmbeddedDocument):
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$
                 - min_Length : 1, max_length: 30
     """
-    author_FN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$')
-    author_LN = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
+    author_FN = StringField(min_length=2,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$')
+    author_LN = StringField(min_length=2,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     author_email = EmailField(min_length=9,max_length=70, required=True, regex='^[\.a-z0-9]*(@upr\.edu)$')
     author_faculty = StringField(min_length=1,max_length=30, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- \. : 0-9 À-ÿ]*$')
 
@@ -155,7 +155,7 @@ class timeline(EmbeddedDocument):
         The reason for this technique is that the Timeline Class has its own schema.
         List of attributes(All of them are required):
             - event: <String>  Event happend within the DocumentCase.
-                - min_Length : 10, max_length: 100
+                - min_Length : 10, max_length: 50
             - eventStartDate: <String>  Date when the event started, it has to have the following format: 'YYYY-MM-DD'.
                 - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
                 - min_Length : 9, max_length: 11
@@ -163,7 +163,7 @@ class timeline(EmbeddedDocument):
                 - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
                 - min_Length : 9, max_length: 11
     """
-    event = StringField(min_length=10, max_length=100, required=True)
+    event = StringField(min_length=10, max_length=50, required=True)
     eventStartDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     eventEndDate = StringField(min_length=9, max_length=11,  required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
 
@@ -177,12 +177,12 @@ class section(EmbeddedDocument):
         List of attributes(All of them are required):
             - secTitle: <String>  Section's title.
                 - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
-                - min_Length : 1, max_length: 100
+                - min_Length : 2, max_length: 50
             - content: <String>  Section's body.
                 - min_Length : 1
     """
-    secTitle = StringField(min_length=1, max_length=100, required=True, regex='^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)')
-    content = StringField(min_length=1, required=True)
+    secTitle = StringField(min_length=2, max_length=50, required=True, regex='^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)')
+    content = StringField(min_length=1, required=True, max_length=5000)
 
 
 class location(EmbeddedDocument):
@@ -195,13 +195,13 @@ class location(EmbeddedDocument):
         List of attributes:
             - address: <String>  Location's address.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$
-                - min_Length : 1, max_length: 50
+                - min_Length : 7, max_length: 50
             - latitude: <Decimal> city's latitude.
                 - min: 17.87, max: 18.53
             - longitude: <Decimal> city's longitude
                 - min: -67.28, max: -65.23
     """
-    address = StringField(min_length=1, max_length=50, required=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
+    address = StringField(min_length=7, max_length=50, required=True, regex='^[A-ZÁÉÍÓÚ][A-Z a-z À-ÿ]*(, PR)$')
     latitude = FloatField(min_value=17.86, max_value=18.54, required=True)
     longitude = FloatField(min_value=-67.29, max_value=-65.22, required=True)
 
@@ -216,7 +216,7 @@ class document_case(Document):
             - creatoriD: <String>  the Collaborator's id which created the Case study.
             - title: <String> The case study's title.
                 - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
-                - min_Length : 10, max_length: 100
+                - min_Length : 10, max_length: 50
             - language: <String> The language which the case study is written.
                 - attribute follows following regex: ^[A-Z][a-z]*$
                 - min_Length : 1, max_length: 20
@@ -262,7 +262,7 @@ class document_case(Document):
                 - max_length: 5
     """
     creatoriD = ReferenceField('collaborator')
-    title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
+    title = StringField(min_length=10, max_length = 50, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
     language = StringField(min_length=1, max_length=20,required=True, regex="^[A-Z][a-z]*$")
     description = StringField(min_length=1, max_length=500,required=False)
     published = BooleanField(default=True,required=True)
@@ -289,10 +289,10 @@ class creation_embedded(EmbeddedDocument):
             - creatoriD: <String>  the Collaborator's id which created the Case study.
             - title: <String> The case study's title.
                 - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
-                - min_Length : 10, max_length: 100
+                - min_Length : 10, max_length: 50
             - language: <String> The language which the case study is written.
                 - attribute follows following regex: ^[A-Z][a-z]*$
-                - min_Length : 1, max_length: 20
+                - min_Length : 2, max_length: 20
             - description: <String> Case study's description.
                 - min_Length : 1, max_length: 500
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
@@ -335,8 +335,8 @@ class creation_embedded(EmbeddedDocument):
                 - max_length: 5
     """
     creatoriD = ReferenceField('collaborator')
-    title = StringField(min_length=10, max_length = 100, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
-    language = StringField(min_length=1, max_length=20,required=True, regex="^[A-Z][a-z]*$")
+    title = StringField(min_length=10, max_length = 50, required=True, unique=True, regex="^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)")
+    language = StringField(min_length=2, max_length=20,required=True, regex="^[A-Z][a-z]*$")
     description = StringField(min_length=1, max_length=500,required=False)
     published = BooleanField(default=True,required=True)
     incidentDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
@@ -421,9 +421,9 @@ class title_embedded(EmbeddedDocument):
         List of attributes:
             - title: <String> the title of the revised case study.
                 - attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)
-                - min_Length : 10, max_length: 100, required
+                - min_Length : 10, max_length: 50, required
     """
-    title = StringField(min_length=10, max_length=100, required=True, regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)")
+    title = StringField(min_length=10, max_length=50, required=True, regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)")
 
     def to_json(self):
         return self.title
@@ -628,10 +628,10 @@ class document_case_revision(Document):
             - docId: <String> DocumentCase id where the change was made.
             - creator_name: <String> Collaborator's name who made the change.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
-                - min_Length : 1, max_length: 90
+                - min_Length : 2, max_length: 90
             - document_title: <String> Collaborator's email who made the change.
                 - attribute follows following regex: ^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)
-                - min_Length : 10, max_length: 100
+                - min_Length : 10, max_length: 50
             - revision_date: <String> Date when the changes were made.
                 - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
                 - min_Length : 9, max_length: 11
@@ -639,20 +639,20 @@ class document_case_revision(Document):
                 - min: 0
             - revision_type: <String> Type of change.
                 - attribute follows following regex: ^[a-z A-Z \- À-ÿ]*[a-záéíóúñü]$
-                - min_Length : 1, max_length: 20
+                - min_Length : 2, max_length: 20
             - field_changed: <Revision> embedded document which contains the old & new changes made
     """
     creatorId = ReferenceField('collaborator')
     docId = ReferenceField('document_case')
-    creator_name = StringField(min_length=1, max_length=90, required=True, 
+    creator_name = StringField(min_length=2, max_length=90, required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     creator_email = EmailField(required=True,min_length=9, max_length=50, regex='^[\.a-z0-9]*(@upr\.edu)$')
-    document_title = StringField(min_length=10, max_length = 100, required=True, 
+    document_title = StringField(min_length=10, max_length = 50, required=True, 
         regex="^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9áéíóú]$)")
     revision_date = StringField(min_length=9, max_length=11, required=True, 
         regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     revision_number = IntField(min_value=0, required=True)
-    revision_type = StringField(min_length=1, max_length= 20, required=True, 
+    revision_type = StringField(min_length=2, max_length= 20, required=True, 
         regex='^[a-z A-Z \- À-ÿ]*[a-záéíóúñü]$')
     field_changed = EmbeddedDocumentField(fields_embedded)
     
