@@ -49,9 +49,9 @@ class tag(Document):
         List of attributes:
             - tagItem: <String>  Tag that can be used in a DocumentCase.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                - min_Length : 1, max_length: 50, required, unique
+                - min_Length : 1, max_length: 30, required, unique
     """
-    tagItem = StringField(min_length=1, max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
+    tagItem = StringField(min_length=1, max_length=30, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
 
 class infrastructure(Document):
     """
@@ -62,9 +62,9 @@ class infrastructure(Document):
         List of attributes:
             - infrastructureType: <String>  category that can be used in a DocumentCase.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                - min_Length : 1, max_length: 50, required, unique
+                - min_Length : 1, max_length: 30, required, unique
     """
-    infrastructureType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
+    infrastructureType = StringField(min_length=1,max_length=30, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
     
 class damage(Document):
     """
@@ -75,9 +75,9 @@ class damage(Document):
         List of attributes:
             - damageType: <String>  category that can be used in a DocumentCase.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                - min_Length : 1, max_length: 50, required, unique
+                - min_Length : 1, max_length: 30, required, unique
     """
-    damageType = StringField(min_length=1,max_length=50, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
+    damageType = StringField(min_length=1,max_length=30, required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$')
 
 class city_pr(Document):
     """
@@ -235,19 +235,19 @@ class document_case(Document):
             - tagsDoc: List<String> of tags from the case study.
                 - For string:
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                    - min_Length : 1, max_length: 50, Required, Unique
+                    - min_Length : 1, max_length: 30, Required, Unique
                 - For List:
                     - min_Length : 0, max_length: 10
             - infrasDocList: List<String> of infrastructure categories from the case study.
                 - For string:
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                    - min_Length : 1, max_length: 50, Required, Unique
+                    - min_Length : 1, max_length: 30, Required, Unique
                 - For List:
                     - min_Length : 1
             - damageDocList: List<String> of damage categories from the case study.
                 - For string:
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                    - min_Length : 1, max_length: 50, Required, Unique
+                    - min_Length : 1, max_length: 30, Required, Unique
                 - For List:
                     - min_Length : 1
             - location: List<Location> of addresses where the case study took place.
@@ -269,9 +269,9 @@ class document_case(Document):
     incidentDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     creationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     lastModificationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    tagsDoc = ListField(StringField(min_length=1,max_length=50, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
-    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
-    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
+    tagsDoc = ListField(StringField(min_length=1,max_length=30, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
+    infrasDocList = ListField(StringField(min_length=1,max_length=30,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
+    damageDocList = ListField(StringField(min_length=1,max_length=30,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
     location = ListField(EmbeddedDocumentField(location), max_length=5, required=False)
     author = ListField(EmbeddedDocumentField(author), min_length=1, max_length=10, required=True)
     actor = ListField(EmbeddedDocumentField(actor),min_length=1, max_length=5, required=True)
@@ -308,19 +308,19 @@ class creation_embedded(EmbeddedDocument):
             - tagsDoc: List<String> of tags from the case study.
                 - For string:
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                    - min_Length : 1, max_length: 50, Required, Unique
+                    - min_Length : 1, max_length: 30, Required, Unique
                 - For List:
                     - min_Length : 0, max_length: 10
             - infrasDocList: List<String> of infrastructure categories from the case study.
                 - For string:
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                    - min_Length : 1, max_length: 50, Required, Unique
+                    - min_Length : 1, max_length: 30, Required, Unique
                 - For List:
                     - min_Length : 1
             - damageDocList: List<String> of damage categories from the case study.
                 - For string:
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
-                    - min_Length : 1, max_length: 50, Required, Unique
+                    - min_Length : 1, max_length: 30, Required, Unique
                 - For List:
                     - min_Length : 1
             - location: List<Location> of addresses where the case study took place.
@@ -342,9 +342,9 @@ class creation_embedded(EmbeddedDocument):
     incidentDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     creationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
     lastModificationDate = StringField(min_length=9, max_length=11, required=True, regex='[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]')
-    tagsDoc = ListField(StringField(min_length=1,max_length=50, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
-    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
-    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
+    tagsDoc = ListField(StringField(min_length=1,max_length=30, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
+    infrasDocList = ListField(StringField(min_length=1,max_length=30,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
+    damageDocList = ListField(StringField(min_length=1,max_length=30,required=True, unique=True, regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'),min_length=1)
     location = ListField(EmbeddedDocumentField(location), max_length=5, required=False)
     author = ListField(EmbeddedDocumentField(author), min_length=1, max_length=10, required=True)
     actor = ListField(EmbeddedDocumentField(actor),min_length=1, max_length=5, required=True)
@@ -453,7 +453,7 @@ class infrastructure_embedded(EmbeddedDocument):
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
                     - min_Length : 1, max_length: 50, Required
     """
-    infrasDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
+    infrasDocList = ListField(StringField(min_length=1,max_length=30,required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
 
     def to_json(self):
@@ -508,7 +508,7 @@ class damage_embedded(EmbeddedDocument):
                     - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$
                     - min_Length : 1, max_length: 50, Required
     """
-    damageDocList = ListField(StringField(min_length=1,max_length=50,required=True, 
+    damageDocList = ListField(StringField(min_length=1,max_length=30,required=True, 
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'))
 
     def to_json(self):
@@ -578,7 +578,7 @@ class tag_embedded(EmbeddedDocument):
                 - For list:
                     -  max_length: 10
     """
-    tagsDoc = ListField(StringField(min_length=0,max_length=50,
+    tagsDoc = ListField(StringField(min_length=0,max_length=30,
         regex='^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$'), required=False, max_length=10)
     def to_json(self):
         return self.tagsDoc

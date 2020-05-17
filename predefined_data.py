@@ -45,7 +45,7 @@ def Categories():
             - Power Generation
     """  
     infrastructures = ["Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
-    "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
+    "Power Generation/Transmission", "Telecommunications" , "Housing", "Building", "Ports",
     "Public Transportation"]
     damages = [ "Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
     "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"]
@@ -62,7 +62,7 @@ def Categories():
         tagDoc = tag(tagItem=tagslist)
         tagDoc.save()
 
-Categories()
+# Categories()
 
 def Locations():
     """
@@ -74,7 +74,7 @@ def Locations():
             cityDoc = city_pr(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
             cityDoc.save()
 
-Locations()
+# Locations()
 
 def Collabs():
     """
@@ -93,7 +93,7 @@ def Collabs():
     collab6 = collaborator(first_name="VICTORIA M.", last_name="TORRES.SANTOS", email="victoria.black@upr.edu",approved=True)
     collab6.save()
 
-Collabs()
+# Collabs()
 
 def Admins():
     """
@@ -111,7 +111,7 @@ def Admins():
     admin5.save()
     
 
-Admins()
+# Admins()
 
 def Documents():
     """
@@ -162,5 +162,5 @@ def Documents():
     author = [authorDoc2], actor = [actorDoc2],section = [sectionDoc2],timeline = [timelineDoc2], language="Spanish")
     doc2.save()
 
-Documents()
+# Documents()
 

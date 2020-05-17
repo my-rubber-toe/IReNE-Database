@@ -111,7 +111,7 @@
                      bsonType: "string",
                      description: "Infrastructure category, must be a string, with a length between 8-20 characters, following the pattern, and is required",
                      minLength: 1,
-                     maxLength:50,
+                     maxLength:30,
                      pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                   }
                }
@@ -135,7 +135,7 @@
                      bsonType: "string",
                      description: "Infrastructure category, must be a string, must follow the pattern, and is required",
                      minLength: 1,
-                     maxLength:50,
+                     maxLength:30,
                      pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                   }
                }
@@ -160,7 +160,7 @@
                      bsonType: "string",
                      description: "Tag category, must be a string, must follow the pattern, and is required",
                      minLength: 1,
-                     maxLength:50,
+                     maxLength:30,
                      pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                   }
                }
@@ -273,7 +273,7 @@
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   },
@@ -287,7 +287,7 @@
                         additionalProperties: false,
                         description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   },
@@ -302,7 +302,7 @@
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$",
                         minLength: 1,
-                        maxLength:50
+                        maxLength:30
                      }
                   },
                   location: {
@@ -548,7 +548,7 @@
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   },
@@ -562,12 +562,12 @@
                         additionalProperties: false,
                         description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   },
                   tagsDoc: {
-                     bsonType: ["array"],
+                     bsonType: "array",
                      minItems: 0,
                      maxItems:10,
                      uniqueItems: false,
@@ -575,7 +575,9 @@
                      items: {
                         bsonType: "string",
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$",
+                        minLength: 1,
+                        maxLength:30
                      }
                   },
                   location: {
@@ -802,7 +804,7 @@
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   }
@@ -825,7 +827,7 @@
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   }
@@ -853,7 +855,7 @@
                         additionalProperties: false,
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
-                        maxLength:50,
+                        maxLength:30,
                         pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , \- ]*$"
                      }
                   }

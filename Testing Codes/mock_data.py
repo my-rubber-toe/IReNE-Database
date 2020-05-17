@@ -23,8 +23,7 @@ damage = {"Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/s
 tags = {"Earthquake", "Hurricane", "Flooding", "Water", "Fire", "Buildings", "Housing", "Telecommunications", 
     "Ports", "Power Generation"}
 
-index = 0
-for index in range(0,100):
+for index in range(100):
     #mock data for creating collaborators
     fn = names.get_first_name()
     ln = names.get_last_name()
@@ -117,7 +116,7 @@ for index in range(0,100):
 """
     This section is to have mock data with edge cases
 """
-for index in range(0,10):
+for index in range(10):
     #mock data for creating collaborators
     fn = names.get_first_name()
     ln = names.get_last_name()
@@ -181,6 +180,10 @@ for index in range(0,10):
     
     listOfTimeline = []
     for x in range(5):
+        start = random.choice(dates)
+        end = random.choice(dates)
+        while(start > end):
+            end = random.choice(dates)
         timelineDoc = timeline(event = "The Case study turned" + random.choice(my_word_list), 
         eventStartDate = start, eventEndDate = end)
         listOfTimeline.append(timelineDoc)
