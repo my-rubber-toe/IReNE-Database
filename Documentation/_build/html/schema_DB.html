@@ -47,7 +47,7 @@ List of attributes(All of them are required):</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>actor_FN: &lt;String&gt;  Actor’s First Name.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : À-ÿ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$</p></li>
 <li><p>min_Length : 1, max_length: 30</p></li>
 </ul>
 </dd>
@@ -55,7 +55,7 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>actor_LN: &lt;String&gt;  Actor’s Last Name.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : À-ÿ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$</p></li>
 <li><p>min_Length : 1, max_length: 30</p></li>
 </ul>
 </dd>
@@ -63,7 +63,7 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>role: &lt;String&gt;  Actor’s role in the DocumentCase.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : 0-9 À-ÿ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$</p></li>
 <li><p>min_Length : 1, max_length: 30</p></li>
 </ul>
 </dd>
@@ -152,7 +152,7 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>author_LN: &lt;String&gt;  Author’s Last Name.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
 <li><p>min_Length : 2, max_length: 30</p></li>
 </ul>
 </dd>
@@ -168,7 +168,7 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>author_faculty: &lt;String&gt;  Author’s Faculty.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - . : 0-9 À-ÿ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$</p></li>
 <li><p>min_Length : 1, max_length: 30</p></li>
 </ul>
 </dd>
@@ -312,7 +312,7 @@ List of attributes:</p>
 <li><p>creatoriD: &lt;String&gt;  the Collaborator’s id which created the Case study.</p></li>
 <li><dl class="simple">
 <dt>title: &lt;String&gt; The case study’s title.</dt><dd><ul>
-<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9À-ÿ]$)</p></li>
 <li><p>min_Length : 10, max_length: 50</p></li>
 </ul>
 </dd>
@@ -362,7 +362,7 @@ List of attributes:</p>
 <dt>tagsDoc: List&lt;String&gt; of tags from the case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
@@ -383,7 +383,7 @@ List of attributes:</p>
 <dt>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
@@ -404,7 +404,7 @@ List of attributes:</p>
 <dt>damageDocList: List&lt;String&gt; of damage categories from the case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
@@ -485,7 +485,7 @@ List of attributes:</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, required, unique</p></li>
 </ul>
 </dd>
@@ -517,7 +517,7 @@ List of attributes:</p>
 <dt>damageDocList: List&lt;String&gt; the list of categories for damage type for the revised case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 50, Required</p></li>
 </ul>
 </dd>
@@ -592,7 +592,7 @@ List of attributes:</p>
 <li><p>creatoriD: &lt;String&gt;  the Collaborator’s id which created the Case study.</p></li>
 <li><dl class="simple">
 <dt>title: &lt;String&gt; The case study’s title.</dt><dd><ul>
-<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9À-ÿ]$)</p></li>
 <li><p>min_Length : 10, max_length: 50</p></li>
 </ul>
 </dd>
@@ -642,7 +642,7 @@ List of attributes:</p>
 <dt>tagsDoc: List&lt;String&gt; of tags from the case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
@@ -663,7 +663,7 @@ List of attributes:</p>
 <dt>infrasDocList: List&lt;String&gt; of infrastructure categories from the case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
@@ -684,7 +684,7 @@ List of attributes:</p>
 <dt>damageDocList: List&lt;String&gt; of damage categories from the case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
@@ -765,7 +765,7 @@ List of attributes:</p>
 <li><p>docId: &lt;String&gt; DocumentCase id where the change was made.</p></li>
 <li><dl class="simple">
 <dt>creator_name: &lt;String&gt; Collaborator’s name who made the change.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
 <li><p>min_Length : 2, max_length: 90</p></li>
 </ul>
 </dd>
@@ -773,7 +773,7 @@ List of attributes:</p>
 </li>
 <li><dl class="simple">
 <dt>document_title: &lt;String&gt; Collaborator’s email who made the change.</dt><dd><ul>
-<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9áéíóú]$)</p></li>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9áéíóú]$)</p></li>
 <li><p>min_Length : 10, max_length: 50</p></li>
 </ul>
 </dd>
@@ -796,7 +796,7 @@ List of attributes:</p>
 </li>
 <li><dl class="simple">
 <dt>revision_type: &lt;String&gt; Type of change.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[a-z A-Z - À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>attribute follows following regex: ^[a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
 <li><p>min_Length : 2, max_length: 20</p></li>
 </ul>
 </dd>
@@ -872,7 +872,7 @@ List of attributes:</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>infrastructureType: &lt;String&gt;  category that can be used in a DocumentCase.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, required, unique</p></li>
 </ul>
 </dd>
@@ -904,7 +904,7 @@ List of attributes:</p>
 <dt>infrasDocList: List&lt;String&gt; the list of categories for infrastructure type for the revised case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 50, Required</p></li>
 </ul>
 </dd>
@@ -1019,7 +1019,7 @@ List of attributes(All of them are required):</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>secTitle: &lt;String&gt;  Section’s title.</dt><dd><ul>
-<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9À-ÿ]$)</p></li>
 <li><p>min_Length : 2, max_length: 50</p></li>
 </ul>
 </dd>
@@ -1074,7 +1074,7 @@ List of attributes:</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>tagItem: &lt;String&gt;  Tag that can be used in a DocumentCase.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 30, required, unique</p></li>
 </ul>
 </dd>
@@ -1106,7 +1106,7 @@ List of attributes:</p>
 <dt>tagsDoc: List&lt;String&gt; the list of tags for the revised case study.</dt><dd><ul>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; , - ]*$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*$</p></li>
 <li><p>min_Length : 1, max_length: 50</p></li>
 </ul>
 </dd>
@@ -1214,7 +1214,7 @@ List of attributes:</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>title: &lt;String&gt; the title of the revised case study.</dt><dd><ul>
-<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9À-ÿ]$)</p></li>
+<li><p>attribute follows following regex: ^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9À-ÿ]$)</p></li>
 <li><p>min_Length : 10, max_length: 50, required</p></li>
 </ul>
 </dd>
