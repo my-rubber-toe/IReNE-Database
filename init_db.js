@@ -86,7 +86,7 @@
                      description: "Admin username, must be a string, with a length between 8-20 characters, following the pattern, and is required",
                      minLength: 6,
                      maxLength:20,
-                     pattern: "(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$"
+                     pattern: "(^[^.]([a-zA-Z0-9]*)[.]{0,1}([a-zA-Z0-9]*))[^.]$"
                   },
                   password: {
                      bsonType: "string",

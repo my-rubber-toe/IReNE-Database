@@ -1,9 +1,6 @@
 from mongoengine import *
 import json
 
-#Connection to the Database
-connect('IReNEdb')
-
 
 class collaborator(Document):
     """
@@ -35,11 +32,11 @@ class admin(Document):
         These attributes will be the credentials of the Admins for them to enter the Admin Dashboard.
         List of attributes(All of them are required):
             - username: <String>  Admin's username.
-                - attribute follows following regex: (^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$
+                - attribute follows following regex: (^[^.]([a-zA-Z0-9]*)[.]{0,1}([a-zA-Z0-9]*))[^.]$
                 - min_Length : 6, max_length: 20
             - password: <String> Admin's  password.
     """
-    username = StringField(min_length=6, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[\.]([a-zA-Z0-9]*))[^.]$' )
+    username = StringField(min_length=6, max_length=20, required=True, unique=True, regex='(^[^.]([a-zA-Z0-9]*)[.]{0,1}([a-zA-Z0-9]*))[^.]$')
     password = StringField(required=True)
 
 class tag(Document):
@@ -178,7 +175,7 @@ class section(EmbeddedDocument):
         The reason for this technique is that the Section Class has its own schema.
         List of attributes(All of them are required):
             - secTitle: <String>  Section's title.
-                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*][A-Za-z0-9À-ÿ]$
                 - min_Length : 2, max_length: 50
             - content: <String>  Section's body.
                 - min_Length : 1
@@ -283,7 +280,7 @@ class document_case(Document):
 
 class creation_embedded(EmbeddedDocument):
     """
-        Document Class for creation_embedded.
+        EmbeddedDocument Class for creation_embedded.
         creation_embedded will consist of a revision for a created case study.
         List of attributes:
             - Required: creatoriD, title, language, published, incidentDate, creationDate, lastModificationDate,
@@ -418,7 +415,7 @@ class creation_embedded(EmbeddedDocument):
 
 class title_embedded(EmbeddedDocument):
     """
-        Document Class for title_embedded.
+        EmbeddedDocument Class for title_embedded.
         title_embedded will consist of a revision for the title of a case study.
         List of attributes:
             - title: <String> the title of the revised case study.
@@ -433,7 +430,7 @@ class title_embedded(EmbeddedDocument):
 
 class description_embedded(EmbeddedDocument):
     """
-        Document Class for description_embedded.
+        EmbeddedDocument Class for description_embedded.
         description_embedded will consist of a revision for the description of a case study.
         List of attributes:
             - description: <String> the description of the revised case study.
@@ -447,7 +444,7 @@ class description_embedded(EmbeddedDocument):
 
 class infrastructure_embedded(EmbeddedDocument):
     """
-        Document Class for infrastructure_embedded.
+        EmbeddedDocument Class for infrastructure_embedded.
         infrastructure_embedded will consist of a revision for the list of infrastructure types of a case study.
         List of attributes:
             - infrasDocList: List<String> the list of categories for infrastructure type for the revised case study.
@@ -464,7 +461,7 @@ class infrastructure_embedded(EmbeddedDocument):
 
 class timeline_embedded(EmbeddedDocument):
     """
-        Document Class for timeline_embedded.
+        EmbeddedDocument Class for timeline_embedded.
         timeline_embedded will consist of a revision for the timeline of a case study.
         List of attributes:
             - timeline: List<timeline> the timeline of the revised case study.
@@ -484,7 +481,7 @@ class timeline_embedded(EmbeddedDocument):
 
 class section_embedded(EmbeddedDocument):
     """
-        Document Class for section_embedded.
+        EmbeddedDocument Class for section_embedded.
         section_embedded will consist of a revision for the section of a case study.
         List of attributes:
             - section: <section> the section of the revised case study.
@@ -502,7 +499,7 @@ class section_embedded(EmbeddedDocument):
 
 class damage_embedded(EmbeddedDocument):
     """
-        Document Class for damage_embedded.
+        EmbeddedDocument Class for damage_embedded.
         damage_embedded will consist of a revision for the list of damage types of a case study.
         List of attributes:
             - damageDocList: List<String> the list of categories for damage type for the revised case study.
@@ -519,7 +516,7 @@ class damage_embedded(EmbeddedDocument):
 
 class actor_embedded(EmbeddedDocument):
     """
-        Document Class for actor_embedded.
+        EmbeddedDocument Class for actor_embedded.
         actor_embedded will consist of a revision for the actors of a case study.
         List of attributes:
             - actor: List<actor> the actors of the revised case study.
@@ -538,7 +535,7 @@ class actor_embedded(EmbeddedDocument):
 
 class author_embedded(EmbeddedDocument):
     """
-        Document Class for author_embedded.
+        EmbeddedDocument Class for author_embedded.
         author_embedded will consist of a revision for the authors of a case study
         List of attributes:
             - author: List<author> the authors of the revised case study.
@@ -558,7 +555,7 @@ class author_embedded(EmbeddedDocument):
 
 class incident_embedded(EmbeddedDocument):
     """
-        Document Class for incident_embedded.
+        EmbeddedDocument Class for incident_embedded.
         incident_embedded will consist of a revision for the incident date of a case study
         List of attributes:
             - incidentDate: <string> the incident date of the revised case study.
@@ -570,7 +567,7 @@ class incident_embedded(EmbeddedDocument):
 
 class tag_embedded(EmbeddedDocument):
     """
-        Document Class for tag_embedded.
+        EmbeddedDocument Class for tag_embedded.
         tag_embedded will consist of a revision for the list of tags of a case study.
         List of attributes:
             - tagsDoc: List<String> the list of tags for the revised case study.
@@ -588,7 +585,7 @@ class tag_embedded(EmbeddedDocument):
 
 class location_embedded(EmbeddedDocument):
     """
-        Document Class for location_embedded.
+        EmbeddedDocument Class for location_embedded.
         location_embedded will consist of a revision for the locations of a case study.
         List of attributes:
             - location: List<location> the list of locations for the revised case study.
@@ -620,11 +617,8 @@ class fields_embedded(EmbeddedDocument):
     
 class document_case_revision(Document):
     """
-        EmbeddedDocument Class for Revision. 
+        Document Class for Revision. 
         These are going to be the revision log for DocumentCaseRevision.
-        An EmbeddedDocument is a Document Class that is defined inside another document.
-        This one is going to be defined, and stored inside the DocumentCaseRevision Class. 
-        The reason for this technique is that the Section Class has its own schema.
         List of attributes:
             - creatorId: <String> Collaborator ID who made the change.
             - docId: <String> DocumentCase id where the change was made.
