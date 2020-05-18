@@ -163,11 +163,3 @@ def Documents():
     doc2.save()
 
 # Documents()
-
-doc = document_case.objects.get(title="The Great Rain Wild")
-idDoc = doc.id
-print(len(bson.BSON.encode({"_id": idDoc})))
-
-# print(doc1.bsonsize(db.document_case.findOne({title:"The Great Rain"})))
-# document_case.objects.exec_js(bson.SON.__sizeof__(document_case.objects.get(title="The Great Rain")))
-# bsonsize(db.document_case.findOne({"title":"The Great Rain"})))

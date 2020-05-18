@@ -41,12 +41,14 @@
                      description: "First Name of Collaborator, must be a string, with a length between 0-30, and is required",
                      minLength: 1,
                      maxLength:30,
+                     pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'
                   },
                   last_name: {
                      bsonType: "string",
                      description: "Last Name of Collaborator, must be a string, with a length between 0-30 characters, and is required",
                      minLength: 1,
                      maxLength:60,
+                     pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'
                   },
                   email: {
                      bsonType: "string",
@@ -112,7 +114,7 @@
                      description: "Infrastructure category, must be a string, with a length between 8-20 characters, following the pattern, and is required",
                      minLength: 1,
                      maxLength:30,
-                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"
                   }
                }
             }
@@ -136,7 +138,7 @@
                      description: "Infrastructure category, must be a string, must follow the pattern, and is required",
                      minLength: 1,
                      maxLength:30,
-                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                  
                   }
                }
             }
@@ -161,7 +163,7 @@
                      description: "Tag category, must be a string, must follow the pattern, and is required",
                      minLength: 1,
                      maxLength:30,
-                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                  
                   }
                }
             }
@@ -223,7 +225,7 @@
                      description: "Title of the case study, must be a string, and is required",
                      minLength: 10,
                      maxLength: 50,
-                     pattern: "^([A-ZÁÉÍÓÚÑÜ]*)([A-Z a-z 0-9 À-ÿ : ]*)([A-Za-z0-9À-ÿ]$)"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$"
                   },
                   description: {
                      bsonType: "string",
@@ -274,7 +276,7 @@
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , ]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   },
                   damageDocList: {
@@ -288,7 +290,7 @@
                         description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , ]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   },
                   tagsDoc: {
@@ -300,8 +302,8 @@
                      items: {
                         bsonType: "string",
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , ]*$",
-                        minLength: 1,
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$",                       
+                         minLength: 1,
                         maxLength:30
                      }
                   },
@@ -352,21 +354,21 @@
                               description: "Author first name",
                               minLength:2,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            author_LN: {
                               bsonType: "string",
                               description: "Author last name",
                               minLength:2,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            author_faculty: {
                               bsonType: "string",
                               description: "Author faculty",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$"
                            },
                            author_email: {
                               bsonType: "string",
@@ -395,21 +397,21 @@
                               description: "Actor first name",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            actor_LN: {
                               bsonType: "string",
                               description: "Actor last name",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            role: {
                               bsonType: "string",
                               description: "Actor role",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$"
                            }
                         }
 
@@ -462,7 +464,7 @@
                               description: "Title of the section",
                               minLength: 1,
                               maxLength:50,
-                              pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : ]*)([A-Za-z0-9À-ÿ]$)"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$"
                            },
                            content: {
                               bsonType: "string",
@@ -496,7 +498,7 @@
                      description: "Title of the case study, must be a string, and is required",
                      minLength: 10,
                      maxLength: 50,
-                     pattern: "^([A-ZÁÉÍÓÚÑÜ]*)([A-Z a-z 0-9 À-ÿ : ]*)([A-Za-z0-9À-ÿ]$)"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$"
                   },
                   description: {
                      bsonType: "string",
@@ -547,7 +549,7 @@
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , ]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   },
                   damageDocList: {
@@ -561,7 +563,7 @@
                         description: "Damage categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , ]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   },
                   tagsDoc: {
@@ -573,7 +575,7 @@
                      items: {
                         bsonType: "string",
                         description: "Tags that case study has, must be a list of string, must follow the pattern, and is required",
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & , ]*$",
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$",                        
                         minLength: 1,
                         maxLength:30
                      }
@@ -624,21 +626,21 @@
                               description: "Author first name",
                               minLength:2,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            author_LN: {
                               bsonType: "string",
                               description: "Author last name",
                               minLength:2,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            author_faculty: {
                               bsonType: "string",
                               description: "Author faculty",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$"
                            },
                            author_email: {
                               bsonType: "string",
@@ -666,21 +668,21 @@
                               description: "Actor first name",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                          
                            },
                            actor_LN: {
                               bsonType: "string",
                               description: "Actor last name",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            role: {
                               bsonType: "string",
                               description: "Actor role",
                               minLength:1,
                               maxLength:30,
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$"
                            }
                         }
 
@@ -733,7 +735,7 @@
                               description: "Title of the section",
                               minLength: 1,
                               maxLength:50,
-                              pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ : \-]*)([A-Za-z0-9À-ÿ]$)"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$"
                            },
                            content: {
                               bsonType: "string",
@@ -760,7 +762,7 @@
                      description: "Infrastructure category, must be a string, must follow the pattern, and is required",
                      minLength: 1,
                      maxLength:50,
-                     pattern: "^([A-ZÁÉÍÓÚ]+)([A-Z a-z 0-9 À-ÿ : -]*)([A-Za-z0-9áéíóú]$)"
+                     pattern: "^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$"
                   }
                }
             }
@@ -797,7 +799,7 @@
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   }
                }
@@ -819,7 +821,7 @@
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   }
                }
@@ -846,7 +848,7 @@
                         description: "Infrastructure categories that case study has, must be a list of string, must follow the pattern, and is required",
                         minLength: 1,
                         maxLength:30,
-                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$"
+                        pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$"                     
                      }
                   }
                }
@@ -924,7 +926,7 @@
                               description: "Title of the section",
                               minLength: 1,
                               maxLength:50,
-                              pattern: "^([A-ZÁÉÍÓÚÑÜ]+)([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9À-ÿ]$)"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$"
                            },
                            content: {
                               bsonType: "string",
@@ -961,17 +963,17 @@
                            actor_FN: {
                               bsonType: "string",
                               description: "Actor first name",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            actor_LN: {
                               bsonType: "string",
                               description: "Actor last name",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : À-ÿ]*$"
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$'                           
                            },
                            role: {
                               bsonType: "string",
                               description: "Actor role",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$"
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$"
                            }
                         }
                      }
@@ -1003,21 +1005,21 @@
                            author_FN: {
                               bsonType: "string",
                               description: "Author first name",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$",
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$',                             
                               minLength:2,
                               maxLength:30
                            },
                            author_LN: {
                               bsonType: "string",
                               description: "Author last name",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$",
+                              pattern: '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$',                              
                               minLength:2,
                               maxLength:30
                            },
                            author_faculty: {
                               bsonType: "string",
                               description: "Author faculty",
-                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z . : 0-9 À-ÿ]*$",
+                              pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$",
                               minLength:1,
                               maxLength:30
                            },
@@ -1124,8 +1126,7 @@
                      bsonType: "string",
                      description: "Collaborator who made the changes",
                      minLength:2,
-                     maxLength:90,
-                     pattern: "^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*[a-záéíóúñü]$"
+                     maxLength:90
                   },
                   creator_email:{
                      bsonType: "string",
@@ -1140,7 +1141,7 @@
                      description: "Document's title",
                      minLength:10,
                      maxLength:50,
-                     pattern: "^([A-ZÁÉÍÓÚ])([A-Z a-z 0-9 À-ÿ :]*)([A-Za-z0-9áéíóú]$)"
+                     pattern: "^[A-ZÁÉÍÓÚ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9áéíóú]$"
                   },
                   revision_type:{
                      bsonType: "string",
@@ -1169,7 +1170,6 @@
                         bsonType: ["array"],
                         properties: {
                            bsonType: "object",
-                           required: ["new", "old"],
                            new: {
                               bsonType: "object",
                               description: "New changes"
