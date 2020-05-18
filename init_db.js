@@ -486,7 +486,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               required: ["creatoriD", "title", "published", "incidentDate", "creationDate", "lastModificationDate", "infrasDocList", "damageDocList", "author", "actor"],
                properties: {
                   creatoriD: {
                      bsonType: "objectId",
@@ -618,7 +617,6 @@
                      uniqueItems: false,
                      items: {
                         bsonType: "object",
-                        required: ["author_FN", "author_LN", "author_faculty", "author_email"],
                         description: "Authors who wrote the case study, must be a list of Author objects, must follow the pattern, and is required",
                         properties: {
                            author_FN: {
@@ -661,7 +659,6 @@
                      uniqueItems: false,
                      items: {
                         bsonType: "object",
-                        required: ["actor_FN", "actor_LN", "role"],
                         description: "Actors who play a role in the case study, must be a list of Actor objects, must follow the pattern, and is required",
                         properties: {
                            actor_FN: {
@@ -757,7 +754,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               required: ["title"],
                properties: {
                   title: {
                      bsonType: "string",
@@ -775,7 +771,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               required: ["description"],
                properties: {
                   description: {
                      bsonType: "string",
@@ -793,7 +788,6 @@
             $jsonSchema: {
                bsonType: "object",
                minItems: 1,
-               required: ["infrasDocList"],
                properties: {
                   infrasDocList: {
                      bsonType: ["array"],
@@ -816,7 +810,6 @@
             $jsonSchema: {
                bsonType: "object",
                minItems: 1,
-               required: ["damageDocList"],
                properties: {
                   damageDocList: {
                      bsonType: ["array"],
@@ -844,7 +837,6 @@
                bsonType: "object",
                minItems: 1,
                maxItems:10,
-               required: ["tagsDoc"],
                properties: {
                   tagsDoc: {
                      bsonType: ["array"],
@@ -873,7 +865,6 @@
                minItems: 0,
                maxItems:5,
                uniqueItems: false,
-               required: ["timeline"],
                properties: {
                   timeline: {
                      bsonType: ["array"],
@@ -921,7 +912,6 @@
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
-               required: ["section"],
                properties: {
                   section: {
                      bsonType: ["array"],
@@ -960,7 +950,6 @@
                minItems: 0,
                maxItems:5,
                uniqueItems: false,
-               required: ["actor"],
                properties: {
                   actor: {
                      bsonType: ["array"],
@@ -1003,7 +992,6 @@
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
-               required: ["author"],
                properties: {
                   author: {
                      bsonType: ["array"],
@@ -1059,7 +1047,6 @@
                minItems: 0,
                maxItems:10,
                uniqueItems: false,
-               required: ["location"],
                properties: {
                   location: {
                      bsonType: ["array"],
@@ -1103,7 +1090,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               required: ["incidentDate"],
                properties: {
                   incidentDate: {
                      bsonType: "string",
@@ -1125,7 +1111,6 @@
          validator: {
             $jsonSchema: {
                bsonType: "object",
-               required: ["creatorId", "docId", "creator_name", "creator_email", "document_title", "revision_date", "revision_number", "revision_type", "field_changed"],
                properties: {
                   creatorId: {
                      bsonType: "objectId",
@@ -1200,9 +1185,6 @@
             }
          }
       })
-
-         
-         
-      
+  
    }
 })()

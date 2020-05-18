@@ -6,7 +6,6 @@ sys.path.append("..")
 from schema_DB import *
 import names
 import random
-import namegenerator
 import datetime
 from faker  import Faker 
 
@@ -100,7 +99,7 @@ for index in range(100):
         mod = random.choice(dates)
     
 
-    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=[loc,loc1], 
+    doc = document_case(creatoriD = get_collab, title =  ("The Great Document made by: " + get_collab.first_name), location=[loc,loc1], 
     description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
     incidentDate = inc, 
     creationDate= created,
@@ -216,7 +215,7 @@ for index in range(10):
         mod = random.choice(dates)
     
 
-    doc = document_case(creatoriD = get_collab, title = ("The Great " + namegenerator.gen()), location=listOfLocations, 
+    doc = document_case(creatoriD = get_collab, title = ("The Great Document made by: " + get_collab.first_name), location=listOfLocations, 
     description = fake.sentence(ext_word_list=my_word_list), published=random.choice([True, False]),
     incidentDate = inc, 
     creationDate= created,
