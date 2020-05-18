@@ -19,7 +19,9 @@ title_regex = ['The Great Rain', 'The Grea', 'The Great Magnific Extraodinary Se
 'The Great Magnific Extraodinary Sequence of Events2', 'the great sequence of event', 'The Great: Rain',
 'the great sequence of evemt!']
 
-roleFaculty_regex
+roleFaculty_regex = ['ICOM', 'Icom', 'iCOM', 'i', 'I', 'IC', 'Ic', 'Ing. de Sistemas: CE', 'Ingeniero de Computadoras y si',
+'Ingeniero de Computadoras y sis', 'The 4th engineer: CE']
+
 
 for x in name_regex:
     z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$', x)
@@ -27,6 +29,14 @@ for x in name_regex:
         print('Name: ' ,x ,' Result', z)
     else:
         print('NOT PASSED: ', x)
+
+for x in name_regex:
+    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$', x)
+    if (len(x) > 0 and len(x) < 31):
+        print('Collab name: ' ,x ,' Result', z)
+    else:
+        print('NOT PASSED: ', x)
+
 
 for x in email_regex:
     z = re.match('^[\.a-z0-9]*(@upr\.edu)$', x)
@@ -44,8 +54,8 @@ for x in admin_regex:
         print('NOT PASSED: ', x)
 
 for x in category_regex:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*$', x)
-    if (len(x) > 0 and len(x) < 51):
+    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$', x)
+    if (len(x) > 1 and len(x) < 51):
         print('category: ' ,x ,' Result', z)
     else:
         print('NOT PASSED: ', x)
@@ -58,7 +68,7 @@ for x in title_regex:
         print('NOT PASSED: ', x)
 
 for x in roleFaculty_regex:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$', x)
+    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$', x)
     if (len(x) > 1 and len(x) < 31):
         print('role/Faculty: ' ,x ,' Result', z)
     else:

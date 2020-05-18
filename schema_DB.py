@@ -9,10 +9,10 @@ class collaborator(Document):
         Collaborators are the users that will Create/Edit Case Studies.
         List of attributes (All of them are required):
             - first_name: <String> Collaborator's first name.
-                - min_Length: 2, max_length: 30
+                - min_Length: 1, max_length: 30
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$
             - last_name: <String> Collaborator's last name.
-                - min_Length: 2, max_length: 60
+                - min_Length: 1, max_length: 60
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$
             - email: <String> Collaborator's email. It must be a @upr.edu email.
                 - attribute follows following regex: ^[\.a-z0-9]*(@upr\.edu)$
@@ -131,18 +131,18 @@ class actor(EmbeddedDocument):
         An EmbeddedDocument is a Document Class that is defined inside another document.
         This one is going to be defined, and stored inside the DocumentCase Class.
         The reason for this technique is that the Actor Class has its own schema.
-        List of attributes(All of them are required):
+        List of attributes(All of them are required, except actor_LN):
             - actor_FN: <String>  Actor's First Name.
                 - min_Length : 1, max_length: 30
             - actor_LN: <String>  Actor's Last Name.
                 - min_Length : 1, max_length: 30
             - role: <String>  Actor's role in the DocumentCase.
-                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$
+                - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$
                 - min_Length : 2, max_length: 30
     """
     actor_FN = StringField(min_length=1, max_length=30, required=True)
     actor_LN = StringField(min_length=1,max_length=30, required=False)
-    role = StringField(min_length=2,max_length=30, required=True, regex= '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$')
+    role = StringField(min_length=2,max_length=30, required=True, regex= '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$')
 
 class timeline(EmbeddedDocument):
     """
