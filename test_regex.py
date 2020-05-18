@@ -12,9 +12,14 @@ email_regex = ['jainel.torres@upr.edu', 'juan.pueblo1@upr.edu', 'juanadelpueblo@
 admin_regex = ['jaineltorres', 'jainel.torres', 'jainel..torres', 'jainel.torres2', 'qwert', 'jai.el', 'jainelllll.lllllllll', 
 'jainelllll.llllllllll', 'jainel$', 'jainel', 'Jainel.torres', '.jainel', 'jainel.', 'jainel3', 'Jainel4']
 
-category_regex = ['', 'J', 'Ports/Lol', 'Parks & Recreations', 'Port, Camping, Building & Lol', 'Aeropuerto, Avión, Volar, Voló, Paz']
+category_regex = ['', 'J', 'Ports/Lol', 'Parks & Recreations', 'Port, Camping, Building & Lol', 'Aeropuerto, Avión, Volar, Voló, Volaron, Volamos,A',
+'Aeropuerto, Avión, Volar, Voló, Volaron, Volamos,AA']
 
-title_regex = ['The Great Rain']
+title_regex = ['The Great Rain', 'The Grea', 'The Great Magnific Extraodinary Sequence of Events', 
+'The Great Magnific Extraodinary Sequence of Events2', 'the great sequence of event', 'The Great: Rain',
+'the great sequence of evemt!']
+
+roleFaculty_regex
 
 for x in name_regex:
     z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$', x)
@@ -51,5 +56,14 @@ for x in title_regex:
         print('title: ' ,x ,' Result', z)
     else:
         print('NOT PASSED: ', x)
+
+for x in roleFaculty_regex:
+    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$', x)
+    if (len(x) > 1 and len(x) < 31):
+        print('role/Faculty: ' ,x ,' Result', z)
+    else:
+        print('NOT PASSED: ', x)
+
+
 
 
