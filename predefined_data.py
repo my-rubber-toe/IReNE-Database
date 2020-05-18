@@ -1,7 +1,7 @@
 from mongoengine import *
 from schema_DB import *
 import json
-
+import bson
 """
     This code is to populate the predefined data that will have the database, it should 
     run only once.
@@ -62,7 +62,7 @@ def Categories():
         tagDoc = tag(tagItem=tagslist)
         tagDoc.save()
 
-Categories()
+# Categories()
 
 def Locations():
     """
@@ -74,7 +74,7 @@ def Locations():
             cityDoc = city_pr(city= cities['city'], latitude=cities['latitude'], longitude=cities['longitude'])
             cityDoc.save()
 
-Locations()
+# Locations()
 
 def Collabs():
     """
@@ -93,7 +93,7 @@ def Collabs():
     collab6 = collaborator(first_name="VICTORIA M.", last_name="TORRES.SANTOS", email="victoria.black@upr.edu",approved=True)
     collab6.save()
 
-Collabs()
+# Collabs()
 
 def Admins():
     """
@@ -111,7 +111,7 @@ def Admins():
     admin5.save()
     
 
-Admins()
+# Admins()
 
 def Documents():
     """
@@ -130,7 +130,7 @@ def Documents():
     sectionDoc1 = section(secTitle = "Introduction", content = "It was raining a lot")
     citypr = city_pr.objects.get(city = 'Coamo, PR')
     loc = location(address= citypr.city, latitude= citypr.latitude, longitude=citypr.longitude)
-    doc1 = document_case(creatoriD = get_collab1, title = ("The Great Rain"), location=[loc], 
+    doc1 = document_case(creatoriD = get_collab1, title = ("The Great Rainw"), location=[loc], 
     description = "It was a cold and stormy night...", published= True,
     incidentDate = "2017-09-17", 
     creationDate= "2018-03-20",
@@ -141,7 +141,7 @@ def Documents():
     author = [authorDoc1], actor = [actorDoc1],section = [sectionDoc1],
     timeline = [timelineDoc1,timelineDoc2,timelineDoc3], language="English")
     doc1.save()
-
+    
     get_collab2 = collaborator.objects.get(first_name= "Roberto")
     authorDoc2 = author(author_FN = get_collab2.first_name, author_LN = get_collab2.last_name, 
     author_email = get_collab2.email, author_faculty= "ICOM")
@@ -162,5 +162,12 @@ def Documents():
     author = [authorDoc2], actor = [actorDoc2],section = [sectionDoc2],timeline = [timelineDoc2], language="Spanish")
     doc2.save()
 
-Documents()
+# Documents()
 
+doc = document_case.objects.get(title="The Great Rain Wild")
+idDoc = doc.id
+print(len(bson.BSON.encode({"_id": idDoc})))
+
+# print(doc1.bsonsize(db.document_case.findOne({title:"The Great Rain"})))
+# document_case.objects.exec_js(bson.SON.__sizeof__(document_case.objects.get(title="The Great Rain")))
+# bsonsize(db.document_case.findOne({"title":"The Great Rain"})))

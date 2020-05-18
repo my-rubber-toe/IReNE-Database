@@ -467,8 +467,7 @@
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1,
-                              maxLength:5000
+                              minLength: 1
                            }
                         }
 
@@ -742,8 +741,7 @@
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1,
-                              maxLength:5000
+                              minLength: 1
                            }
                         }
 
@@ -941,8 +939,7 @@
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1,
-                              maxLength:5000
+                              minLength: 1
                            }
                         }
                      }
