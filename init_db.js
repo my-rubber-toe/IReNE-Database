@@ -230,7 +230,7 @@
                   description: {
                      bsonType: "string",
                      description: "description of the case study, must be a string",
-                     minLength: 1,
+                     minLength: 0,
                      maxLength: 500
                   },
                   language: {
@@ -773,7 +773,7 @@
                   description: {
                      bsonType: "string",
                      description: "Infrastructure category, must be a string, must follow the pattern, and is required",
-                     minLength: 1,
+                     minLength: 0,
                      maxLength:500
                   }
                }
@@ -1125,13 +1125,13 @@
                   creator_name: {
                      bsonType: "string",
                      description: "Collaborator who made the changes",
-                     minLength:2,
+                     minLength:0,
                      maxLength:90
                   },
                   creator_email:{
                      bsonType: "string",
                      description: "Collaborator who made the email",
-                     minLength: 9,
+                     minLength: 0,
                      maxLength:70,
                      pattern: '^[\.a-z0-9]*(@upr\.edu)$'
                      
@@ -1139,13 +1139,13 @@
                   document_title:{
                      bsonType: "string",
                      description: "Document's title",
-                     minLength:10,
+                     minLength:0,
                      maxLength:50,
                      pattern: "^[A-ZÁÉÍÓÚ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9áéíóú]$"
                   },
                   revision_type:{
                      bsonType: "string",
-                     minLength:2,
+                     minLength:0,
                      maxLength:20,
                      description: "Which attribute was updated",
                      pattern: '^[a-z A-Z À-ÿ]*[a-záéíóúñü]$'
@@ -1158,13 +1158,13 @@
                   revision_date:{
                      bsonType: "string",
                      description: "Revision date",
-                     minLength:9,
+                     minLength:0,
                      maxLength:11,
                      pattern: "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]"
                   },
                   field_changed:{
                      bsonType: "object",
-                     minItems: 1,
+                     minItems: 0,
                      uniqueItems: false,
                      items: {
                         bsonType: ["array"],
