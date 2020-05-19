@@ -401,7 +401,7 @@
                            actor_LN: {
                               bsonType: "string",
                               description: "Actor last name",
-                              minLength:1,
+                              minLength:0,
                               maxLength:30                       
                            },
                            role: {
@@ -670,7 +670,7 @@
                            actor_LN: {
                               bsonType: "string",
                               description: "Actor last name",
-                              minLength:1,
+                              minLength:0,
                               maxLength:30                          
                            },
                            role: {
@@ -953,7 +953,7 @@
                      bsonType: ["array"],
                      items: {
                         bsonType: "object",
-                        required: ["actor_FN", "actor_LN", "role"],
+                        required: ["actor_FN", "role"],
                         description: "Actors who play a role in the case study, must be a list of Actor objects, must follow the pattern, and is required",
                         properties: {
                            actor_FN: {
@@ -965,7 +965,7 @@
                            actor_LN: {
                               bsonType: "string",
                               description: "Actor last name",  
-                              minLength: 1,
+                              minLength: 0,
                               maxLength:30                        
                            },
                            role: {

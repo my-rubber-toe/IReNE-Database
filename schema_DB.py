@@ -1,7 +1,7 @@
 from mongoengine import *
 import json
 
-connect('IReNEdb')
+connect("IReNEdb",host="mongodb://testuser:testpassword@test.irene.uprm.edu:27017/?authSource=admin")
 
 class collaborator(Document):
     """
@@ -141,7 +141,7 @@ class actor(EmbeddedDocument):
                 - min_Length : 2, max_length: 30
     """
     actor_FN = StringField(min_length=1, max_length=30, required=True)
-    actor_LN = StringField(min_length=1,max_length=30, required=False)
+    actor_LN = StringField(min_length=0,max_length=30, required=False)
     role = StringField(min_length=2,max_length=30, required=True, regex= '^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$')
 
 class timeline(EmbeddedDocument):

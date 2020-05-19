@@ -1,5 +1,8 @@
+import sys
+sys.path.append("..")
 from mongoengine import *
 from schema_DB import *
+
 
 #-------------------------Tests for Create------------------------------------
 def test_create_Collab(fn,ln,email):

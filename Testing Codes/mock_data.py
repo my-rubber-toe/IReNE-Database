@@ -15,7 +15,7 @@ from faker  import Faker
 fake = Faker() 
 
 infrastructure = {"Streets or Highway", "Bridges", "Airports", "Water Supply", "Waste Water Management",
-    "Power Generation & Transmission", "Telecommunications" , "Housing", "Building", "Ports",
+    "Power Generation/Transmission", "Telecommunications" , "Housing", "Building", "Ports",
     "Public Transportation"}
 damage = {"Earthquake", "Hurricane", "Tsunami", "Flooding", "Landslide", "Fire/smoke", 
     "Extreme Precipitation", "Water Damage", "Wind Damage", "Tornado"}
@@ -111,6 +111,7 @@ for index in range(100):
 
     
     doc.save()
+    print(doc.title)
 
 """
     This section is to have mock data with edge cases
