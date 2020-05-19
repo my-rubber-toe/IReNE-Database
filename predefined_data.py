@@ -15,7 +15,7 @@ def Categories():
             - Airports
             - Water Supply
             - Waste Water Management
-            - Power Generation & Transmission
+            - Power Generation/Transmission
             - Telecommunications
             - Housing
             - Building

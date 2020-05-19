@@ -135,7 +135,7 @@ class actor(EmbeddedDocument):
             - actor_FN: <String>  Actor's First Name.
                 - min_Length : 1, max_length: 30
             - actor_LN: <String>  Actor's Last Name.
-                - min_Length : 1, max_length: 30
+                - min_Length : 0, max_length: 30
             - role: <String>  Actor's role in the DocumentCase.
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$
                 - min_Length : 2, max_length: 30
@@ -219,7 +219,7 @@ class document_case(Document):
                 - attribute follows following regex: ^[A-Z][a-z]*$
                 - min_Length : 1, max_length: 20
             - description: <String> Case study's description.
-                - min_Length : 1, max_length: 500
+                - min_Length : 0, max_length: 500
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
             - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
                 - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
@@ -292,7 +292,7 @@ class creation_embedded(EmbeddedDocument):
                 - attribute follows following regex: ^[A-Z][a-z]*$
                 - min_Length : 2, max_length: 20
             - description: <String> Case study's description.
-                - min_Length : 1, max_length: 500
+                - min_Length : 0, max_length: 500
             - published: <Boolean> <Default=False> When set to true, the case study will be visible in SearchSpace service.
             - incidentDate: <String>  Date when the incident happened, it has to have the following format: 'YYYY-MM-DD'.
                 - attribute follows following regex: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]
@@ -433,7 +433,7 @@ class description_embedded(EmbeddedDocument):
         description_embedded will consist of a revision for the description of a case study.
         List of attributes:
             - description: <String> the description of the revised case study.
-                - min_Length : 1, max_length: 500
+                - min_Length : 0, max_length: 500
     """
     description = StringField(min_length=0, max_length=500, required=False)
 
