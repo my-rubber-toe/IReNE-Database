@@ -90,7 +90,7 @@ def Collabs():
     collab4.save()
     collab5 = collaborator(first_name="Yomar", last_name="Ruiz", email="yomar.ruiz@upr.edu",approved=True)
     collab5.save()
-    collab6 = collaborator(first_name="VICTORIA M.", last_name="TORRES.SANTOS", email="victoria.black@upr.edu",approved=True)
+    collab6 = collaborator(first_name="VICTORIA M", last_name="TORRES SANTOS", email="victoria.black@upr.edu",approved=True)
     collab6.save()
 
 Collabs()
@@ -118,7 +118,7 @@ def Documents():
         Fills the db with 2 Documents mock-data
     """                                                                                                                                                                                                                                             
     get_collab1 = collaborator.objects.get(first_name= "Jainel")
-    authorDoc1 = author(author_FN = get_collab1.first_name, author_LN = get_collab1.last_name, 
+    authorDoc1 = author(author_FN = get_collab1.first_name, author_LN = "Torres-Santos", 
     author_email = get_collab1.email, author_faculty="ICOM")
     actorDoc1 = actor(actor_FN = "Victoria", actor_LN = "Black", role = "Mayor")
     timelineDoc1 = timeline(event = "The rain has started", 

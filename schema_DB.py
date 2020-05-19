@@ -177,10 +177,10 @@ class section(EmbeddedDocument):
                 - attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*][A-Za-z0-9À-ÿ]$
                 - min_Length : 2, max_length: 50
             - content: <String>  Section's body.
-                - min_Length : 1
+                - min_Length : 0
     """
     secTitle = StringField(min_length=2, max_length=50, required=True, regex='^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$')
-    content = StringField(min_length=1, required=True)
+    content = StringField(min_length=0, required=True)
 
 
 class location(EmbeddedDocument):

@@ -467,7 +467,7 @@
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1
+                              minLength: 0
                            }
                         }
 
@@ -736,7 +736,7 @@
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1
+                              minLength: 0
                            }
                         }
 
@@ -927,7 +927,7 @@
                            content: {
                               bsonType: "string",
                               description: "Content of the section",
-                              minLength: 1
+                              minLength: 0
                            }
                         }
                      }

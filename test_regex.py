@@ -94,76 +94,76 @@ for x in description_regex:
 
 
 
-my_word_list = [
-    'Fire','The','Date',
-    'City','Building','Water',
-    'Rain','Shake',
-    'Energy','Power','Pipes','Closed', 'Flood', 'wow'
-    'Damage', 'PR', 'Island', 'What', 'is', 'comes', '.', ',', ':', 'iH', 'Hi', "Hello",
-    'Linda M', 'Linda M-M', 'll', 'L', "Avión", "Volar", "Voló", "Volaron", "Volamos","AA", "!", "1", "2","", " ", "-"]
+# my_word_list = [
+#     'Fire','The','Date',
+#     'City','Building','Water',
+#     'Rain','Shake',
+#     'Energy','Power','Pipes','Closed', 'Flood', 'wow'
+#     'Damage', 'PR', 'Island', 'What', 'is', 'comes', '.', ',', ':', 'iH', 'Hi', "Hello",
+#     'Linda M', 'Linda M-M', 'll', 'L', "Avión", "Volar", "Voló", "Volaron", "Volamos","AA", "!", "1", "2","", " ", "-"]
 
-list_sentences = []
-for x in range(700):
-    list_sentences.append(fake.sentence(ext_word_list=my_word_list))
+# list_sentences = []
+# for x in range(700):
+#     list_sentences.append(fake.sentence(ext_word_list=my_word_list))
 
-name_passed = []
-name_notpassed = []
-for x in list_sentences:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$', x)
-    if (len(x) > 1 and len(x) < 31):
-        print('Name: ' ,x ,' Result', z)
-        name_passed.append(x)
-    else:
-        print('NOT PASSED: ', x)
-        name_notpassed.append(x)
+# name_passed = []
+# name_notpassed = []
+# for x in list_sentences:
+#     z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$', x)
+#     if (len(x) > 1 and len(x) < 31):
+#         print('Name: ' ,x ,' Result', z)
+#         name_passed.append(x)
+#     else:
+#         print('NOT PASSED: ', x)
+#         name_notpassed.append(x)
 
-collabname_passed = []
-collabname_notpassed = []
-for x in list_sentences:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$', x)
-    if (len(x) > 0 and len(x) < 31):
-        print('Collab name: ' ,x ,' Result', z)
-        collabname_passed.append(x)
-    else:
-        print('NOT PASSED: ', x)
-        collabname_notpassed.append(x)
+# collabname_passed = []
+# collabname_notpassed = []
+# for x in list_sentences:
+#     z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$', x)
+#     if (len(x) > 0 and len(x) < 31):
+#         print('Collab name: ' ,x ,' Result', z)
+#         collabname_passed.append(x)
+#     else:
+#         print('NOT PASSED: ', x)
+#         collabname_notpassed.append(x)
 
-cat_passed = []
-cat_notpassed = []
-for x in list_sentences:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$', x)
-    if (len(x) > 1 and len(x) < 51):
-        print('category: ' ,x ,' Result', z)
-        cat_passed.append(x)
-    else:
-        print('NOT PASSED: ', x)
-        cat_notpassed.append(x)
+# cat_passed = []
+# cat_notpassed = []
+# for x in list_sentences:
+#     z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / & ,]*[a-záéíóúñü]$', x)
+#     if (len(x) > 1 and len(x) < 51):
+#         print('category: ' ,x ,' Result', z)
+#         cat_passed.append(x)
+#     else:
+#         print('NOT PASSED: ', x)
+#         cat_notpassed.append(x)
 
-title_passed = []
-title_notpassed =[]
-for x in list_sentences:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$', x)
-    if (len(x) > 9 and len(x) < 51):
-        print('title: ' ,x ,' Result', z)
-        title_passed.append(x)
-    else:
-        print('NOT PASSED: ', x)
-        title_notpassed.append(x)
+# title_passed = []
+# title_notpassed =[]
+# for x in list_sentences:
+#     z = re.match('^[A-ZÁÉÍÓÚÑÜ][A-Z a-z 0-9 À-ÿ :]*[A-Za-z0-9À-ÿ]$', x)
+#     if (len(x) > 9 and len(x) < 51):
+#         print('title: ' ,x ,' Result', z)
+#         title_passed.append(x)
+#     else:
+#         print('NOT PASSED: ', x)
+#         title_notpassed.append(x)
 
-role_passed = []
-role_notpassed =[]
-for x in list_sentences:
-    z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$', x)
-    if (len(x) > 1 and len(x) < 31):
-        print('role/Faculty: ' ,x ,' Result', z)
-        role_passed.append(x)
-    else:
-        print('NOT PASSED: ', x)
-        role_notpassed.append(x)
+# role_passed = []
+# role_notpassed =[]
+# for x in list_sentences:
+#     z = re.match('^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$', x)
+#     if (len(x) > 1 and len(x) < 31):
+#         print('role/Faculty: ' ,x ,' Result', z)
+#         role_passed.append(x)
+#     else:
+#         print('NOT PASSED: ', x)
+#         role_notpassed.append(x)
 
 
-with open('test.json', 'w') as outfile:
-    json.dump({"name_passed" : name_passed, "name_notpassed": name_notpassed,
-     "collabname_passed": collabname_passed, "collabname_notpassed":collabname_notpassed,
-     "cat_passed": cat_passed,"cat_notpassed":cat_notpassed,"title_passed":title_passed,
-      "title_notpassed":title_notpassed, "role_passed":role_passed,"role_notpassed":role_notpassed }, outfile)
+# with open('test.json', 'w') as outfile:
+#     json.dump({"name_passed" : name_passed, "name_notpassed": name_notpassed,
+#      "collabname_passed": collabname_passed, "collabname_notpassed":collabname_notpassed,
+#      "cat_passed": cat_passed,"cat_notpassed":cat_notpassed,"title_passed":title_passed,
+#       "title_notpassed":title_notpassed, "role_passed":role_passed,"role_notpassed":role_notpassed }, outfile)
