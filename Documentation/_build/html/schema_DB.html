@@ -42,12 +42,11 @@ These are going to be the Actor of a DocumentCase, the ones having a role in the
 An EmbeddedDocument is a Document Class that is defined inside another document.
 This one is going to be defined, and stored inside the DocumentCase Class.
 The reason for this technique is that the Actor Class has its own schema.
-List of attributes(All of them are required):</p>
+List of attributes(All of them are required, except actor_LN):</p>
 <blockquote>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>actor_FN: &lt;String&gt;  Actor’s First Name.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
 <li><p>min_Length : 1, max_length: 30</p></li>
 </ul>
 </dd>
@@ -55,7 +54,6 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>actor_LN: &lt;String&gt;  Actor’s Last Name.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
 <li><p>min_Length : 1, max_length: 30</p></li>
 </ul>
 </dd>
@@ -63,8 +61,8 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>role: &lt;String&gt;  Actor’s role in the DocumentCase.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z:0-9À-ÿ]$</p></li>
-<li><p>min_Length : 1, max_length: 30</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-z A-Z : 0-9 À-ÿ]*[a-zA-Z0-9À-ÿ]$</p></li>
+<li><p>min_Length : 2, max_length: 30</p></li>
 </ul>
 </dd>
 </dl>
@@ -76,7 +74,7 @@ List of attributes(All of them are required):</p>
 <dl class="class">
 <dt id="schema_DB.actor_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">actor_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.actor_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for actor_embedded.
+<dd><p>EmbeddedDocument Class for actor_embedded.
 actor_embedded will consist of a revision for the actors of a case study.
 List of attributes:</p>
 <blockquote>
@@ -110,7 +108,7 @@ List of attributes(All of them are required):</p>
 <div><ul class="simple">
 <li><dl class="simple">
 <dt>username: &lt;String&gt;  Admin’s username.</dt><dd><ul>
-<li><p>attribute follows following regex: (^[^.]([a-zA-Z0-9]*)[.]([a-zA-Z0-9]*))[^.]$</p></li>
+<li><p>attribute follows following regex: (^[^.]([a-zA-Z0-9]*)[.]{0,1}([a-zA-Z0-9]*))[^.]$</p></li>
 <li><p>min_Length : 6, max_length: 20</p></li>
 </ul>
 </dd>
@@ -168,8 +166,8 @@ List of attributes(All of them are required):</p>
 </li>
 <li><dl class="simple">
 <dt>author_faculty: &lt;String&gt;  Author’s Faculty.</dt><dd><ul>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-zA-Z:0-9À-ÿ]*$</p></li>
-<li><p>min_Length : 1, max_length: 30</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z : 0-9 À-ÿ]*[.]{0,1}[ ]{0,1}[a-zA-Z0-9À-ÿ]*$</p></li>
+<li><p>min_Length : 2, max_length: 30</p></li>
 </ul>
 </dd>
 </dl>
@@ -181,7 +179,7 @@ List of attributes(All of them are required):</p>
 <dl class="class">
 <dt id="schema_DB.author_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">author_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.author_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for author_embedded.
+<dd><p>EmbeddedDocument Class for author_embedded.
 author_embedded will consist of a revision for the authors of a case study
 List of attributes:</p>
 <blockquote>
@@ -261,7 +259,7 @@ List of attributes (All of them are required):</p>
 <li><dl class="simple">
 <dt>first_name: &lt;String&gt; Collaborator’s first name.</dt><dd><ul>
 <li><p>min_Length: 1, max_length: 30</p></li>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$</p></li>
 </ul>
 </dd>
 </dl>
@@ -269,7 +267,7 @@ List of attributes (All of them are required):</p>
 <li><dl class="simple">
 <dt>last_name: &lt;String&gt; Collaborator’s last name.</dt><dd><ul>
 <li><p>min_Length: 1, max_length: 60</p></li>
-<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*[a-záéíóúñü]$</p></li>
+<li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ]*(-){0,1}[a-z A-Z À-ÿ]*$</p></li>
 </ul>
 </dd>
 </dl>
@@ -301,7 +299,7 @@ List of attributes (All of them are required):</p>
 <dl class="class">
 <dt id="schema_DB.creation_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">creation_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.creation_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for creation_embedded.
+<dd><p>EmbeddedDocument Class for creation_embedded.
 creation_embedded will consist of a revision for a created case study.
 List of attributes:</p>
 <blockquote>
@@ -488,7 +486,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>damageType: &lt;String&gt;  category that can be used in a DocumentCase.</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 30, required, unique</p></li>
+<li><p>min_Length : 2, max_length: 30, required, unique</p></li>
 </ul>
 </dd>
 </dl>
@@ -510,7 +508,7 @@ List of attributes:</p>
 <dl class="class">
 <dt id="schema_DB.damage_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">damage_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.damage_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for damage_embedded.
+<dd><p>EmbeddedDocument Class for damage_embedded.
 damage_embedded will consist of a revision for the list of damage types of a case study.
 List of attributes:</p>
 <blockquote>
@@ -520,7 +518,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 50, Required</p></li>
+<li><p>min_Length : 2, max_length: 50, Required</p></li>
 </ul>
 </dd>
 </dl>
@@ -549,7 +547,7 @@ Defaults to True.</p>
 <dl class="class">
 <dt id="schema_DB.description_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">description_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.description_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for description_embedded.
+<dd><p>EmbeddedDocument Class for description_embedded.
 description_embedded will consist of a revision for the description of a case study.
 List of attributes:</p>
 <blockquote>
@@ -645,7 +643,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
+<li><p>min_Length : 2, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
 </dl>
@@ -666,7 +664,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
+<li><p>min_Length : 2, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
 </dl>
@@ -687,7 +685,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 30, Required, Unique</p></li>
+<li><p>min_Length : 2, max_length: 30, Required, Unique</p></li>
 </ul>
 </dd>
 </dl>
@@ -755,11 +753,8 @@ List of attributes:</p>
 <dl class="class">
 <dt id="schema_DB.document_case_revision">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">document_case_revision</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**values</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.document_case_revision" title="Permalink to this definition">¶</a></dt>
-<dd><p>EmbeddedDocument Class for Revision. 
+<dd><p>Document Class for Revision. 
 These are going to be the revision log for DocumentCaseRevision.
-An EmbeddedDocument is a Document Class that is defined inside another document.
-This one is going to be defined, and stored inside the DocumentCaseRevision Class. 
-The reason for this technique is that the Section Class has its own schema.
 List of attributes:</p>
 <blockquote>
 <div><ul class="simple">
@@ -838,7 +833,7 @@ List of attributes:</p>
 <dl class="class">
 <dt id="schema_DB.incident_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">incident_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.incident_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for incident_embedded.
+<dd><p>EmbeddedDocument Class for incident_embedded.
 incident_embedded will consist of a revision for the incident date of a case study
 List of attributes:</p>
 <blockquote>
@@ -874,7 +869,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>infrastructureType: &lt;String&gt;  category that can be used in a DocumentCase.</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 30, required, unique</p></li>
+<li><p>min_Length : 2, max_length: 30, required, unique</p></li>
 </ul>
 </dd>
 </dl>
@@ -896,7 +891,7 @@ List of attributes:</p>
 <dl class="class">
 <dt id="schema_DB.infrastructure_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">infrastructure_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.infrastructure_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for infrastructure_embedded.
+<dd><p>EmbeddedDocument Class for infrastructure_embedded.
 infrastructure_embedded will consist of a revision for the list of infrastructure types of a case study.
 List of attributes:</p>
 <blockquote>
@@ -906,7 +901,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 50, Required</p></li>
+<li><p>min_Length : 2, max_length: 50, Required</p></li>
 </ul>
 </dd>
 </dl>
@@ -972,7 +967,7 @@ List of attributes:</p>
 <dl class="class">
 <dt id="schema_DB.location_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">location_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.location_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for location_embedded.
+<dd><p>EmbeddedDocument Class for location_embedded.
 location_embedded will consist of a revision for the locations of a case study.
 List of attributes:</p>
 <blockquote>
@@ -1040,7 +1035,7 @@ List of attributes(All of them are required):</p>
 <dl class="class">
 <dt id="schema_DB.section_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">section_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.section_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for section_embedded.
+<dd><p>EmbeddedDocument Class for section_embedded.
 section_embedded will consist of a revision for the section of a case study.
 List of attributes:</p>
 <blockquote>
@@ -1076,7 +1071,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>tagItem: &lt;String&gt;  Tag that can be used in a DocumentCase.</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 30, required, unique</p></li>
+<li><p>min_Length : 2, max_length: 30, required, unique</p></li>
 </ul>
 </dd>
 </dl>
@@ -1098,7 +1093,7 @@ List of attributes:</p>
 <dl class="class">
 <dt id="schema_DB.tag_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">tag_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.tag_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for tag_embedded.
+<dd><p>EmbeddedDocument Class for tag_embedded.
 tag_embedded will consist of a revision for the list of tags of a case study.
 List of attributes:</p>
 <blockquote>
@@ -1108,7 +1103,7 @@ List of attributes:</p>
 <li><dl class="simple">
 <dt>For string:</dt><dd><ul>
 <li><p>attribute follows following regex: ^[A-ZÁÉÍÓÚÑÜ][a-z A-Z À-ÿ / &amp; ,]*[a-záéíóúñü]$</p></li>
-<li><p>min_Length : 1, max_length: 50</p></li>
+<li><p>min_Length : 2, max_length: 50</p></li>
 </ul>
 </dd>
 </dl>
@@ -1182,7 +1177,7 @@ List of attributes(All of them are required):</p>
 <dl class="class">
 <dt id="schema_DB.timeline_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">timeline_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.timeline_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for timeline_embedded.
+<dd><p>EmbeddedDocument Class for timeline_embedded.
 timeline_embedded will consist of a revision for the timeline of a case study.
 List of attributes:</p>
 <blockquote>
@@ -1208,7 +1203,7 @@ Defaults to True.</p>
 <dl class="class">
 <dt id="schema_DB.title_embedded">
 <em class="property">class </em><code class="sig-prename descclassname">schema_DB.</code><code class="sig-name descname">title_embedded</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#schema_DB.title_embedded" title="Permalink to this definition">¶</a></dt>
-<dd><p>Document Class for title_embedded.
+<dd><p>EmbeddedDocument Class for title_embedded.
 title_embedded will consist of a revision for the title of a case study.
 List of attributes:</p>
 <blockquote>

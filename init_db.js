@@ -501,7 +501,7 @@
                   description: {
                      bsonType: "string",
                      description: "description of the case study, must be a string",
-                     minLength: 1,
+                     minLength: 0,
                      maxLength: 500
                   },
                   language: {
